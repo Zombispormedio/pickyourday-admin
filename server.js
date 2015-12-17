@@ -5,8 +5,8 @@ var C=require("./config/config.js");
 var app=express();
 //Configuracion
 require(C.config+"express.js")(app);
-var port=process.env.PORT || 5000;
-app.set('port', port);
+
+app.set('port', C.port);
 
 app.use("/", express.static(__dirname+"/public"));
 
@@ -15,7 +15,7 @@ app.use("/", express.static(__dirname+"/public"));
 
 
 
-app.listen(port, function(){
+app.listen(C.port, function(){
     console.log("Conectado: "+app.get("port"));
 });
 

@@ -1,11 +1,11 @@
-adminCtrl.TabCtrl = function ($rootScope, $scope, $http) {
+adminController.TabCtrl = function ($rootScope, $scope, OauthService) {
 
-	$scope.logout = function () {
-		$http.get("https://pickyourday.herokuapp.com/api/oauth/logout").then(function successCallback(response) {
-			deleteLocal("user");
-			$rootScope.go("login");
-		}, function errorCallback(response) {
+    $scope.logout = function () {
+        OauthService.logout().Session({}, function(){
+            deleteLocal("user");
+            $rootScope.go("login");
+        }, function(){
 
-		});
-	}
-}
+        });
+    };
+};

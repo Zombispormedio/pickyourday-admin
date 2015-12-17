@@ -1,8 +1,8 @@
-adminFtry.AuthInterceptor = function($q, $location){
+adminFactory.AuthInterceptor = function($q, $location){
     return {
         request: function(config){
             config.headers = config.headers || {};
-           
+
                var user=getJSONLocal("user");
             if (!config.headers.Authorization && user) {
                 config.headers.Authorization = user.token;

@@ -1,57 +1,57 @@
-var adminCtrl = {};
-var adminFtry = {};
-var adminFiltr = {};
-var adminDrctv = {};
+var adminController = {};
+var adminFactory = {};
+var adminFilter = {};
+var adminDirective = {};
 
-var app = angular.module('myAdmin', ['ui.router'])
-	.controller(adminCtrl)
-	.factory(adminFtry)
-	.filter(adminFiltr)
-	.directive(adminDrctv)
+var app = angular.module('myAdmin', ['ui.router', "ngResource"])
+    .controller(adminController)
+    .factory(adminFactory)
+    .filter(adminFilter)
+    .directive(adminDirective)
 
-	.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
-
-
-		$stateProvider
-			.state("login", {
-				url: "/login",
-				onEnter: function ($rootScope) {
-					if (getJSONLocal("user")) {
-						
-						$rootScope.go("app");
-					}
-				},
-				templateUrl: 'app/login/main.html',
-				controller: 'LoginCtrl'
-
-			})
-			.state("app", {
-				url: '/',
-				onEnter: function ($rootScope) {
-					if (!getJSONLocal("user")) {
-						
-						$rootScope.go("login");
-					}
-				},
-				templateUrl: 'app/main.html',
-				controller: 'TabCtrl'
-			})
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
 
-		$urlRouterProvider.otherwise("/login");
-		$httpProvider.interceptors.push('AuthInterceptor');
+        $stateProvider
+            .state("login", {
+                url: "/login",
+                onEnter: function ($rootScope) {
+                    if (getJSONLocal("user")) {
 
-	})
+                        $rootScope.go("app");
+                    }
+                },
+                templateUrl: 'app/login/main.html',
+                controller: 'LoginCtrl'
 
-	.run(function ($rootScope, $state) {
+            })
+            .state("app", {
+                url: '/',
+                onEnter: function ($rootScope) {
+                    if (!getJSONLocal("user")) {
 
-		$rootScope.go = function (state, params) {
-			$state.go(state, params);
-		}
+                        $rootScope.go("login");
+                    }
+                },
+                templateUrl: 'app/main.html',
+                controller: 'TabCtrl'
+            })
 
-		
+
+        $urlRouterProvider.otherwise("/login");
+        $httpProvider.interceptors.push('AuthInterceptor');
+
+    })
+
+    .run(function ($rootScope, $state) {
+
+        $rootScope.go = function (state, params) {
+            $state.go(state, params);
+        }
 
 
 
 
-	});
+
+
+    });
