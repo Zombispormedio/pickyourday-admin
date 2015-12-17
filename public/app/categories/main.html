@@ -1,0 +1,39 @@
+<div class="container">
+
+    <uib-accordion close-others="true" ng-if="categories.length>0">
+
+        <uib-accordion-group is-open="status.open" ng-repeat="category in categories">
+            <uib-accordion-heading>
+                {{category.name}}
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </uib-accordion-heading>
+
+            <div class="media">
+                <div class="media-left">
+
+                    <img src="{{category.image.src || 'assets/img/noimage.png'}}" alt="category.image.alt" class="img-thumbnail thumbnail media-object">
+
+                </div>
+                <div class="media-body">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Description</h3>
+                        </div>
+                        <div class="panel-body">
+                            {{category.description}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </uib-accordion-group>
+    </uib-accordion>
+
+    <div class="alert alert-warning" role="alert" ng-if="categories.length==0">Warning! No categories</div>
+    <div class="alert alert-warning" role="alert" ng-if="error">{{error}}</div>
+
+    <div class="alert alert-danger" role="alert" ng-if="danger">{{danger}}</div>
+
+</div>

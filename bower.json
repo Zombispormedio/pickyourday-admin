@@ -20,6 +20,8 @@
     "angular": "~1.4.8",
     "bootstrap": "~3.3.6",
     "angular-ui-router": "~0.2.15",
-    "angular-resource": "~1.4.8"
+    "angular-resource": "~1.4.8",
+    "angular-bootstrap": "~0.14.3",
+    "angular-contenteditable": "~0.3.8"
   }
 }

@@ -1,16 +1,29 @@
 <div>
-	<div class="logout">
-		<button type="button" class="btn btn-danger" aria-label="Left Align" ng-click="logout()">
-			<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-		</button>
-	</div>
-	<ul class="nav nav-tabs">
-		<li role="presentation" class="active"><a href="#">Customers</a></li>
-		<li role="presentation"><a href="#">Companies</a></li>
-		<li role="presentation"><a href="#">Pick</a></li>
-		<li role="presentation"><a href="#">Services</a></li>
-		<li role="presentation"><a href="#">Categories</a></li>
-	</ul>
-	<!--<div ui-view="content"></div>-->
+    <div class="logout">
+        <button type="button" class="btn btn-danger" aria-label="Left Align" ng-click="logout()">
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+        </button>
+    </div>
+    <uib-tabset>
+        <uib-tab heading="Customers" select="goToCustomers()">
+            <div ui-view="customers"></div>
+        </uib-tab>
+        <uib-tab heading="Companies" select="goToCompanies()">
+            <div ui-view="companies"></div>
+        </uib-tab>
+        <uib-tab heading="Picks" select="goToPicks()">
+            <div ui-view="picks"></div>
+        </uib-tab>
+        <uib-tab heading="Services" select="goToServices">
+            <div ui-view="services"></div>
+        </uib-tab>
+
+        <uib-tab heading="Categories" select="goToCategories()">
+            <div ui-view="categories"></div>
+
+        </uib-tab>
+
+
+    </uib-tabset>
 
 </div>

@@ -1,9 +1,18 @@
 .page-header{
-	text-align: center;	
+    text-align: center;
 }
 
 .logout{
-	float: right;
-	margin-right: 2%;
+    float: right;
+    margin-right: 2%;
     margin-top: -0.5%;
+}
+
+.size512{
+    width: 512px;
+    height:512px;
+}
+.thumbnail{
+    width: 350px;
+    height:256px;
 }
