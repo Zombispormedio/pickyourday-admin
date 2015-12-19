@@ -1,19 +1,90 @@
-adminController.CategoriesCtrl = function ($scope, SystemService) {
+adminController.CategoriesCtrl = function ($rootScope, $scope, SystemService) {
+
+
+    $scope.create=function(){
+        $rootScope.input("Enter Category Name: ", "text", "Automoción, belleza, administración...", function(value){
+
+
+            SystemService.categories().create({}, {name:value}, function(result){
+                if(result.error){ $rootScope.error(result.error); return;}
+                console.log(result);
+                $scope.categories.unshift(result.category);
+
+                $rootScope.success("Category Created!");
+
+            }, function(){
+
+                $rootScope.warning("Server Not Found");
+
+            });
+
+        });
+    };
+
+
+    $scope.save=function(category){
+
+
+        SystemService.categories().update({id:category._id}, category, function(result){
+            if(result.error){ $rootScope.error(result.error); return;}
+            category.editable=false;
+            $rootScope.success("Saved!");
+
+        }, function(){
+
+            $rootScope.warning("Server Not Found");
+
+        });
+    };
+
+
+    $scope.delete=function(category, index){
+        $rootScope.confirm("Are you sure?", function(){
+
+            SystemService.categories().delete({id:category._id}, category, function(result){
+                if(result.error){ $rootScope.error(result.error); return;}
+
+                $scope.categories.splice(index, 1);
+
+                $rootScope.success("Deleted!");
+
+            }, function(){
+
+                $rootScope.warning("Server Not Found");
+
+            });
+
+
+        });
+    };
+
+
+
+
+
 
     this.ListCategories=function(){
 
         SystemService.categories().list({}, {}, function(result){
-            if(result.error){ $scope.error=result.error; return;}
+            if(result.error){  $rootScope.error(result.error); return;}
 
             $scope.categories=result.categories;
 
+            if($scope.categories.length===0){
+                $rootScope.warning("Warning! No categories");
+            }
+
         }, function(){
 
-            $scope.danger="Server Not Found";
+            $rootScope.warning("Server Not Found");
 
         });
 
     };
+
+
+
+
 
 
     this.ListCategories();

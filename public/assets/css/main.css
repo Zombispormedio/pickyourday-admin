@@ -16,3 +16,30 @@
     width: 350px;
     height:256px;
 }
+
+
+.inline{
+   display: inline;
+}
+
+.fr{
+    float:right;
+}
+
+.edit-button{
+
+display: inline;
+float: right;
+font-size: 1.5em;
+
+}
+
+
+.add-button{
+    position: fixed;
+}
+
+.add-button button{
+    font-size: 7.3em;
+    border-radius: 0;
+}

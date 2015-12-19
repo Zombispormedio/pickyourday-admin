@@ -3,7 +3,7 @@ var adminFactory = {};
 var adminFilter = {};
 var adminDirective = {};
 
-var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap'])
+var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 'contenteditable'])
 .controller(adminController)
 .factory(adminFactory)
 .filter(adminFilter)
@@ -51,7 +51,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap'])
         }
     })
         .state("services", {
-        url: "/services",
+        url: "services",
         onEnter: function ($rootScope) {
             if (!getJSONLocal("user")) {
                 $rootScope.go("login");
@@ -65,7 +65,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap'])
         }
     })
         .state("app.customers", {
-        url: "/customers",
+        url: "customers",
         onEnter: function ($rootScope) {
             if (!getJSONLocal("user")) {
                 $rootScope.go("login");
@@ -79,7 +79,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap'])
         }
     })
         .state("app.companies", {
-        url: "/companies",
+        url: "companies",
         onEnter: function ($rootScope) {
             if (!getJSONLocal("user")) {
                 $rootScope.go("login");
@@ -93,7 +93,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap'])
         }
     })
         .state("app.picks", {
-        url: "/picks",
+        url: "picks",
         onEnter: function ($rootScope) {
             if (!getJSONLocal("user")) {
                 $rootScope.go("login");
@@ -121,7 +121,34 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap'])
 
     $rootScope.go = function (state, params) {
         $state.go(state, params);
-    }
+    };
+
+    $rootScope.success=function(message){
+        notie.alert(1, message, 1.5);
+    };
+
+    $rootScope.error=function(message){
+        notie.alert(3, message, 2.5);
+    };
+
+    $rootScope.warning=function(message){
+        notie.alert(2, message, 2);
+    };
+
+    $rootScope.confirm=function(message, cb){
+        notie.confirm(message, 'Yes', 'Cancel', function() {
+            cb();
+        });
+    };
+
+    $rootScope.input=function(message, type, placeholder, cb){
+        notie.input(message, 'Submit', 'Cancel', type, placeholder, cb);
+    };
+
+
+
+
+
 
 
 
