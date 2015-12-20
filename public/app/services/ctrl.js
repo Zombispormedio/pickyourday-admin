@@ -1,6 +1,6 @@
 adminController.ServicesCtrl = function ($rootScope, $scope, SystemService) {
 
-
+    $scope.loading=true;
     $scope.create=function(){
         $rootScope.input("Enter Service Name: ", "text", "Cortar Pelo, extracción de molares...", function(value){
 
@@ -24,9 +24,6 @@ adminController.ServicesCtrl = function ($rootScope, $scope, SystemService) {
 
 
     $scope.save=function(service){
-
-
-
         SystemService.default_services().update({id:service._id}, service, function(result){
             if(result.error){ $rootScope.error(result.error); return;}
             service.editable=false;
@@ -61,15 +58,11 @@ adminController.ServicesCtrl = function ($rootScope, $scope, SystemService) {
     };
 
 
-
-
-
-
     this.ListServices=function(){
 
         SystemService.default_services().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
-
+            $scope.loading=false;
             $scope.services=result.default_services;
 
             if($scope.services.length===0){

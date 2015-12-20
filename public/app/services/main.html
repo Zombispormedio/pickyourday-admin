@@ -1,10 +1,13 @@
-<div class="btn-group add-button" role="group" aria-label="add">
+<div class="btn-group add-button" role="group" aria-label="add" ng-if="!loading">
     <button type="button" class="btn btn-default" ng-click="create()"><i class="fa fa-plus-circle"></i></button>
 
 </div>
+
+<div class="loading" ng-if="loading">
+    <h1><i class="fa fa-cog fa-spin fa-4x" ></i></h1>
+</div>
+
 <div class="container">
-
-
     <uib-accordion close-others="true" ng-if="services.length>0">
 
         <uib-accordion-group is-open="status.open"  ng-repeat="service in services" ng-init="service.editable=false">

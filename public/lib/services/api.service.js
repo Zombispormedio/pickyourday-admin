@@ -1,6 +1,7 @@
 adminFactory.ApiService= function($resource, $location){
     return {
         env:$location.absUrl().indexOf("localhost")==-1?"prod":"dev",
+
         prod:{
             protocol:"http",
             host:"pickyourday.herokuapp.com",

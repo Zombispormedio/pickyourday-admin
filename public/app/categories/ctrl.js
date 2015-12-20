@@ -1,6 +1,6 @@
 adminController.CategoriesCtrl = function ($rootScope, $scope, SystemService, $uibModal) {
 
-
+    $scope.loading=true;
     $scope.create=function(){
         $rootScope.input("Enter Category Name: ", "text", "Automoción, belleza, administración...", function(value){
 
@@ -67,7 +67,7 @@ adminController.CategoriesCtrl = function ($rootScope, $scope, SystemService, $u
 
         SystemService.categories().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
-
+            $scope.loading=false;
             $scope.categories=result.categories;
 
             if($scope.categories.length===0){

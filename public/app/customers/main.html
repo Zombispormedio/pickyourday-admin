@@ -1,0 +1,34 @@
+
+<div class="btn-group add-button" role="group" aria-label="add" ng-if="!loading">
+    <button type="button" class="btn btn-default" ng-click="create()"><i class="fa fa-plus-circle"></i></button>
+
+</div>
+
+<div class="loading" ng-if="loading">
+    <h1><i class="fa fa-refresh fa-spin fa-4x" ></i></h1>
+</div>
+<div class="container">
+
+    <uib-accordion close-others="true" ng-if="customers.length>0">
+
+        <uib-accordion-group is-open="status.open"  ng-repeat="customer in customers" ng-init="category.editable=false">
+            <uib-accordion-heading>
+
+                {{customer.email}}
+
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </uib-accordion-heading>
+<!--
+
+            <div class="btn-group fr" role="group" aria-label="actions">
+                <button type="button" class="btn btn-default edit-button" ng-click="customer.editable=true" ng-if="!customer.editable"><i class="fa fa-pencil"></i></button>
+                <button type="button" class="btn btn-success edit-button" ng-click="save(customer)" ng-if="customer.editable">Save</button>
+                <button type="button" class="btn btn-default edit-button" ng-click="delete(customer $index)"><i class="fa fa-trash"></i></button>
+            </div>-->
+
+        </uib-accordion-group>
+    </uib-accordion>
+
+
+
+</div>

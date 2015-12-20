@@ -1,10 +1,6 @@
 adminController.PickCtrl = function ($rootScope, $scope, SystemService) {
 
-
-
-
-
-
+    $scope.loading=true;
 
     $scope.delete=function(pick, index){
         $rootScope.confirm("Are you sure?", function(){
@@ -28,14 +24,12 @@ adminController.PickCtrl = function ($rootScope, $scope, SystemService) {
 
 
 
-
-
-
     this.ListPicks=function(){
 
         SystemService.picks().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
 
+            $scope.loading=false;
             $scope.picks=result.picks;
 
             if($scope.picks.length===0){

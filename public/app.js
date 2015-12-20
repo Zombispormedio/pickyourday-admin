@@ -74,7 +74,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
         views: {
             'customers': {
                 templateUrl: 'app/customers/main.html',
-                controller:""
+                controller:"CustomersCtrl"
             }
         }
     })
