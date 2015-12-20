@@ -1,4 +1,4 @@
-adminController.CategoriesCtrl = function ($rootScope, $scope, SystemService) {
+adminController.CategoriesCtrl = function ($rootScope, $scope, SystemService, $uibModal) {
 
 
     $scope.create=function(){
@@ -7,7 +7,7 @@ adminController.CategoriesCtrl = function ($rootScope, $scope, SystemService) {
 
             SystemService.categories().create({}, {name:value}, function(result){
                 if(result.error){ $rootScope.error(result.error); return;}
-                console.log(result);
+
                 $scope.categories.unshift(result.category);
 
                 $rootScope.success("Category Created!");
@@ -82,6 +82,27 @@ adminController.CategoriesCtrl = function ($rootScope, $scope, SystemService) {
 
     };
 
+
+
+
+    $scope.open = function (category) {
+
+
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/image-uploader/main.html',
+            controller: 'ImageUploaderCtrl'
+
+        });
+
+        modalInstance.result.then(function (item) {
+
+            category.image=item;
+
+        }, function () {
+
+        });
+    };
 
 
 

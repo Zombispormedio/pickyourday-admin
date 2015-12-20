@@ -1,0 +1,130 @@
+<div class="btn-group add-button" role="group" aria-label="add">
+    <button type="button" class="btn btn-default" ng-click="create()"><i class="fa fa-plus-circle"></i></button>
+
+</div>
+<div class="container">
+
+
+    <uib-accordion close-others="true" ng-if="services.length>0">
+
+        <uib-accordion-group is-open="status.open"  ng-repeat="service in services" ng-init="service.editable=false">
+            <uib-accordion-heading>
+
+                {{service.name}}
+
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </uib-accordion-heading>
+
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Name</h3>
+                        </div>
+                        <div class="panel-body">
+                            <span contenteditable="{{service.editable}}"
+                                  ng-model="service.name"
+                                  strip-br="true"
+                                  strip-tags="true"
+                                  select-non-editable="true">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Description</h3>
+                        </div>
+                        <div class="panel-body">
+                            <span contenteditable="{{service.editable}}"
+                                  ng-model="service.description"
+                                  strip-br="true"
+                                  strip-tags="true"
+                                  select-non-editable="true">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div  class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Duration</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="input-group">
+
+                                <input type="number" ng-disabled="!service.editable" class="form-control" min="0" aria-describedby="basic-addon1" ng-model="service.duration">
+                                <span class="input-group-addon" id="basic-addon2">minutes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+            <div class="row">
+                <div  class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Keywords
+                                <i class="fa fa-plus fr bt-icon"  ng-if="service.editable" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}"></i>
+
+                            </h3>
+
+                        </div>
+                        <div class="panel-body">
+
+
+                            <div class="keywords label label-default" ng-repeat="keyword in service.keywords" >
+                                <span contenteditable="{{service.editable}}"
+                                      ng-model="keyword"
+                                      strip-br="true"
+                                      strip-tags="true"
+                                      select-non-editable="true">
+                                </span>
+
+                                <i class="fa fa-minus-circle bt-icon" ng-if="service.editable" ng-click="deleteKeyword(service, $index)"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+                <div class="btn-group fr" role="group" aria-label="actions">
+                    <button type="button" class="btn btn-default edit-button" ng-click="service.editable=true" ng-if="!service.editable"><i class="fa fa-pencil"></i></button>
+                    <button type="button" class="btn btn-success edit-button" ng-click="save(service)" ng-if="service.editable">Save</button>
+                    <button type="button" class="btn btn-default edit-button" ng-click="delete(service, $index)"><i class="fa fa-trash"></i></button>
+                </div>
+
+                <script type="text/ng-template" id="KeywordPopover.html">
+
+                    <div class="form-group">
+
+                        <input type="text" class="form-control mb5" ng-model="service.tempTag">
+
+                        <button class="btn btn-default ml20" type="button" ng-click="addTag(service)">Submit</i></button>
+
+
+                    </div>
+                </script>
+
+
+        </uib-accordion-group>
+    </uib-accordion>
+
+
+
+
+</div>
+
+
+

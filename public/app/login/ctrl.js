@@ -8,15 +8,15 @@ adminController.LoginCtrl = function ($rootScope, $scope, OauthService ) {
                 saveLocal("user", res.data);
                 $rootScope.go("app");
             } else {
-                $scope.error=res.error;
+                $rootScope.error(res.error);
             }
         }, function(){
-            $scope.error="Server Not Found";
+            $rootScope.warning("Server Not Found");
         });
 
     };
 
     $scope.cleanError=function(){
-        $scope.error="";
+
     };
 };

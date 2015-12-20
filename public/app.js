@@ -50,7 +50,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
             }
         }
     })
-        .state("services", {
+        .state("app.services", {
         url: "services",
         onEnter: function ($rootScope) {
             if (!getJSONLocal("user")) {
@@ -60,7 +60,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
         views: {
             'services': {
                 templateUrl: 'app/services/main.html',
-                controller:""
+                controller:"ServicesCtrl"
             }
         }
     })
@@ -102,10 +102,10 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
         views: {
             'picks': {
                 templateUrl: 'app/picks/main.html',
-                controller:""
+                controller:"PickCtrl"
             }
         }
-    })
+    });
 
 
 

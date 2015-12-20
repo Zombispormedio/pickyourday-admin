@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add Media</h3>
+</div>
+<div class="modal-body">
+    <div class="input-group mb5">
+        <span class="input-group-addon" id="basic-addon1">Alt Attribute</span>
+        <input type="text" class="form-control" aria-describedby="basic-addon1" ng-model="image.alt">
+    </div>
+    <uib-tabset ng-init="f=0">
+        <uib-tab heading="By URL" select="f=0">
+
+            <div class="input-group mb5 mt5">
+                <span class="input-group-addon" id="basic-addon3">URL</span>
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" ng-model="image.src">
+            </div>
+
+
+        </uib-tab>
+        <uib-tab heading="Upload File" select="f=1" disable="true"></uib-tab>
+
+    </uib-tabset>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

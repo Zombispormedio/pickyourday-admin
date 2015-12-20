@@ -40,6 +40,42 @@ font-size: 1.5em;
 }
 
 .add-button button{
-    font-size: 7.3em;
+    font-size: 7em;
     border-radius: 0;
 }
+
+.image-uploader:hover{
+
+    transform: scale(0.95, 0.95);
+
+}
+
+.mb5{
+    margin-bottom: 5%;
+}
+
+.mb10{
+    margin-bottom: 10%;
+}
+
+.mt5{
+    margin-top: 5%;
+}
+
+.bt-icon:hover{
+    color:rgba(1,1,1,0.5);
+}
+
+.ml20{
+    margin-left: 20%;
+}
+
+.keywords{
+    display: inline-block;
+    padding: 5%;
+    margin: 2%;
+    background-color: #76B;
+    font-size: 1.1em;
+}
+
+

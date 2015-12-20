@@ -16,9 +16,9 @@
             </uib-accordion-heading>
 
             <div class="media">
-                <div class="media-left">
+                <div class="media-left" ng-class="{'image-uploader': category.editable}">
 
-                    <img src="{{category.image.src || 'assets/img/noimage.png'}}" alt="category.image.alt" class="img-thumbnail thumbnail media-object">
+                    <img src="{{category.image.src || 'assets/img/noimage.png'}}" alt="category.image.alt" class="img-thumbnail thumbnail media-object" ng-click="category.editable && open(category)">
 
                 </div>
                 <div class="media-body">
