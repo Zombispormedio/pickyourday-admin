@@ -1,56 +1,85 @@
 
 <div class="container">
-{{picks}}
+
     <uib-accordion close-others="true" ng-if="picks.length>0">
 
-        <uib-accordion-group is-open="status.open"  ng-repeat="pick in picks" ng-init="category.editable=false">
+        <uib-accordion-group is-open="status.open"  ng-repeat="pick in picks">
             <uib-accordion-heading>
 
-                {{category.name}}
 
+                {{pick.initDate |date }}: {{pick.service.metadata.name}} to {{pick.customer.email}} in {{pick.company.name}}
                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
             </uib-accordion-heading>
 
-            <div class="media">
-                <div class="media-left" ng-class="{'image-uploader': category.editable}">
+            <div class="row">
+                <div class="col-md-3">
+                    <ul class="list-group">
+                        <li class="list-group-item">Created: {{pick.dateCreated | date}}</li>
+                        <li class="list-group-item">State: {{pick.state | capitalize}}</li>
+                    </ul>
+                </div>
 
-                    <img src="{{category.image.src || 'assets/img/noimage.png'}}" alt="category.image.alt" class="img-thumbnail thumbnail media-object" ng-click="category.editable && open(category)">
+                <div  class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Company</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">Name: {{pick.company.name}}</li>
+                                <li class="list-group-item">CIF: {{pick.company.cif}}</li>
+                                <li class="list-group-item">Email: {{pick.company.email}}</li>
+                                <li class="list-group-item">Category: {{pick.company.category.name}</li>
+
+                            </ul>
+                        </div>
+                    </div>
 
                 </div>
-                <div class="media-body">
+
+                <div  class="col-md-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Name</h3>
+                            <h3 class="panel-title">Service</h3>
                         </div>
                         <div class="panel-body">
-                            <span contenteditable="{{category.editable}}"
-                                  ng-model="category.name"
-                                  strip-br="true"
-                                  strip-tags="true"
-                                  select-non-editable="true">
-                            </span>
+                            <ul class="list-group">
+                                <li class="list-group-item">Name: {{pick.service.metadata.name}}</li>
+                                <li class="list-group-item">Company Description: {{pick.service.description}}</li>
+
+
+                                <li class="list-group-item">Price: {{pick.service.price}}</li>
+                                <li class="list-group-item">Duration: {{pick.service.metadata.duration}}</li>
+
+
+
+                            </ul>
                         </div>
                     </div>
 
+                </div>
+
+                <div  class="col-md-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Description</h3>
+                            <h3 class="panel-title">Customer</h3>
                         </div>
                         <div class="panel-body">
-                            <span contenteditable="{{category.editable}}"
-                                  ng-model="category.description"
-                                  strip-br="true"
-                                  strip-tags="true"
-                                  select-non-editable="true">
-                            </span>
+                            <ul class="list-group">
+                                <li class="list-group-item">Name: {{pick.customer.name}} {{pick.customer.surname}}</li>
+
+                                <li class="list-group-item">Email: {{pick.customer.email}}</li>
+
+
+                            </ul>
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="btn-group fr" role="group" aria-label="actions">
-                <button type="button" class="btn btn-default edit-button" ng-click="category.editable=true" ng-if="!category.editable"><i class="fa fa-pencil"></i></button>
-                <button type="button" class="btn btn-success edit-button" ng-click="save(category)" ng-if="category.editable">Save</button>
-                <button type="button" class="btn btn-default edit-button" ng-click="delete(category, $index)"><i class="fa fa-trash"></i></button>
+
+                <button type="button" class="btn btn-default edit-button" ng-click="delete(pick, $index)"><i class="fa fa-trash"></i></button>
             </div>
 
         </uib-accordion-group>
