@@ -2,6 +2,7 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService) {
 
     $scope.loading=true;
 
+
     $scope.create=function(){
         $rootScope.input("Enter Customer Email: ", "text", "@email.com", function(value){
 
@@ -82,7 +83,6 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService) {
         });
 
     };
-
 
 
 

@@ -7,24 +7,66 @@
 <div class="loading" ng-if="loading">
     <h1><i class="fa fa-refresh fa-spin fa-4x" ></i></h1>
 </div>
-<div class="container">
+<div class="container mr2">
 
     <uib-accordion close-others="true" ng-if="customers.length>0">
 
-        <uib-accordion-group is-open="status.open"  ng-repeat="customer in customers" ng-init="category.editable=false">
+        <uib-accordion-group is-open="status.open"  ng-repeat="customer in customers" ng-init="customer.editable=false">
             <uib-accordion-heading>
 
                 {{customer.email}}
 
                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
             </uib-accordion-heading>
-<!--
+
+            {{customer}}
+
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <ul class="list-group">
+                        <li class="list-group-item">Name:
+                            <span contenteditable="{{customer.editable}}"
+                                  ng-model="customer.name"
+                                  strip-br="true"
+                                  strip-tags="true"
+                                  select-non-editable="true">
+                            </span>
+                        </li>
+                        <li class="list-group-item">Surname:
+                            <span contenteditable="{{customer.editable}}"
+                                  ng-model="customer.surname"
+                                  strip-br="true"
+                                  strip-tags="true"
+                                  select-non-editable="true">
+                            </span>
+                        </li>
+                        <li class="list-group-item">Email:
+                            <span contenteditable="{{customer.editable}}"
+                                  ng-model="customer.email"
+                                  strip-br="true"
+                                  strip-tags="true"
+                                  select-non-editable="true">
+                            </span>
+                        </li>
+                        <li class="list-group-item">Birthdate: <span
+
+                                                                     >{{customer.birthDate | date}}</span></li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                </div>
+
+
+            </div>
+
 
             <div class="btn-group fr" role="group" aria-label="actions">
                 <button type="button" class="btn btn-default edit-button" ng-click="customer.editable=true" ng-if="!customer.editable"><i class="fa fa-pencil"></i></button>
                 <button type="button" class="btn btn-success edit-button" ng-click="save(customer)" ng-if="customer.editable">Save</button>
                 <button type="button" class="btn btn-default edit-button" ng-click="delete(customer $index)"><i class="fa fa-trash"></i></button>
-            </div>-->
+            </div>
 
         </uib-accordion-group>
     </uib-accordion>
