@@ -26,6 +26,6 @@
     "components-font-awesome": "~4.5.0",
     "notie": "*",
     "angular-animate": "~1.4.8",
-    "google-map": "GoogleWebComponents/google-map#~1.1.7"
+    "ngmap": "~1.15.6"
   }
 }
