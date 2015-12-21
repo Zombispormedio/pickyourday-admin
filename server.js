@@ -10,11 +10,6 @@ app.set('port', C.port);
 
 app.use("/", express.static(__dirname+"/public"));
 
-
-
-
-
-
 app.listen(C.port, function(){
     console.log("Conectado: "+app.get("port"));
 });
