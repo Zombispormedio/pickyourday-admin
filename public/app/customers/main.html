@@ -67,7 +67,7 @@
 
                         </div>
                     </div>
-                    <div class="panel panel-default">
+                    <div class="panel panel-default width24">
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                   Current Location
@@ -78,18 +78,21 @@
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <div class="input-group">
-                                        <span class="input-group-addon" id="basic-addon2">Longitude</span>
-                                        <input type="number" ng-disabled="!customer.editable" class="form-control" min="0" aria-describedby="basic-addon1" ng-model="customer.location.currentLocation.longitude" step="0.0001">
+                                        <span class="input-group-addon">Longitude</span>
+                                        <input type="number" ng-disabled="!customer.editable" class="form-control"   ng-model="customer.location.currentLocation.longitude" step="0.0001">
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="input-group">
-                                        <span class="input-group-addon" id="basic-addon2">Latitude</span>
-                                        <input type="number" ng-disabled="!customer.editable" class="form-control" min="0" aria-describedby="basic-addon1" ng-model="customer.location.currentLocation.latitude" step="0.0001">
+                                        <span class="input-group-addon" >Latitude</span>
+                                        <input type="number" ng-disabled="!customer.editable" class="form-control"   ng-model="customer.location.currentLocation.latitude" step="0.0001">
                                     </div>
+
                                 </li>
                                 <li class="list-group-item">
-                                    <ng-map center="[ {{customer.location.currentLocation.longitude}}, {{customer.location.currentLocation.latitude}}]"></ng-map>
+                                    <ng-map default-style="true" center="[ {{customer.location.currentLocation.longitude}}, {{customer.location.currentLocation.latitude}}]" zoom="6">
+
+                                    </ng-map>
                                 </li>
                             </ul>
 
