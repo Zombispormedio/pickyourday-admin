@@ -87,3 +87,14 @@ font-size: 1.5em;
     margin-right: 6%;
 }
 
+.width24{
+    width: 24em;
+   
+}
+
+.height24{
+     height: 24em;
+}
+google-map {
+    height: 200px;
+  }

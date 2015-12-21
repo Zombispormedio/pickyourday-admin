@@ -1,4 +1,3 @@
-
 <div class="btn-group add-button" role="group" aria-label="add" ng-if="!loading">
     <button type="button" class="btn btn-default" ng-click="create()"><i class="fa fa-plus-circle"></i></button>
 
@@ -12,7 +11,7 @@
 
     <uib-accordion close-others="true" ng-if="customers.length>0">
 
-        <uib-accordion-group is-open="status.open"  ng-repeat="customer in customers" ng-init="customer.editable=false">
+        <uib-accordion-group is-open="status.open" ng-repeat="customer in customers" ng-init="customer.editable=false">
             <uib-accordion-heading>
 
                 {{customer.email}}
@@ -20,7 +19,7 @@
                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
             </uib-accordion-heading>
 
-          
+
 
 
             <div class="row">
@@ -29,32 +28,73 @@
 
                     <ul class="list-group">
                         <li class="list-group-item">Name:
-                            <span contenteditable="{{customer.editable}}"
-                                  ng-model="customer.name"
-                                  strip-br="true"
-                                  strip-tags="true"
-                                  select-non-editable="true">
+                            <span contenteditable="{{customer.editable}}" ng-model="customer.name" strip-br="true" strip-tags="true" select-non-editable="true">
                             </span>
                         </li>
                         <li class="list-group-item">Surname:
-                            <span contenteditable="{{customer.editable}}"
-                                  ng-model="customer.surname"
-                                  strip-br="true"
-                                  strip-tags="true"
-                                  select-non-editable="true">
+                            <span contenteditable="{{customer.editable}}" ng-model="customer.surname" strip-br="true" strip-tags="true" select-non-editable="true">
                             </span>
                         </li>
                         <li class="list-group-item">Email:
-                            <span contenteditable="{{customer.editable}}"
-                                  ng-model="customer.email"
-                                  strip-br="true"
-                                  strip-tags="true"
-                                  select-non-editable="true">
+                            <span contenteditable="{{customer.editable}}" ng-model="customer.email" strip-br="true" strip-tags="true" select-non-editable="true">
                             </span>
                         </li>
-                      
-                   </ul>
+
+                        <li class="list-group-item">Register Date: {{customer.registerDate | date}}
+                        </li>
+                        <li class="list-group-item">Last Access: {{customer.lastAccess | date}}
+                        </li>
+                        <li class="list-group-item">Last Update: {{customer.lastUpdate | date}}
+                        </li>
+
+
+
+                    </ul>
                 </div>
+
+                <div class="col-md-3">
+
+                    <div class="panel panel-default width24">
+                        <div class="panel-heading" ng-init="customer.calendar=false">
+                            <h3 class="panel-title">Birthdate: {{customer.birthDate | date}}
+                                <i class="fa fa-calendar-plus-o fr bt-icon" ng-click="customer.calendar = !customer.calendar" ng-if=" customer.editable&&customer.calendar"></i>
+                                <i class="fa fa-calendar-minus-o fr bt-icon" ng-click="customer.calendar = !customer.calendar" ng-if="customer.editable&&!customer.calendar"></i>
+                            </h3>
+                        </div>
+                        <div class="panel-body" ng-if="customer.editable&&customer.calendar">
+
+                            <uib-datepicker ng-model="customer.birthDate" show-weeks="true" class="well well-sm"></uib-datepicker>
+
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                  Current Location
+                              </h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <ul class="list-group">
+                                <li class="list-group-item">Longitude:
+                            <span contenteditable="{{customer.editable}}" ng-model="customer.location.currentLocation.longitude" strip-br="true" strip-tags="true"
+                            select-non-editable="true">  </span></li>
+                               <li class="list-group-item"> Latitude:
+                            <span contenteditable="{{customer.editable}}" ng-model="customer.location.currentLocation.latitude" strip-br="true" strip-tags="true"
+                            select-non-editable="true">
+                            </span></li>
+                            <li class="list-group-item"><google-map latitude="37.77493" longitude="-122.41942"></google-map></li>
+                            </ul>
+                            
+                          
+                            
+
+                            
+                        </div>
+                    </div>
+                </div>
+
+
 
 
             </div>
@@ -65,11 +105,11 @@
                 <button type="button" class="btn btn-success edit-button" ng-click="save(customer)" ng-if="customer.editable">Save</button>
                 <button type="button" class="btn btn-default edit-button" ng-click="delete(customer, $index)"><i class="fa fa-trash"></i></button>
             </div>
-            
+
 
         </uib-accordion-group>
-        
-        
+
+
     </uib-accordion>
 
 
