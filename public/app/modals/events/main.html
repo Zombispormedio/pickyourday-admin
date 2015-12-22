@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add Event</h3>
+</div>
+<div class="modal-body">
+
+    <div class="input-group mb5">
+        <span class="input-group-addon" >Name</span>
+        <input type="text" class="form-control" placeholder="Cena con la familia" ng-model="event.name">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon" >Description</span>
+        <input type="text" class="form-control" placeholder="Hoy comemos langosta" ng-model="event.description">
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-5 width24">
+
+
+            <h3><strong>Initial Date: </strong>{{event.initDate |date}}</h3>
+
+        </div>
+        <div class="col-md-5 width24">
+            <h3><strong>Deadline Date: </strong>{{event.endDate |date }}</h3>
+        </div>
+        <div class="col-md-2">
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-5 width24">
+
+
+            <uib-datepicker ng-model="event.initDate" show-weeks="true" min-date="minDate" class="well well-sm"></uib-datepicker>
+
+
+        </div>
+        <div class="col-md-5 width24">
+            <uib-datepicker ng-model="event.endDate" show-weeks="true" min-date="minDate" class="well well-sm"></uib-datepicker>
+        </div>
+        <div class="col-md-2">
+        </div>
+
+    </div>
+
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

@@ -1,24 +1,26 @@
-adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService) {
+adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService,  $uibModal) {
 
     $scope.loading=true;
 
 
     $scope.create=function(){
-        $rootScope.input("Enter Customer Email: ", "text", "@email.com", function(value){
+        $rootScope.input("Enter Customer Email: ", "text", "@email.com", function(email){
 
 
-            CustomerService.categories().create({}, {name:value}, function(result){
-                if(result.error){ $rootScope.error(result.error); return;}
+            $rootScope.input("Enter Customer Password: ", "password","", function(password){
+               CustomerService.customer().create({}, {email:email, password:password}, function(result){
+                   if(result.error){ $rootScope.error(result.error); return;}
 
-                $scope.categories.unshift(result.customer);
+                   $rootScope.customers.unshift(result.customer);
 
-                $rootScope.success("Customer Created!");
+                   $rootScope.success("Customer Created!");
 
-            }, function(){
+               }, function(){
 
-                $rootScope.warning("Server Not Found");
+                   $rootScope.warning("Server Not Found");
 
-            });
+               });
+           });
 
         });
     };
@@ -46,7 +48,7 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService) {
             CustomerService.customer().delete({id:customer._id}, {}, function(result){
                 if(result.error){ $rootScope.error(result.error); return;}
 
-                $scope.customers.splice(index, 1);
+                $rootScope.customers.splice(index, 1);
 
                 $rootScope.success("Deleted!");
 
@@ -61,6 +63,57 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService) {
     };
 
 
+    $scope.createEvent = function (customer) {
+
+
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/events/main.html',
+            controller: 'EventsCtrl',
+            size:'lg'
+
+        });
+
+        modalInstance.result.then(function (item) {
+
+            customer.events.push(item);
+            $rootScope.success("Event Created!");
+
+        }, function () {
+
+        });
+    };
+
+
+    $scope.updateEvent=function(customer, index){
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/events/main.html',
+            controller: 'EventsCtrl',
+            size:'lg',
+            resolve: {
+                items: function () {
+
+                    return customer.events[index];
+                }
+            }
+
+        });
+
+        modalInstance.result.then(function (item) {
+            customer.events[index]=item;
+            $rootScope.success("Event Updated!");
+
+        }, function () {
+
+        });
+
+    };
+    $scope.deleteEvent=function(customer, index){
+
+      customer.events.splice(index, 1);
+        $rootScope.success("Event Deleted!");
+    };
 
 
 
@@ -70,9 +123,9 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService) {
             if(result.error){  $rootScope.error(result.error); return;}
 
             $scope.loading=false;
-            $scope.customers=result.customers;
+            $rootScope.customers=result.customers;
 
-            if($scope.customers.length===0){
+            if($rootScope.customers.length===0){
                 $rootScope.warning("Warning! No customers");
             }
 

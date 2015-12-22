@@ -27,24 +27,24 @@
                 <div class="col-md-3">
 
                     <ul class="list-group">
-                        <li class="list-group-item">Name:
+                        <li class="list-group-item">  <span><strong>Name:</strong></span>
                             <span contenteditable="{{customer.editable}}" ng-model="customer.name" strip-br="true" strip-tags="true" select-non-editable="true">
                             </span>
                         </li>
-                        <li class="list-group-item">Surname:
+                        <li class="list-group-item">  <span><strong>Surname:</strong></span>
                             <span contenteditable="{{customer.editable}}" ng-model="customer.surname" strip-br="true" strip-tags="true" select-non-editable="true">
                             </span>
                         </li>
-                        <li class="list-group-item">Email:
+                        <li class="list-group-item">  <span><strong>Email:</strong></span>
                             <span contenteditable="{{customer.editable}}" ng-model="customer.email" strip-br="true" strip-tags="true" select-non-editable="true">
                             </span>
                         </li>
 
-                        <li class="list-group-item">Register Date: {{customer.registerDate | date}}
+                        <li class="list-group-item">  <span><strong>Register Date: </strong></span>{{customer.registerDate | date: 'medium'}}
                         </li>
-                        <li class="list-group-item">Last Access: {{customer.lastAccess | date}}
+                        <li class="list-group-item">  <span><strong>Last Access: </strong></span>{{customer.lastAccess | date:'medium'}}
                         </li>
-                        <li class="list-group-item">Last Update: {{customer.lastUpdate | date}}
+                        <li class="list-group-item">  <span><strong>Last Update: </strong></span>{{customer.lastUpdate | date:'medium'}}
                         </li>
 
 
@@ -52,13 +52,13 @@
                     </ul>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-4">
 
                     <div class="panel panel-default width24">
                         <div class="panel-heading" ng-init="customer.calendar=false">
-                            <h3 class="panel-title">Birthdate: {{customer.birthDate | date}}
-                                <i class="fa fa-calendar-plus-o fr bt-icon" ng-click="customer.calendar = !customer.calendar" ng-if=" customer.editable&&customer.calendar"></i>
-                                <i class="fa fa-calendar-minus-o fr bt-icon" ng-click="customer.calendar = !customer.calendar" ng-if="customer.editable&&!customer.calendar"></i>
+                            <h3 class="panel-title">  <span><strong>Birthdate: </strong></span>{{customer.birthDate | date}}
+                                <i class="fa fa-calendar-minus-o fr bt-icon" ng-click="customer.calendar = !customer.calendar" ng-if=" customer.editable&&customer.calendar"></i>
+                                <i class="fa fa-calendar-plus-o fr bt-icon" ng-click="customer.calendar = !customer.calendar" ng-if="customer.editable&&!customer.calendar"></i>
                             </h3>
                         </div>
                         <div class="panel-body" ng-if="customer.editable&&customer.calendar">
@@ -68,14 +68,22 @@
                         </div>
                     </div>
                     <div class="panel panel-default width24">
-                        <div class="panel-heading">
+                        <div class="panel-heading" ng-init="customer.map=false">
                             <h3 class="panel-title">
-                                  Current Location
-                              </h3>
+                                Current Location
+
+                                <i class="fa fa-map-o fr bt-icon" ng-click="customer.map = !customer.map" ng-if=" customer.map"></i>
+                                <i class="fa fa-map fr bt-icon" ng-click="customer.map = !customer.map" ng-if="!customer.map"></i>
+                            </h3>
                         </div>
                         <div class="panel-body">
 
                             <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span><strong>Country:</strong></span>
+                                    <span contenteditable="{{customer.editable}}" ng-model="customer.location.country" strip-br="true" strip-tags="true" select-non-editable="true">
+                                    </span>
+                                </li>
                                 <li class="list-group-item">
                                     <div class="input-group">
                                         <span class="input-group-addon">Longitude</span>
@@ -89,12 +97,74 @@
                                     </div>
 
                                 </li>
-                                <li class="list-group-item">
+                                <li class="list-group-item" ng-if="customer.map">
                                     <ng-map default-style="true" center="[ {{customer.location.currentLocation.longitude}}, {{customer.location.currentLocation.latitude}}]" zoom="6">
 
                                     </ng-map>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+
+                    <div class="panel panel-default" ng-init="customer.showEvents=false">
+                        <div class="panel-heading" >
+                            <h3 class="panel-title"><a href="" ng-click="customer.showEvents=!customer.showEvents"><strong>Events </strong></a>
+                                <i class="fa fa-plus fr bt-icon"  ng-if="customer.editable" ng-click="customer.editable && createEvent(customer)"></i>
+                            </h3>
+                        </div>
+                        <div class="panel-body" ng-if="customer.showEvents">
+                            <uib-accordion close-others="true" ng-if="customer.events.length>0">
+                                <uib-accordion-group is-open="customer.openEvent" ng-repeat="event in customer.events">
+                                    <uib-accordion-heading>
+
+                                        <h4>{{event.name}}
+                                            <span class="label label-info fr dec-none">{{event.initDate |date }}</span>
+                                        </h4>
+
+
+                                    </uib-accordion-heading>
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <strong>Deadline: </strong>
+                                            {{event.endDate |date}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h4 class="list-group-item-heading">Description</h4>
+                                            <p class="list-group-item-text">{{event.description}}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Created: </strong>
+                                            {{event.dateCreated |date}}
+                                        </li>
+
+
+
+
+                                    </ul>
+
+                                    <button type="button" class="btn btn-default edit-button" ng-if="customer.editable" ng-click="updateEvent(customer, $index)"><i class="fa fa-pencil"></i></button>
+
+                                    <button type="button" class="btn btn-default edit-button" ng-if="customer.editable" ng-click="deleteEvent(customer, $index)"><i class="fa fa-trash"></i></button>
+
+
+                                </uib-accordion-group>
+                            </uib-accordion>
+                            <div class="alert alert-info" role="alert" ng-if="customer.events.length==0">No Events</div>
+
+
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">  <span><strong>Suggestions</strong></span>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+
 
 
                         </div>

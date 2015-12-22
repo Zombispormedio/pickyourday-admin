@@ -8,7 +8,7 @@ adminController.CategoriesCtrl = function ($rootScope, $scope, SystemService, $u
             SystemService.categories().create({}, {name:value}, function(result){
                 if(result.error){ $rootScope.error(result.error); return;}
 
-                $scope.categories.unshift(result.category);
+                $rootScope.categories.unshift(result.category);
 
                 $rootScope.success("Category Created!");
 
@@ -44,7 +44,7 @@ adminController.CategoriesCtrl = function ($rootScope, $scope, SystemService, $u
             SystemService.categories().delete({id:category._id}, category, function(result){
                 if(result.error){ $rootScope.error(result.error); return;}
 
-                $scope.categories.splice(index, 1);
+                $rootScope.categories.splice(index, 1);
 
                 $rootScope.success("Deleted!");
 
@@ -68,9 +68,9 @@ adminController.CategoriesCtrl = function ($rootScope, $scope, SystemService, $u
         SystemService.categories().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
             $scope.loading=false;
-            $scope.categories=result.categories;
+            $rootScope.categories=result.categories;
 
-            if($scope.categories.length===0){
+            if($rootScope.categories.length===0){
                 $rootScope.warning("Warning! No categories");
             }
 

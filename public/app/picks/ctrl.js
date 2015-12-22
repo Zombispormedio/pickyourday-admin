@@ -8,7 +8,7 @@ adminController.PickCtrl = function ($rootScope, $scope, SystemService) {
             SystemService.picks().delete({id:pick._id}, pick, function(result){
                 if(result.error){ $rootScope.error(result.error); return;}
 
-                $scope.picks.splice(index, 1);
+                $rootScope.picks.splice(index, 1);
 
                 $rootScope.success("Deleted!");
 
@@ -30,9 +30,9 @@ adminController.PickCtrl = function ($rootScope, $scope, SystemService) {
             if(result.error){  $rootScope.error(result.error); return;}
 
             $scope.loading=false;
-            $scope.picks=result.picks;
+            $rootScope.picks=result.picks;
 
-            if($scope.picks.length===0){
+            if($rootScope.picks.length===0){
                 $rootScope.warning("Warning! No Services");
             }
 
