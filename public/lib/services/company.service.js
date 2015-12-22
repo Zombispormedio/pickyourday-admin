@@ -1,8 +1,8 @@
-adminFactory.CustomerService= function(ApiService){
+adminFactory.CompanyService= function(ApiService){
     return {
 
         base:"company",
-        customer:function(){
+        company:function(){
             return ApiService.rest(this.base+"/:id",{
                 list:{method:"GET", params:{}},
                 create:{method:"POST", params:{}},

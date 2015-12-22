@@ -4,16 +4,17 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService) {
 
 
     $scope.create=function(){
-        $rootScope.input("Enter Customer Email: ", "text", "@email.com", function(email){
 
+        $rootScope.input("Enter Company CIF: ", "text", "B000000", function(cif){
+        $rootScope.input("Enter Company Email: ", "text", "@email.com", function(email){
+            $rootScope.input("Enter Company Password: ", "password","", function(password){
 
-            $rootScope.input("Enter Customer Password: ", "password","", function(password){
-                CustomerService.customer().create({}, {email:email, password:password}, function(result){
+                CompanyService.company().create({}, {email:email, password:password, cif:cif}, function(result){
                     if(result.error){ $rootScope.error(result.error); return;}
 
                     $rootScope.companies.unshift(result.customer);
 
-                    $rootScope.success("Customer Created!");
+                    $rootScope.success("Company Created!");
 
                 }, function(){
 
@@ -23,15 +24,16 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService) {
             });
 
         });
+        });
     };
 
 
-    $scope.save=function(customer){
+    $scope.save=function(company){
 
 
-        CustomerService.customer().update({id:customer._id}, customer, function(result){
+        CompanyService.company().update({id:company._id}, company, function(result){
             if(result.error){ $rootScope.error(result.error); return;}
-            customer.editable=false;
+            company.editable=false;
             $rootScope.success("Saved!");
 
         }, function(){
@@ -42,13 +44,13 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService) {
     };
 
 
-    $scope.delete=function(customer, index){
+    $scope.delete=function(company, index){
         $rootScope.confirm("Are you sure?", function(){
 
-            CustomerService.customer().delete({id:customer._id}, {}, function(result){
+            CompanyService.company().delete({id:company._id}, {}, function(result){
                 if(result.error){ $rootScope.error(result.error); return;}
 
-                $rootScope.customers.splice(index, 1);
+                $rootScope.companies.splice(index, 1);
 
                 $rootScope.success("Deleted!");
 
@@ -68,13 +70,13 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService) {
 
     this.ListCompanies=function(){
 
-        CustomerService.customer().list({}, {}, function(result){
+        CompanyService.company().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
 
             $scope.loading=false;
-            $rootScope.companies=result.customers;
+            $rootScope.companies=result.companies;
 
-            if($scope.companies.length===0){
+            if($rootScope.companies.length===0){
                 $rootScope.warning("Warning! No customers");
             }
 

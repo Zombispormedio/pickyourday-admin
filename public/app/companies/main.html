@@ -1,0 +1,65 @@
+<div class="btn-group add-button" role="group" aria-label="add" ng-if="!loading">
+    <button type="button" class="btn btn-default" ng-click="create()"><i class="fa fa-plus-circle"></i></button>
+
+</div>
+
+<div class="loading" ng-if="loading">
+    <h1><i class="fa fa-refresh fa-spin fa-4x" ></i></h1>
+</div>
+
+<div class="container mr2">
+
+    <uib-accordion close-others="true" ng-if="companies.length>0">
+
+        <uib-accordion-group is-open="status.open" ng-repeat="company in companies" ng-init="company.editable=false">
+            <uib-accordion-heading>
+
+                {{company.cif}}-{{company.email}}
+
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </uib-accordion-heading>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <ul class="list-group">
+                        <li class="list-group-item">  <span><strong>Name:</strong></span>
+                            <span contenteditable="{{company.editable}}" ng-model="company.name" strip-br="true" strip-tags="true" select-non-editable="true">
+                            </span>
+                        </li>
+
+                        <li class="list-group-item">  <span><strong>Email:</strong></span>
+                            <span contenteditable="{{company.editable}}" ng-model="company.email" strip-br="true" strip-tags="true" select-non-editable="true">
+                            </span>
+                        </li>
+
+                        <li class="list-group-item">  <span><strong>Register Date: </strong></span>{{company.registerDate | date: 'medium'}}
+                        </li>
+                        <li class="list-group-item">  <span><strong>Last Access: </strong></span>{{company.lastAccess | date:'medium'}}
+                        </li>
+                        <li class="list-group-item">  <span><strong>Last Update: </strong></span>{{company.lastUpdate | date:'medium'}}
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+
+
+
+            <div class="btn-group fr" role="group" aria-label="actions">
+                <button type="button" class="btn btn-default edit-button" ng-click="company.editable=true" ng-if="!company.editable"><i class="fa fa-pencil"></i></button>
+                <button type="button" class="btn btn-success edit-button" ng-click="save(company)" ng-if="company.editable">Save</button>
+                <button type="button" class="btn btn-default edit-button" ng-click="delete(company, $index)"><i class="fa fa-trash"></i></button>
+            </div>
+
+
+        </uib-accordion-group>
+
+
+    </uib-accordion>
+
+
+
+</div>
