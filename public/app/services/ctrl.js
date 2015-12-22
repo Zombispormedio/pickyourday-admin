@@ -63,7 +63,7 @@ adminController.ServicesCtrl = function ($rootScope, $scope, SystemService) {
         SystemService.default_services().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
             $scope.loading=false;
-            $scope.services=result.default_services;
+            $rootScope.services=result.default_services;
 
             if($rootScope.services.length===0){
                 $rootScope.warning("Warning! No Services");

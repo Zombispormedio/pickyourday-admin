@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add Service</h3>
+</div>
+<div class="modal-body">
+    <h4>Default Services</h4>
+    <form>
+        <div class="list-group grid-service" ng-init="selectedIndex=0">
+            <a class="list-group-item pointer" ng-repeat="default_service in default_services" ng-class="{'active':default_service.active}"
+               ng-click="selectedDefault($index)">
+
+                <h4 class="list-group-item-heading">{{default_service.name}}</h4>
+                <p class="list-group-item-text">{{default_service.description}}</p>
+            </a>
+
+        </div>
+
+
+
+        <div class="row mb2">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon">Duration</span>
+                    <input type="number" class="form-control"   ng-model="service.duration" min="0">
+                    <span class="input-group-addon" >minutes</span>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon">Price</span>
+                    <input type="number" class="form-control"   ng-model="service.price" min="0">
+                    <span class="input-group-addon" >euros</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-item.heading" >Description</span>
+            <textarea class="form-control" rows="3" cols="70" style="resize:none;" ng-model="service.description"></textarea>
+        </div>
+
+
+    </form>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

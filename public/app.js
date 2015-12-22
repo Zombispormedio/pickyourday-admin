@@ -168,6 +168,27 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
 
     this.ListCategories();
 
+    this.ListServices=function(){
+
+        SystemService.default_services().list({}, {}, function(result){
+            if(result.error){  $rootScope.error(result.error); return;}
+
+            $rootScope.services=result.default_services;
+
+            if($rootScope.services.length===0){
+                $rootScope.warning("Warning! No Services");
+            }
+
+        }, function(){
+
+            $rootScope.warning("Server Not Found");
+
+        });
+
+    };
+
+    this.ListServices();
+
 
 
 

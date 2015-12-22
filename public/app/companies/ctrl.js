@@ -53,7 +53,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
 
 
         CompanyService.company().update({id:company._id}, company, function(result){
-            if(result.error){ $rootScope.error(result.error); return;}
+            if(result.error){ $rootScope.error(result.error.message); return;}
             company.editable=false;
             $rootScope.success("Saved!");
 
@@ -180,7 +180,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
     $scope.updateLocation=function(company, index){
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: 'app/modals/location//main.html',
+            templateUrl: 'app/modals/location/main.html',
             controller: 'LocationCtrl',
             size:'lg',
             resolve: {
@@ -212,6 +212,70 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
     };
     $scope.deleteEmail=function(company, index){
         company.emailSecond.splice(index, 1);
+    };
+
+    $scope.changeCategory=function(company){
+        company.category_metadata= _.find($scope.categories, function(obj) { return obj._id == company.category; });
+    };
+
+    $scope.createService=function(company){
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/service/main.html',
+            controller: 'ServiceCtrl',
+            resolve: {
+                items: function () {
+
+                    return {};
+                }
+            }
+
+        });
+
+        modalInstance.result.then(function (item) {
+
+            company.services.push(item);
+            $rootScope.success("Service Created!");
+
+        }, function () {
+
+        });
+    };
+
+    $scope.updateService=function(company, index){
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/service/main.html',
+            controller: 'ServiceCtrl',
+            resolve: {
+                items: function () {
+
+                    return company.services[index];
+                }
+            }
+
+        });
+
+        modalInstance.result.then(function (item) {
+
+            company.services[index]=item;
+            $rootScope.success("Service Updated!");
+
+        }, function () {
+
+        });
+    };
+
+
+    $scope.deleteService=function(company, index){
+
+        company.services.splice(index, 1);
+        $rootScope.success("Service Deleted!");
+    };
+
+    $scope.deleteImage=function(company, index){
+        company.images.splice(index, 1);
+        $rootScope.success("Image Deleted!");
     };
 
 

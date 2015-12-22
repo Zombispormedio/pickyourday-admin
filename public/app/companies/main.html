@@ -36,7 +36,7 @@
 
 
                         <li class="list-group-item">  <span><strong>Category:</strong></span>
-                            <select class="form-control" ng-model="company.category" ng-disabled="!company.editable">
+                            <select class="form-control" ng-model="company.category" ng-disabled="!company.editable" ng-change="changeCategory(company)">
                                 <option ng-repeat="category in categories" value="{{category._id}}">{{category.name}}</option>
 
                             </select>
@@ -80,6 +80,135 @@
 
                     </ul>
 
+
+
+
+                    <ul class="list-group">
+                        <li class="list-group-item">  <span><strong>Register Date: </strong></span>{{company.registerDate | date: 'medium'}}
+                        </li>
+                        <li class="list-group-item">  <span><strong>Last Access: </strong></span>{{company.lastAccess | date:'medium'}}
+                        </li>
+                        <li class="list-group-item">  <span><strong>Last Update: </strong></span>{{company.lastUpdate | date:'medium'}}
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Description</h3>
+                        </div>
+                        <div class="panel-body">
+                            <span contenteditable="{{company.editable}}"
+                                  ng-model="company.description"
+                                  strip-br="true"
+                                  strip-tags="true"
+                                  select-non-editable="true">
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Images
+                                <i class="fa fa-plus fr bt-icon"  ng-if="company.editable" ng-click="company.editable && addImage(company)"></i>
+                            </h3>
+                        </div>
+                        <div class="panel-body" >
+                            <uib-carousel interval="50000" no-wrap="false" >
+                                <uib-slide ng-repeat="image in company.images" active="image.active">
+                                    <img ng-src="{{image.src}}" alt="{{image.alt}}" style="margin:auto; height: 305px;" >
+                                    <div class="carousel-caption">
+                                        <i class="fa fa-trash-o delete-image bt-icon" ng-if="company.editable" ng-click="deleteImage(company, $index)"></i>
+                                        <h4>{{image.alt}}</h4>
+
+                                    </div>
+                                </uib-slide>
+                            </uib-carousel>
+
+                            <div class="alert alert-info" role="alert" ng-if="company.images.length==0">No images</div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Keywords
+                                <i class="fa fa-plus fr bt-icon"  ng-if="company.editable" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}"></i>
+
+                            </h3>
+
+                        </div>
+                        <div class="panel-body">
+                            <div class="keywords label label-default" ng-repeat="keyword in company.keywords" >
+                                <span contenteditable="{{company.editable}}"
+                                      ng-model="company.keywords[$index]"
+                                      strip-br="true"
+                                      strip-tags="true"
+                                      select-non-editable="true">
+                                </span>
+
+                                <i class="fa fa-minus-circle bt-icon" ng-if="company.editable" ng-click="deleteKeyword(company, $index)"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="panel panel-default" ng-init="company.showServices=false">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a href="" ng-click="company.showServices=!company.showServices"><strong>Services </strong></a>
+                                <i class="fa fa-plus fr bt-icon" ng-if="company.editable" ng-click="company.editable && createService(company)"></i>
+                            </h3>
+                        </div>
+                        <div class="panel-body" ng-if="company.showServices">
+                            <uib-accordion close-others="true" ng-if="company.services.length>0">
+                                <uib-accordion-group is-open="service.openService" ng-repeat="service in company.services">
+                                    <uib-accordion-heading>
+
+                                        <h4>{{service.default.name}}</h4>
+
+                                    </uib-accordion-heading>
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <strong>Price: </strong>
+                                            {{service.price}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Duration: </strong>
+                                            {{service.duration}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Rating: </strong>
+                                            {{service.rating_average||0}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h4 class="list-group-item-heading">Description</h4>
+                                            <p class="list-group-item-text">{{service.description}}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Created: </strong>
+                                            {{service.dateCreated |date}}
+                                        </li>
+
+                                    </ul>
+
+                                    <button type="button" class="btn btn-default edit-button" ng-if="company.editable" ng-click="updateService(company, $index)"><i class="fa fa-pencil"></i></button>
+
+                                    <button type="button" class="btn btn-default edit-button" ng-if="company.editable" ng-click="deleteService(company, $index)"><i class="fa fa-trash"></i></button>
+
+
+                                </uib-accordion-group>
+                            </uib-accordion>
+                            <div class="alert alert-info" role="alert" ng-if="company.services.length==0">No Services</div>
+                        </div>
+                    </div>
                     <div class="panel panel-default mb5"  ng-init="company.showLocations=false">
                         <div class="panel-heading">
                             <h3 class="panel-title">
@@ -158,78 +287,6 @@
                         </div>
                     </div>
 
-
-
-                    <ul class="list-group">
-                        <li class="list-group-item">  <span><strong>Register Date: </strong></span>{{company.registerDate | date: 'medium'}}
-                        </li>
-                        <li class="list-group-item">  <span><strong>Last Access: </strong></span>{{company.lastAccess | date:'medium'}}
-                        </li>
-                        <li class="list-group-item">  <span><strong>Last Update: </strong></span>{{company.lastUpdate | date:'medium'}}
-                        </li>
-                    </ul>
-
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Description</h3>
-                        </div>
-                        <div class="panel-body">
-                            <span contenteditable="{{company.editable}}"
-                                  ng-model="company.description"
-                                  strip-br="true"
-                                  strip-tags="true"
-                                  select-non-editable="true">
-                            </span>
-                        </div>
-                    </div>
-
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Images
-                                <i class="fa fa-plus fr bt-icon"  ng-if="company.editable" ng-click="company.editable && addImage(company)"></i>
-                            </h3>
-                        </div>
-                        <div class="panel-body" >
-                            <uib-carousel interval="50000" no-wrap="false" >
-                                <uib-slide ng-repeat="image in company.images" active="image.active">
-                                    <img ng-src="{{image.src}}" alt="{{image.alt}}" style="margin:auto; height: 305px;" >
-                                    <div class="carousel-caption">
-                                        <h4>{{image.alt}}</h4>
-                                    </div>
-                                </uib-slide>
-                            </uib-carousel>
-
-                            <div class="alert alert-info" role="alert" ng-if="company.images.length==0">No images</div>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Keywords
-                                <i class="fa fa-plus fr bt-icon"  ng-if="company.editable" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}"></i>
-
-                            </h3>
-
-                        </div>
-                        <div class="panel-body">
-                            <div class="keywords label label-default" ng-repeat="keyword in company.keywords" >
-                                <span contenteditable="{{company.editable}}"
-                                      ng-model="company.keywords[$index]"
-                                      strip-br="true"
-                                      strip-tags="true"
-                                      select-non-editable="true">
-                                </span>
-
-                                <i class="fa fa-minus-circle bt-icon" ng-if="company.editable" ng-click="deleteKeyword(company, $index)"></i>
-
-                            </div>
-
-                        </div>
-
-                    </div>
 
                 </div>
 
