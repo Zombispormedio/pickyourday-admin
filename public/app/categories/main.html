@@ -55,12 +55,20 @@
                             </span>
                         </div>
                     </div>
-                    <div class="panel panel-default">
+                    <div class="panel panel-default mb2">
                         <div class="panel-heading">
                             <h3 class="panel-title">Color</h3>
                         </div>
                         <div class="panel-body">
-                            <input colorpicker="hex" type="text" ng-model="category.color"  ng-disabled="!category.editable" />
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input colorpicker="hex" type="text" ng-model="category.color"  ng-disabled="!category.editable" />
+                                        <span class="input-group-addon"><i class="fa fa-square" ng-style="{'color':category.color}"></i></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
