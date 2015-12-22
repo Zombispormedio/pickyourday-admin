@@ -3,7 +3,7 @@ var adminFactory = {};
 var adminFilter = {};
 var adminDirective = {};
 
-var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 'contenteditable', 'ngAnimate', 'ngMap'])
+var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 'contenteditable', 'ngAnimate', 'ngMap', 'colorpicker.module'])
 .controller(adminController)
 .factory(adminFactory)
 .filter(adminFilter)

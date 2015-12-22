@@ -14,7 +14,7 @@
         <uib-accordion-group is-open="status.open" ng-repeat="company in companies" ng-init="company.editable=false">
             <uib-accordion-heading>
 
-                {{company.cif}}-{{company.email}}
+                {{company.cif}} - {{company.email}}  <span class="label label-default" ng-style="{'background-color':company.category_metadata.color}">{{company.category_metadata.name}}</span>
 
                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
             </uib-accordion-heading>
