@@ -33,7 +33,7 @@ adminController.PickCtrl = function ($rootScope, $scope, SystemService) {
             $rootScope.picks=result.picks;
 
             if($rootScope.picks.length===0){
-                $rootScope.warning("Warning! No Services");
+                $rootScope.warning("Warning! No Picks");
             }
 
         }, function(){
