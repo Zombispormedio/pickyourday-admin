@@ -102,3 +102,10 @@ google-map {
 .dec-none{
     text-decoration: none;
 }
+
+
+.category-company{
+    text-decoration: none;
+    float: right;
+    margin-right: 5%;
+}

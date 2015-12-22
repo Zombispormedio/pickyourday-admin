@@ -14,9 +14,10 @@
         <uib-accordion-group is-open="status.open" ng-repeat="company in companies" ng-init="company.editable=false">
             <uib-accordion-heading>
 
-                {{company.cif}} - {{company.email}}  <span class="label label-default" ng-style="{'background-color':company.category_metadata.color}">{{company.category_metadata.name}}</span>
+                {{company.cif}} - {{company.email}}
 
                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                <span class="label label-default category-company" ng-style="{'background-color':company.category_metadata.color}">{{company.category_metadata.name}}</span>
             </uib-accordion-heading>
 
             <div class="row">
@@ -33,12 +34,48 @@
                             </span>
                         </li>
 
-                        <li class="list-group-item">  <span><strong>Register Date: </strong></span>{{company.registerDate | date: 'medium'}}
+                        <li class="list-group-item">
+                            <div class="input-group">
+                                <span class="input-group-addon" >Phone</span>
+                                <input type="phone" ng-disabled="!company.editable" class="form-control"   ng-model="company.tempPhone">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="addPhone(company)">Add</button>
+                                </span>
+                            </div>
+
+                            <table class="table table-striped" ng-if="company.phone.length>0">
+                                <tr ng-repeat="phone in company.phone">
+                                    <td>#{{$index}}</td>
+                                    <td>{{phone}}</td>
+                                </tr>
+                            </table>
                         </li>
-                        <li class="list-group-item">  <span><strong>Last Access: </strong></span>{{company.lastAccess | date:'medium'}}
+
+                        <li class="list-group-item">
+                            <div class="input-group">
+                                <span class="input-group-addon" >More Emails</span>
+                                <input type="email" ng-disabled="!company.editable" class="form-control"   ng-model="company.tempPhone">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="addPhone(company)">Add</button>
+                                </span>
+                            </div>
+
+                            <table class="table table-striped" ng-if="company.phone.length>0">
+                                <tr ng-repeat="phone in company.phone">
+                                    <td>#{{$index}}</td>
+                                    <td>{{phone}}</td>
+                                </tr>
+                            </table>
                         </li>
-                        <li class="list-group-item">  <span><strong>Last Update: </strong></span>{{company.lastUpdate | date:'medium'}}
-                        </li>
+
+                    </ul>
+                    <ul class="list-group">
+                    <li class="list-group-item">  <span><strong>Register Date: </strong></span>{{company.registerDate | date: 'medium'}}
+                    </li>
+                    <li class="list-group-item">  <span><strong>Last Access: </strong></span>{{company.lastAccess | date:'medium'}}
+                    </li>
+                    <li class="list-group-item">  <span><strong>Last Update: </strong></span>{{company.lastUpdate | date:'medium'}}
+                    </li>
                     </ul>
 
                 </div>

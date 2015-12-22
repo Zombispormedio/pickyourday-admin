@@ -6,24 +6,24 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService) {
     $scope.create=function(){
 
         $rootScope.input("Enter Company CIF: ", "text", "B000000", function(cif){
-        $rootScope.input("Enter Company Email: ", "text", "@email.com", function(email){
-            $rootScope.input("Enter Company Password: ", "password","", function(password){
+            $rootScope.input("Enter Company Email: ", "text", "@email.com", function(email){
+                $rootScope.input("Enter Company Password: ", "password","", function(password){
 
-                CompanyService.company().create({}, {email:email, password:password, cif:cif}, function(result){
-                    if(result.error){ $rootScope.error(result.error); return;}
+                    CompanyService.company().create({}, {email:email, password:password, cif:cif}, function(result){
+                        if(result.error){ $rootScope.error(result.error); return;}
 
-                    $rootScope.companies.unshift(result.customer);
+                        $rootScope.companies.unshift(result.customer);
 
-                    $rootScope.success("Company Created!");
+                        $rootScope.success("Company Created!");
 
-                }, function(){
+                    }, function(){
 
-                    $rootScope.warning("Server Not Found");
+                        $rootScope.warning("Server Not Found");
 
+                    });
                 });
-            });
 
-        });
+            });
         });
     };
 
@@ -66,7 +66,12 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService) {
 
 
 
-
+    $scope.addPhone=function(company){
+        if(company.tempPhone!==""){
+            company.phone.push(company.tempPhone);
+            company.tempPhone="";
+        }
+    };
 
     this.ListCompanies=function(){
 
