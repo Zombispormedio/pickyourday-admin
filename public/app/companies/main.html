@@ -34,6 +34,14 @@
                             </span>
                         </li>
 
+
+                        <li class="list-group-item">  <span><strong>Category:</strong></span>
+                            <select class="form-control">
+                                <option ng-repeat="category in categories">{{category.name}}</option>
+
+                            </select>
+                        </li>
+
                         <li class="list-group-item">
                             <div class="input-group">
                                 <span class="input-group-addon" >Phone</span>
@@ -47,6 +55,7 @@
                                 <tr ng-repeat="phone in company.phone">
                                     <td>#{{$index}}</td>
                                     <td>{{phone}}</td>
+                                    <td ng-if="company.editable"><i class="fa fa-times bt-icon" ng-click="deletePhone(company, $index)"></i></td>
                                 </tr>
                             </table>
                         </li>
@@ -64,6 +73,7 @@
                                 <tr ng-repeat="email in company.emailSecond">
                                     <td>#{{$index}}</td>
                                     <td>{{email}}</td>
+                                    <td ng-if="company.editable"><i class="fa fa-times bt-icon" ng-click="deleteEmail(company, $index)"></i></td>
                                 </tr>
                             </table>
                         </li>
@@ -78,6 +88,71 @@
                             </h3>
                         </div>
                         <div class="panel-body"  ng-if="company.showLocations">
+
+                            <uib-accordion close-others="true" ng-if="company.locations.length>0">
+                                <uib-accordion-group is-open="company.openLocation" ng-repeat="location in company.locations">
+                                    <uib-accordion-heading>
+
+                                        <h4>{{location.name}}
+
+                                        </h4>
+
+                                    </uib-accordion-heading>
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <strong>Country: </strong>
+                                            {{location.country}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Province: </strong>
+                                            {{location.province}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>City: </strong>
+                                            {{location.city}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Zipcode: </strong>
+                                            {{location.zipcode}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Adress: </strong>
+                                            {{location.address}}
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <strong>Geolocation </strong>
+                                            <ul class="list-group">
+                                                <li class="list-group-item">
+                                                    <strong>Longitude: </strong>
+                                                    {{location.geolocation.longitude}}
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <strong>Latitude: </strong>
+                                                    {{location.geolocation.latitude}}
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <ng-map default-style="true" center="[ {{location.geolocation.longitude}}, {{location.geolocation.latitude}}]" zoom="15">
+                                            </ng-map>
+
+                                        </li>
+
+
+
+                                    </ul>
+
+                                    <button type="button" class="btn btn-default edit-button" ng-if="company.editable" ng-click="updateLocation(company, $index)"><i class="fa fa-pencil"></i></button>
+
+                                    <button type="button" class="btn btn-default edit-button" ng-if="company.editable" ng-click="deleteLocation(company, $index)"><i class="fa fa-trash"></i></button>
+
+
+                                </uib-accordion-group>
+                            </uib-accordion>
+                            <div class="alert alert-info" role="alert" ng-if="company.locations.length==0">No Locations</div>
 
 
                         </div>

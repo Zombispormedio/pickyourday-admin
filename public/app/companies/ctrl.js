@@ -3,28 +3,49 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
     $scope.loading=true;
 
 
-    $scope.create=function(){
+    $scope.createCompany=function(category){
+
 
         $rootScope.input("Enter Company CIF: ", "text", "B000000", function(cif){
-            $rootScope.input("Enter Company Email: ", "text", "@email.com", function(email){
-                $rootScope.input("Enter Company Password: ", "password","", function(password){
+            $rootScope.input("Enter Company Name: ", "text", "Peluquería Loquita", function(name){
+                $rootScope.input("Enter Company Email: ", "text", "@email.com", function(email){
+                    $rootScope.input("Enter Company Password: ", "password","", function(password){
 
-                    CompanyService.company().create({}, {email:email, password:password, cif:cif}, function(result){
-                        if(result.error){ $rootScope.error(result.error); return;}
+                        CompanyService.company().create({}, {email:email, name:name,password:password, cif:cif, category:category}, function(result){
+                            if(result.error){ $rootScope.error(result.error.message); return;}
 
-                        $rootScope.companies.unshift(result.customer);
+                            $rootScope.companies.unshift(result.company);
 
-                        $rootScope.success("Company Created!");
+                            $rootScope.success("Company Created!");
 
-                    }, function(){
+                        }, function(){
 
-                        $rootScope.warning("Server Not Found");
+                            $rootScope.warning("Server Not Found");
 
+                        });
                     });
                 });
-
             });
         });
+    };
+
+    $scope.create=function(){
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/company/main.html',
+            controller: 'CompanyModalCtrl',
+            size:"sm"
+
+        });
+
+        modalInstance.result.then(function (item) {
+
+            $scope.createCompany(item);
+
+        }, function () {
+
+        });
+
     };
 
 
@@ -156,7 +177,42 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
         });
     };
 
+    $scope.updateLocation=function(company, index){
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/location//main.html',
+            controller: 'LocationCtrl',
+            size:'lg',
+            resolve: {
+                items: function () {
 
+                    return company.locations[index];
+                }
+            }
+
+        });
+
+        modalInstance.result.then(function (item) {
+            company.locations[index]=item;
+            $rootScope.success("Location Updated!");
+
+        }, function () {
+
+        });
+
+    };
+    $scope.deleteLocation=function(company, index){
+
+        company.locations.splice(index, 1);
+        $rootScope.success("Location Deleted!");
+    };
+
+    $scope.deletePhone=function(company, index){
+        company.phone.splice(index, 1);
+    };
+    $scope.deleteEmail=function(company, index){
+        company.emailSecond.splice(index, 1);
+    };
 
 
 

@@ -117,7 +117,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
 
 })
 
-.run(function ($rootScope, $state) {
+.run(function ($rootScope, $state, SystemService) {
 
     $rootScope.go = function (state, params) {
         $state.go(state, params);
@@ -147,6 +147,26 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
 
 
 
+    this.ListCategories=function(){
+
+        SystemService.categories().list({}, {}, function(result){
+            if(result.error){  $rootScope.error(result.error); return;}
+
+            $rootScope.categories=result.categories;
+
+            if($rootScope.categories.length===0){
+                $rootScope.warning("Warning! No categories");
+            }
+
+        }, function(){
+
+            $rootScope.warning("Server Not Found");
+
+        });
+
+    };
+
+    this.ListCategories();
 
 
 
