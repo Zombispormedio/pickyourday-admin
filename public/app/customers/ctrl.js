@@ -70,7 +70,13 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService,  
             animation: true,
             templateUrl: 'app/modals/events/main.html',
             controller: 'EventsCtrl',
-            size:'lg'
+            size:'lg',
+            resolve: {
+                items: function () {
+
+                    return {};
+                }
+            }
 
         });
 

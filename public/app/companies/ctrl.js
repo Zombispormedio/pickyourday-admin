@@ -1,4 +1,4 @@
-adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService) {
+adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $uibModal) {
 
     $scope.loading=true;
 
@@ -73,6 +73,13 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService) {
         }
     };
 
+    $scope.addEmail=function(company){
+        if(company.tempEmail!==""){
+            company.emailSecond.push(company.tempEmail);
+            company.tempEmail="";
+        }
+    };
+
     this.ListCompanies=function(){
 
         CompanyService.company().list({}, {}, function(result){
@@ -93,7 +100,61 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService) {
 
     };
 
+    $scope.addImage=function(company){
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/image-uploader/main.html',
+            controller: 'ImageUploaderCtrl'
 
+        });
+
+        modalInstance.result.then(function (item) {
+
+            company.images.push(item);
+
+        }, function () {
+
+        });
+    };
+
+
+    $scope.dynamicPopover = {
+        templateUrl: 'KeywordPopover.html',
+        title: "Add Keyword"
+    };
+
+    $scope.addTag=function(company){
+        company.keywords.push(company.tempTag);
+        company.tempTag="";
+    };
+
+    $scope.deleteKeyword=function(company, index){
+        company.keywords.splice(index, 1);
+
+    };
+
+    $scope.addLocation=function(company){
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/location/main.html',
+            controller: 'LocationCtrl',
+            size:"lg",
+            resolve: {
+                items: function () {
+
+                    return {};
+                }
+            }
+        });
+
+        modalInstance.result.then(function (item) {
+
+            company.locations.push(item);
+
+        }, function () {
+
+        });
+    };
 
 
 

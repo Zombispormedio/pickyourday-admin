@@ -8,7 +8,7 @@ adminController.EventsCtrl= function ($scope, $uibModalInstance, items) {
     $scope.toggleMin();
 
 
-    $scope.event=items||{};
+    $scope.event=items;
     $scope.ok = function () {
         $scope.event.dateCreated=new Date();
 

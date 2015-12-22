@@ -86,7 +86,7 @@
 
                             <div class="keywords label label-default" ng-repeat="keyword in service.keywords" >
                                 <span contenteditable="{{service.editable}}"
-                                      ng-model="keyword"
+                                      ng-model="service.keywords[$index]"
                                       strip-br="true"
                                       strip-tags="true"
                                       select-non-editable="true">

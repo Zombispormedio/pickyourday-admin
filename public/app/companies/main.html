@@ -22,7 +22,7 @@
 
             <div class="row">
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <ul class="list-group">
                         <li class="list-group-item">  <span><strong>Name:</strong></span>
                             <span contenteditable="{{company.editable}}" ng-model="company.name" strip-br="true" strip-tags="true" select-non-editable="true">
@@ -39,7 +39,7 @@
                                 <span class="input-group-addon" >Phone</span>
                                 <input type="phone" ng-disabled="!company.editable" class="form-control"   ng-model="company.tempPhone">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" ng-click="addPhone(company)">Add</button>
+                                    <button class="btn btn-default" type="button" ng-disabled="!company.editable" ng-click="addPhone(company)">Add</button>
                                 </span>
                             </div>
 
@@ -53,32 +53,111 @@
 
                         <li class="list-group-item">
                             <div class="input-group">
-                                <span class="input-group-addon" >More Emails</span>
-                                <input type="email" ng-disabled="!company.editable" class="form-control"   ng-model="company.tempPhone">
+                                <span class="input-group-addon" >Emails</span>
+                                <input type="email" ng-disabled="!company.editable" class="form-control"   ng-model="company.tempEmail">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" ng-click="addPhone(company)">Add</button>
+                                    <button class="btn btn-default" type="button" ng-disabled="!company.editable" ng-click="addEmail(company)">Add</button>
                                 </span>
                             </div>
 
-                            <table class="table table-striped" ng-if="company.phone.length>0">
-                                <tr ng-repeat="phone in company.phone">
+                            <table class="table table-striped" ng-if="company.emailSecond.length>0">
+                                <tr ng-repeat="email in company.emailSecond">
                                     <td>#{{$index}}</td>
-                                    <td>{{phone}}</td>
+                                    <td>{{email}}</td>
                                 </tr>
                             </table>
                         </li>
 
                     </ul>
+
+                    <div class="panel panel-default mb5"  ng-init="company.showLocations=false">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a href="" ng-click="company.showLocations=!company.showLocations">  Locations</a>
+                                <i class="fa fa-plus fr bt-icon"  ng-if="company.editable" ng-click="company.editable && addLocation(company)"></i>
+                            </h3>
+                        </div>
+                        <div class="panel-body"  ng-if="company.showLocations">
+
+
+                        </div>
+                    </div>
+
+
+
                     <ul class="list-group">
-                    <li class="list-group-item">  <span><strong>Register Date: </strong></span>{{company.registerDate | date: 'medium'}}
-                    </li>
-                    <li class="list-group-item">  <span><strong>Last Access: </strong></span>{{company.lastAccess | date:'medium'}}
-                    </li>
-                    <li class="list-group-item">  <span><strong>Last Update: </strong></span>{{company.lastUpdate | date:'medium'}}
-                    </li>
+                        <li class="list-group-item">  <span><strong>Register Date: </strong></span>{{company.registerDate | date: 'medium'}}
+                        </li>
+                        <li class="list-group-item">  <span><strong>Last Access: </strong></span>{{company.lastAccess | date:'medium'}}
+                        </li>
+                        <li class="list-group-item">  <span><strong>Last Update: </strong></span>{{company.lastUpdate | date:'medium'}}
+                        </li>
                     </ul>
 
                 </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Description</h3>
+                        </div>
+                        <div class="panel-body">
+                            <span contenteditable="{{company.editable}}"
+                                  ng-model="company.description"
+                                  strip-br="true"
+                                  strip-tags="true"
+                                  select-non-editable="true">
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Images
+                                <i class="fa fa-plus fr bt-icon"  ng-if="company.editable" ng-click="company.editable && addImage(company)"></i>
+                            </h3>
+                        </div>
+                        <div class="panel-body" >
+                            <uib-carousel interval="50000" no-wrap="false" >
+                                <uib-slide ng-repeat="image in company.images" active="image.active">
+                                    <img ng-src="{{image.src}}" alt="{{image.alt}}" style="margin:auto; height: 305px;" >
+                                    <div class="carousel-caption">
+                                        <h4>{{image.alt}}</h4>
+                                    </div>
+                                </uib-slide>
+                            </uib-carousel>
+
+                            <div class="alert alert-info" role="alert" ng-if="company.images.length==0">No images</div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Keywords
+                                <i class="fa fa-plus fr bt-icon"  ng-if="company.editable" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}"></i>
+
+                            </h3>
+
+                        </div>
+                        <div class="panel-body">
+                            <div class="keywords label label-default" ng-repeat="keyword in company.keywords" >
+                                <span contenteditable="{{company.editable}}"
+                                      ng-model="company.keywords[$index]"
+                                      strip-br="true"
+                                      strip-tags="true"
+                                      select-non-editable="true">
+                                </span>
+
+                                <i class="fa fa-minus-circle bt-icon" ng-if="company.editable" ng-click="deleteKeyword(company, $index)"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
 
@@ -90,6 +169,18 @@
                 <button type="button" class="btn btn-success edit-button" ng-click="save(company)" ng-if="company.editable">Save</button>
                 <button type="button" class="btn btn-default edit-button" ng-click="delete(company, $index)"><i class="fa fa-trash"></i></button>
             </div>
+
+            <script type="text/ng-template" id="KeywordPopover.html">
+
+                <div class="form-group">
+
+                    <input type="text" class="form-control mb5" ng-model="company.tempTag">
+
+                    <button class="btn btn-default ml20" type="button" ng-click="addTag(company)">Submit</i></button>
+
+
+                </div>
+            </script>
 
 
         </uib-accordion-group>
