@@ -36,7 +36,7 @@
 
 
                         <li class="list-group-item">  <span><strong>Category:</strong></span>
-                            <select class="form-control" ng-model="company.category">
+                            <select class="form-control" ng-model="company.category" ng-disabled="!company.editable">
                                 <option ng-repeat="category in categories" value="{{category._id}}">{{category.name}}</option>
 
                             </select>
