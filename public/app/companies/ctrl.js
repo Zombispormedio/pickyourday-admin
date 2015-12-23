@@ -279,7 +279,8 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
     };
 
 
-
+$rootScope.ListCategories();
+			    $rootScope.ListServices();
 
     this.ListCompanies();
 

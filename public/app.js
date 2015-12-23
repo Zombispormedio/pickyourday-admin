@@ -147,7 +147,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
 
 
 
-    this.ListCategories=function(){
+    $rootScope.ListCategories=function(){
 
         SystemService.categories().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
@@ -168,7 +168,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
 
 
 
-    this.ListServices=function(){
+    $rootScope.ListServices=function(){
 
         SystemService.default_services().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
@@ -188,8 +188,8 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
     };
 	
 	if(getJSONLocal("user")){
-		    this.ListCategories();
-			    this.ListServices();
+		    $rootScope.ListCategories();
+			    $rootScope.ListServices();
 	}
 
 
