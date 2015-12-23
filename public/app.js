@@ -166,7 +166,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
 
     };
 
-    this.ListCategories();
+
 
     this.ListServices=function(){
 
@@ -186,8 +186,13 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
         });
 
     };
+	
+	if(getJSONLocal("user")){
+		    this.ListCategories();
+			    this.ListServices();
+	}
 
-    this.ListServices();
+
 
 
 
