@@ -7,7 +7,9 @@
     margin-right: 2%;
     margin-top: -0.5%;
 }
-
+.none{
+    display: none !important;
+}
 .size512{
     width: 512px;
     height:512px;

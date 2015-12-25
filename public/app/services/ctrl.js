@@ -97,6 +97,6 @@ adminController.ServicesCtrl = function ($rootScope, $scope, SystemService) {
 
 
 
-    this.ListServices();
+   // this.ListServices();
 
 };

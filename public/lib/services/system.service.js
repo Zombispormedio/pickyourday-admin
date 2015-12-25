@@ -31,7 +31,17 @@ adminFactory.SystemService= function(ApiService){
                 delete:{method:"DELETE", params:{id:"@id"}}
 
             });
+        },
+
+        images:function(){
+            return ApiService.rest(this.base+"/image/:type",{
+
+                upload:{method:"POST", params:{type:"@type"}}
+
+            });
         }
+
+
 
 
 

@@ -150,6 +150,6 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService,  
 
 
 
-    this.ListCustomers();
+  //  this.ListCustomers();
 
 };

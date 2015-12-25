@@ -278,10 +278,10 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
         $rootScope.success("Image Deleted!");
     };
 
+/*
+    $rootScope.ListCategories();
+    $rootScope.ListServices();
 
-$rootScope.ListCategories();
-			    $rootScope.ListServices();
-
-    this.ListCompanies();
+    this.ListCompanies();*/
 
 };

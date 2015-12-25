@@ -11,12 +11,24 @@
 
             <div class="input-group mb5 mt5">
                 <span class="input-group-addon" id="basic-addon3">URL</span>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" ng-model="image.src">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" ng-model="image.url">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="uploadByUrl()">Upload</button>
+                </span>
             </div>
 
 
         </uib-tab>
-        <uib-tab heading="Upload File" select="f=1" disable="true"></uib-tab>
+        <uib-tab heading="Upload File" select="f=1">
+
+            <div class="input-group  mb5 mt5">
+                <input type="text" class="form-control" placeholder="Insert File">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="openFile()">Upload</button>
+                </span>
+            </div>
+            <input type="file" id="file" base-sixty-four-input ng-model="image.data" class="none">
+        </uib-tab>
 
     </uib-tabset>
 </div>
