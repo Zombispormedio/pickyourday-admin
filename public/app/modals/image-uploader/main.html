@@ -6,7 +6,7 @@
         <span class="input-group-addon" id="basic-addon1">Alt Attribute</span>
         <input type="text" class="form-control" aria-describedby="basic-addon1" ng-model="image.alt">
     </div>
-    <uib-tabset ng-init="f=0">
+    <uib-tabset ng-init="f=0" ng-if="!loading">
         <uib-tab heading="By URL" select="f=0">
 
             <div class="input-group mb5 mt5">
@@ -17,22 +17,32 @@
                 </span>
             </div>
 
-
         </uib-tab>
         <uib-tab heading="Upload File" select="f=1">
 
             <div class="input-group  mb5 mt5">
-                <input type="text" class="form-control" placeholder="Insert File">
+
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-click="openFile()">Upload</button>
+                    <button class="btn btn-default" type="button" ng-click="openFile()">Upload File</button>
                 </span>
             </div>
             <input type="file" id="file" base-sixty-four-input ng-model="image.data" class="none">
         </uib-tab>
 
     </uib-tabset>
+    <div ng-if="loading">
+        <h3><i class="fa fa-spinner fa-pulse fa-5x" ></i></h3>
+    </div>
+    <div class="row" ng-if="image.src">
+        <div class="col-sm-6 col-md-4">
+            <h3>Preview Image</h3>
+            <div class="thumbnail">
+                <img src="{{image.src}}" alt="image.alt">
+            </div>
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-primary" type="button" ng-click="ok()" ng-disabled="!image.src">Add</button>
     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
 </div>

@@ -1,7 +1,7 @@
 adminController.ImageUploaderCtrl= function ($scope, $uibModalInstance, SystemService) {
 
     $scope.image={};
-
+    $scope.loading=false;
     $scope.openFile=function(){
         document.getElementById("file").click();
     };
@@ -9,9 +9,10 @@ adminController.ImageUploaderCtrl= function ($scope, $uibModalInstance, SystemSe
     $scope.$watch("image.data", function(){
         var data=$scope.image.data;
         if(data){
-
+            $scope.loading=true;
             SystemService.images().upload({type:"data"}, data, function(res){
-                console.log(res);
+                $scope.loading=false;
+                $scope.image.src=res.image.src;
             });
 
         }
@@ -20,18 +21,21 @@ adminController.ImageUploaderCtrl= function ($scope, $uibModalInstance, SystemSe
 
     $scope.uploadByUrl=function(){
         var url=$scope.image.url;
-        if(url!==""){
+
+        if(url&&url!==""){
+            $scope.loading=true;
             SystemService.images().upload({type:"url"}, {url:url}, function(res){
-                console.log(res);
+                $scope.loading=false;
+                $scope.image.src=res.image.src;
             });
         }
 
     };
 
     $scope.ok = function () {
-        console.log($scope.image);
-        /*
-        $uibModalInstance.close($scope.image);*/
+
+            $uibModalInstance.close($scope.image);
+
     };
 
     $scope.cancel = function () {

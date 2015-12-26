@@ -50,6 +50,6 @@ adminController.PickCtrl = function ($rootScope, $scope, SystemService) {
 
 
 
-  //  this.ListPicks();
+    this.ListPicks();
 
 };
