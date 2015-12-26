@@ -57,7 +57,7 @@
                     </div>
                     <div class="panel panel-default mb2">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Color</h3>
+                            <h3 class="panel-title">Color&amp;Icon</h3>
                         </div>
                         <div class="panel-body">
 
@@ -68,9 +68,17 @@
                                         <span class="input-group-addon"><i class="fa fa-square" ng-style="{'color':category.color}"></i></span>
                                     </div>
                                 </div>
+                                <div class="col-md-5 ml15">
+                                    <div class="input-group">
+                                        <img ng-src="{{category.icon.src || noimage}}" alt="{{category.icon.alt}}" class="icon-thumbnail">
+                                        <button type="button" class="btn btn-success" ng-click="uploadIcon(category)" ng-disabled="!category.editable">Upload Icon</button>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="btn-group fr" role="group" aria-label="actions">

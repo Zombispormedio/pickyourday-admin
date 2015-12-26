@@ -104,6 +104,22 @@ adminController.CategoriesCtrl = function ($rootScope, $scope, SystemService, $u
         });
     };
 
+    $scope.uploadIcon=function(category){
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/image-uploader/main.html',
+            controller: 'ImageUploaderCtrl'
+        });
+
+        modalInstance.result.then(function (item) {
+
+            category.icon=item;
+
+        }, function () {
+
+        });
+    };
+
 
 
 

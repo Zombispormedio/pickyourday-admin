@@ -18,7 +18,10 @@
     width: 350px;
     height:256px;
 }
-
+.icon-thumbnail{
+    width: 140px;
+    height:100px;
+}
 
 .inline{
     display: inline;
@@ -77,6 +80,9 @@
 
 .ml20{
     margin-left: 20%;
+}
+.ml15{
+    margin-left: 15%;
 }
 
 .keywords{
