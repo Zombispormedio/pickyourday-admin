@@ -1,0 +1,105 @@
+
+<div class="btn-group add-button" role="group" aria-label="add" ng-if="!loading">
+    <button type="button" class="btn btn-default" ng-click="create()"><i class="fa fa-plus-circle"></i></button>
+
+</div>
+
+<div class="loading" ng-if="loading">
+    <h1><i class="fa fa-circle-o-notch fa-spin fa-4x" ></i></h1>
+</div>
+
+
+<div class="container">
+
+    <uib-accordion close-others="true" ng-if="preferences.length>0">
+
+        <uib-accordion-group is-open="status.open"  ng-repeat="preference in preferences" ng-init="preference.editable=false">
+            <uib-accordion-heading>
+
+                {{preference.name_group}}
+
+
+
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </uib-accordion-heading>
+
+
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="list-group">
+                        <div class="list-group-item ">
+                            <h4 class="list-group-item-heading">Name Group</h4>
+                            <p class="list-group-item-text">
+                                <span contenteditable="{{preference.editable}}"
+                                      ng-model="preference.name_group"
+                                      strip-br="true"
+                                      strip-tags="true"
+                                      select-non-editable="true">
+                                </span>
+                            </p>
+                        </div>
+                        <div class="list-group-item">
+                            <h4 class="list-group-item-heading">Description</h4>
+                            <p class="list-group-item-text">
+                                <span contenteditable="{{preference.editable}}"
+                                      ng-model="preference.description"
+                                      strip-br="true"
+                                      strip-tags="true"
+                                      select-non-editable="true">
+
+                                </span>
+
+                                <span ng-if="!preference.description || preference.description===''">No description</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Questions
+                                <i class="fa fa-plus fr bt-icon"  ng-if="preference.editable" ng-click="preference.editable && addQuestion(preference)"></i>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <uib-accordion close-others="true" ng-if="preference.questions.length>0">
+                                <uib-accordion-group is-open="question.openService" ng-repeat="question in preference.questions">
+                                    <uib-accordion-heading>
+
+
+                                    <h4>{{question.text}}</h4>
+                                    </uib-accordion-heading>
+
+                                    <p><strong>Type: </strong> {{question.type}}</p>
+
+                                    <ul ng-if="question.options.length!==0" class="list-group">
+                                        <li class="list-group-item active">   <strong>Options</strong></li>
+                                        <li ng-repeat="option in question.options" class="list-group-item">{{option}}</li>
+                                    </ul>
+                                    <button type="button" class="btn btn-default edit-button" ng-if="preference.editable" ng-click="updateQuestion(preference, $index)"><i class="fa fa-pencil"></i></button>
+
+                                    <button type="button" class="btn btn-default edit-button" ng-if="preference.editable" ng-click="deleteQuestion(preference, $index)"><i class="fa fa-trash"></i></button>
+
+
+
+                                </uib-accordion-group>
+                            </uib-accordion>
+                            <div class="alert alert-info" role="alert" ng-if="preference.questions.length==0">No Questions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group fr" role="group" aria-label="actions">
+                <button type="button" class="btn btn-default edit-button" ng-click="preference.editable=true" ng-if="!preference.editable"><i class="fa fa-pencil"></i></button>
+                <button type="button" class="btn btn-success edit-button" ng-click="save(preference)" ng-if="preference.editable">Save</button>
+                <button type="button" class="btn btn-default edit-button" ng-click="delete(preference, $index)"><i class="fa fa-trash"></i></button>
+            </div>
+
+        </uib-accordion-group>
+    </uib-accordion>
+    <div class="alert alert-info" role="alert" ng-if="preferences.length==0">No Preferences</div>
+
+
+</div>

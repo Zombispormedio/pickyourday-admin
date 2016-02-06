@@ -105,7 +105,23 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
                 controller:"PickCtrl"
             }
         }
+    })
+
+        .state("app.preferences", {
+        url: "preferences",
+        onEnter: function ($rootScope) {
+            if (!getJSONLocal("user")) {
+                $rootScope.go("login");
+            }
+        },
+        views: {
+            'preferences': {
+                templateUrl: 'app/preferences/main.html',
+                controller:"PreferencesCtrl"
+            }
+        }
     });
+
 
 
 

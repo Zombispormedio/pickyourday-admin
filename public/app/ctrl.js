@@ -26,5 +26,10 @@ adminController.TabCtrl = function ($rootScope, $scope, OauthService) {
         $rootScope.go("app.picks");
     };
 
+    $scope.goToPreferences=function(){
+        $rootScope.go("app.preferences");
+    };
+
+
 
 };
