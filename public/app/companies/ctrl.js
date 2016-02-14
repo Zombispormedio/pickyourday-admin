@@ -51,9 +51,9 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
 
     $scope.save=function(company){
 
-
+		console.log(company);
         CompanyService.company().update({id:company._id}, company, function(result){
-            if(result.error){ $rootScope.error(result.error.message); return;}
+            if(result.error){ $rootScope.error(result.error.message); return console.log(result.error);}
             company.editable=false;
             $rootScope.success("Saved!");
 
@@ -170,14 +170,14 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
 
         modalInstance.result.then(function (item) {
 
-            company.locations.push(item);
+            company.location=item;
 
         }, function () {
 
         });
     };
 
-    $scope.updateLocation=function(company, index){
+    $scope.updateLocation=function(company){
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'app/modals/location/main.html',
@@ -186,14 +186,14 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
             resolve: {
                 items: function () {
 
-                    return company.locations[index];
+                    return company.location;
                 }
             }
 
         });
 
         modalInstance.result.then(function (item) {
-            company.locations[index]=item;
+            company.location=item;
             $rootScope.success("Location Updated!");
 
         }, function () {
@@ -201,9 +201,9 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
         });
 
     };
-    $scope.deleteLocation=function(company, index){
+    $scope.deleteLocation=function(company){
 
-        company.locations.splice(index, 1);
+        delete company.location;
         $rootScope.success("Location Deleted!");
     };
 

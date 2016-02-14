@@ -212,42 +212,42 @@
                     <div class="panel panel-default mb5"  ng-init="company.showLocations=false">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                <a href="" ng-click="company.showLocations=!company.showLocations">  Locations</a>
+                                <a href="" ng-click="company.showLocations=!company.showLocations">  Location</a>
                                 <i class="fa fa-plus fr bt-icon"  ng-if="company.editable" ng-click="company.editable && addLocation(company)"></i>
                             </h3>
                         </div>
                         <div class="panel-body"  ng-if="company.showLocations">
+						
+					
 
-                            <uib-accordion close-others="true" ng-if="company.locations.length>0">
-                                <uib-accordion-group is-open="company.openLocation" ng-repeat="location in company.locations">
-                                    <uib-accordion-heading>
+                         <div ng-if="company.location">
 
-                                        <h4>{{location.name}}
+                                        <h4>{{company.location.name}}
 
                                         </h4>
 
-                                    </uib-accordion-heading>
+                                 
 
                                     <ul class="list-group">
                                         <li class="list-group-item">
                                             <strong>Country: </strong>
-                                            {{location.country}}
+                                            {{company.location.country}}
                                         </li>
                                         <li class="list-group-item">
                                             <strong>Province: </strong>
-                                            {{location.province}}
+                                            {{company.location.province}}
                                         </li>
                                         <li class="list-group-item">
                                             <strong>City: </strong>
-                                            {{location.city}}
+                                            {{company.location.city}}
                                         </li>
                                         <li class="list-group-item">
                                             <strong>Zipcode: </strong>
-                                            {{location.zipcode}}
+                                            {{company.location.zipcode}}
                                         </li>
                                         <li class="list-group-item">
                                             <strong>Adress: </strong>
-                                            {{location.address}}
+                                            {{company.location.address}}
                                         </li>
 
                                         <li class="list-group-item">
@@ -255,17 +255,17 @@
                                             <ul class="list-group">
                                                 <li class="list-group-item">
                                                     <strong>Longitude: </strong>
-                                                    {{location.geolocation.longitude}}
+                                                    {{company.location.geolocation.longitude}}
                                                 </li>
                                                 <li class="list-group-item">
                                                     <strong>Latitude: </strong>
-                                                    {{location.geolocation.latitude}}
+                                                    {{company.location.geolocation.latitude}}
                                                 </li>
                                             </ul>
                                         </li>
 
                                         <li class="list-group-item">
-                                            <ng-map default-style="true" center="[ {{location.geolocation.longitude}}, {{location.geolocation.latitude}}]" zoom="15">
+                                            <ng-map default-style="true" center="[ {{company.location.geolocation.longitude}}, {{company.location.geolocation.latitude}}]" zoom="15">
                                             </ng-map>
 
                                         </li>
@@ -274,14 +274,13 @@
 
                                     </ul>
 
-                                    <button type="button" class="btn btn-default edit-button" ng-if="company.editable" ng-click="updateLocation(company, $index)"><i class="fa fa-pencil"></i></button>
+                                    <button type="button" class="btn btn-default edit-button" ng-if="company.editable" ng-click="updateLocation(company)"><i class="fa fa-pencil"></i></button>
 
-                                    <button type="button" class="btn btn-default edit-button" ng-if="company.editable" ng-click="deleteLocation(company, $index)"><i class="fa fa-trash"></i></button>
+                                    <button type="button" class="btn btn-default edit-button" ng-if="company.editable" ng-click="deleteLocation(company)"><i class="fa fa-trash"></i></button>
 
 
-                                </uib-accordion-group>
-                            </uib-accordion>
-                            <div class="alert alert-info" role="alert" ng-if="company.locations.length==0">No Locations</div>
+                              </div>
+                            <div class="alert alert-info" role="alert" ng-if="!company.location">No Location</div>
 
 
                         </div>
