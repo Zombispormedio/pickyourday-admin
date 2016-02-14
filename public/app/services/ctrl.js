@@ -9,7 +9,7 @@ adminController.ServicesCtrl = function ($rootScope, $scope, SystemService) {
 
                 if(result.error){ $rootScope.error(result.error); return;}
 
-                $scope.services.unshift(result.default_service);
+                $scope.services.unshift(result.data);
 
                 $rootScope.success("Default Service Created!");
 
@@ -63,7 +63,7 @@ adminController.ServicesCtrl = function ($rootScope, $scope, SystemService) {
         SystemService.default_services().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
             $scope.loading=false;
-            $rootScope.services=result.default_services;
+            $rootScope.services=result.data;
 
             if($rootScope.services.length===0){
                 $rootScope.warning("Warning! No Services");

@@ -64,7 +64,7 @@ adminController.PreferencesCtrl = function ($rootScope, $scope, SystemService, $
             SystemService.preferences().create({}, {name_group:value}, function(result){
                 if(result.error){ $rootScope.error(JSON.stringify(result.error)); return;}
 
-                $rootScope.preferences.unshift(result.preference);
+                $rootScope.preferences.unshift(result.data);
 
                 $rootScope.success("Preference Group Created!");
 
@@ -118,7 +118,7 @@ adminController.PreferencesCtrl = function ($rootScope, $scope, SystemService, $
         SystemService.preferences().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
             $scope.loading=false;
-            $rootScope.preferences=result.preferences;
+            $rootScope.preferences=result.data;
 
             if($rootScope.preferences.length===0){
                 $rootScope.warning("Warning! No preferences");

@@ -168,7 +168,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
         SystemService.categories().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
 
-            $rootScope.categories=result.categories;
+            $rootScope.categories=result.data;
 
             if($rootScope.categories.length===0){
                 $rootScope.warning("Warning! No categories");
@@ -189,7 +189,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
         SystemService.default_services().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
 
-            $rootScope.services=result.default_services;
+            $rootScope.services=result.data;
 
             if($rootScope.services.length===0){
                 $rootScope.warning("Warning! No Services");

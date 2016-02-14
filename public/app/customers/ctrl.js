@@ -11,7 +11,7 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService,  
                CustomerService.customer().create({}, {email:email, password:password}, function(result){
                    if(result.error){ $rootScope.error(result.error); return;}
 
-                   $rootScope.customers.unshift(result.customer);
+                   $rootScope.customers.unshift(result.data);
 
                    $rootScope.success("Customer Created!");
 
@@ -129,7 +129,7 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService,  
             if(result.error){  $rootScope.error(result.error); return;}
 
             $scope.loading=false;
-            $rootScope.customers=result.customers;
+            $rootScope.customers=result.data;
 
             if($rootScope.customers.length===0){
                 $rootScope.warning("Warning! No customers");

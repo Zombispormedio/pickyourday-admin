@@ -14,7 +14,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
                         CompanyService.company().create({}, {email:email, name:name,password:password, cif:cif, category:category}, function(result){
                             if(result.error){ $rootScope.error(result.error.message); return;}
 
-                            $rootScope.companies.unshift(result.company);
+                            $rootScope.companies.unshift(result.data);
 
                             $rootScope.success("Company Created!");
 
@@ -107,7 +107,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
             if(result.error){  $rootScope.error(result.error); return;}
 
             $scope.loading=false;
-            $rootScope.companies=result.companies;
+            $rootScope.companies=result.data;
 
             if($rootScope.companies.length===0){
                 $rootScope.warning("Warning! No customers");

@@ -12,7 +12,7 @@ adminController.ImageUploaderCtrl= function ($scope, $uibModalInstance, SystemSe
             $scope.loading=true;
             SystemService.images().upload({type:"data"}, data, function(res){
                 $scope.loading=false;
-                $scope.image.src=res.image.src;
+                $scope.image.src=res.data.src;
             });
 
         }
@@ -26,7 +26,7 @@ adminController.ImageUploaderCtrl= function ($scope, $uibModalInstance, SystemSe
             $scope.loading=true;
             SystemService.images().upload({type:"url"}, {url:url}, function(res){
                 $scope.loading=false;
-                $scope.image.src=res.image.src;
+                $scope.image.src=res.data.src;
             });
         }
 
