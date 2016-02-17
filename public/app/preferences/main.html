@@ -68,12 +68,13 @@
                                     <uib-accordion-heading>
 
 
-                                    <h4>{{question.text}}</h4>
+                                    <h4>&iquest;{{question.text}}?</h4>
                                     </uib-accordion-heading>
 
                                     <p><strong>Type: </strong> {{question.type}}</p>
+                                    
 
-                                    <ul ng-if="question.options.length!==0" class="list-group">
+                                    <ul ng-if="question.options && question.options.length!==0" class="list-group">
                                         <li class="list-group-item active">   <strong>Options</strong></li>
                                         <li ng-repeat="option in question.options" class="list-group-item">{{option}}</li>
                                     </ul>

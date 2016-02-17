@@ -12,12 +12,16 @@ adminController.PreferencesCtrl = function ($rootScope, $scope, SystemService, $
             resolve: {
                 items: function () {
 
-                    return {};
+                    return {
+                        question:{},
+                        preferences:$scope.preferences
+                    };
                 }
             }
         });
 
         modalInstance.result.then(function (item) {
+          
 
             preference.questions.push(item);
 
@@ -35,7 +39,11 @@ adminController.PreferencesCtrl = function ($rootScope, $scope, SystemService, $
             resolve: {
                 items: function () {
 
-                    return preference.questions[index];
+                    return {
+                        question:preference.questions[index],
+                        preferences:$scope.preferences
+                    };
+                    
                 }
             }
 
@@ -64,7 +72,7 @@ adminController.PreferencesCtrl = function ($rootScope, $scope, SystemService, $
             SystemService.preferences().create({}, {name_group:value}, function(result){
                 if(result.error){ $rootScope.error(JSON.stringify(result.error)); return;}
 
-                $rootScope.preferences.unshift(result.data);
+                $scope.preferences.unshift(result.data);
 
                 $rootScope.success("Preference Group Created!");
 
@@ -96,7 +104,7 @@ adminController.PreferencesCtrl = function ($rootScope, $scope, SystemService, $
     $scope.delete=function(preference, index){
         $rootScope.confirm("Are you sure?", function(){
 
-            SystemService.categories().delete({id:preference._id}, preference, function(result){
+            SystemService.preferences().delete({id:preference._id}, preference, function(result){
                 if(result.error){ $rootScope.error(JSON.stringify(result.error)); return;}
 
                 $rootScope.preferences.splice(index, 1);
@@ -118,7 +126,7 @@ adminController.PreferencesCtrl = function ($rootScope, $scope, SystemService, $
         SystemService.preferences().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
             $scope.loading=false;
-            $rootScope.preferences=result.data;
+            $scope.preferences=result.data;
 
             if($rootScope.preferences.length===0){
                 $rootScope.warning("Warning! No preferences");

@@ -1,8 +1,9 @@
 adminController.QuestionCtrl= function ($scope, $uibModalInstance, items) {
 
     $scope.opt="";
-    $scope.types=[{name:"Yes/No", value:"yes_no"}, {name:"Keywords", value:"keywords"}, {name:"Options", value:"options"}];
-    $scope.question=items;
+    $scope.types=[{name:"Yes/No", value:"yes_no"}, {name:"Keywords", value:"keywords"}, {name:"Options", value:"options"}, {name:"Date", value:"date"}];
+    $scope.question=items.question;
+    $scope.preferences=items.preferences;
 
     $scope.changeQuestionType=function(value){
         if($scope.question.type==="options" && value!=="options") delete $scope.question.options;

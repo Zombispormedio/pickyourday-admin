@@ -30,7 +30,7 @@
         <div class="row mt5">
             <div class="col-lg-4" ng-if="question.type==='options'">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="questionOpt" placeholder="add option" ng-model="question.tempOpt" >
+                    <input type="text" class="form-control" name="questionOpt" placeholder="add option" ng-model="question.tempOpt">
                     <span class="input-group-btn">
                         <button class="btn btn-default" ng-click="addOption(question)" type="button">Go!</button>
                     </span>
@@ -38,14 +38,37 @@
                 <br>
                 <ul class="list-group">
                     <li class="list-group-item" ng-repeat="option in question.options">
-                        <span class="badge bt-icon" ng-click="deleteOption($index)"><i class="fa fa-times"></i></span>
-                        {{option}}
+                        <span class="badge bt-icon" ng-click="deleteOption($index)"><i class="fa fa-times"></i></span> {{option}}
                     </li>
 
                 </ul>
 
             </div>
+            <div class="row">
+                <h4>Relations</h4>
+                <div class="btn-group" uib-dropdown keyboard-nav>
+
+                    <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                        Add Relation <span class="caret"></span>
+                    </button>
+
+                    <hr>
+                    <ul uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+                        <li role="menuitem"><a href="#">Action</a></li>
+                        <li role="menuitem"><a href="#">Another action</a></li>
+                        <li role="menuitem"><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li role="menuitem"><a href="#">Separated link</a></li>
+                    </ul>
+                </div>
+                <hr>
+
+            </div>
+
+
+
         </div>
+
 
 
 
