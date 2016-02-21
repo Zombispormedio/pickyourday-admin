@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <h3 class="modal-title">Manage Relationship</h3>
+</div>
+<div class="modal-body">
+    <div class="list-group grid-relationship">
+
+        <div class="list-group-item" ng-repeat="question in questions" ng-init="question.showCondition=false">
+            <h4 class="list-group-item-heading  pointer mb1-5" ng-click="show(question)">
+                  <span>
+                        <input type="checkbox" ng-model="question.related">
+                  </span>
+                   ¿{{question.text}}?
+                    <span class="label label-info fr">{{question.name_group}}</span>
+            </h4>
+            <div class="input-group" ng-if="question.showCondition" ng-switch on="question.type">
+                <span class="input-group-addon">Answer:</span>
+                <input type="text" ng-model="question.answer_keywords" class="form-control" ng-switch-when="keywords">
+                <span class="form-control" ng-switch-when="yes_no">
+                     <input type="radio" aria-label="yes" ng-model="question.answer_yes_no" value="yes">YES
+                     
+                      <input type="radio" aria-label="no" ng-model="question.answer_yes_no" value="no">NO
+                  </span>
+
+
+                <select class="form-control" ng-switch-when="options" ng-model="question.answer_options" ng-init="question.answer_options=question.answer_options || ''">
+                    <option value="" selected>Select Option</option>
+                    <option ng-repeat="option in question.options" value="{{option}}">{{option}}</option>
+
+                </select>
+                <select class="form-control" ng-model="question.answer_date.condition" ng-switch-when="date">
+                    <option value="lte" selected>Less or equals than</option>
+                    <option value="gte">Greater or equals than</option>
+                    <option value="lt">Less than</option>
+                    <option value="gt">Greater than</option>
+
+                </select>
+                <input type="date" class="form-control" ng-switch-when="date" ng-model="question.answer_date.date">
+               
+                
+            
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

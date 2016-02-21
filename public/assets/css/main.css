@@ -58,6 +58,9 @@
 .mb5{
     margin-bottom: 5% !important;
 }
+.mb1-5{
+    margin-bottom: 1.5%;
+}
 
 .mb2{
     margin-bottom: 2% !important;
@@ -126,6 +129,11 @@ google-map {
     overflow-y: scroll;
 }
 
+.grid-relationship{
+    height: 30em;
+    overflow-y: scroll;
+}
+
 .pointer{
     cursor:pointer;
 }
@@ -139,3 +147,6 @@ img:hover + .carousel-caption .delete-image, .carousel-caption:hover .delete-ima
     display: none;
     font-size: 2em;
 }
+
+
+

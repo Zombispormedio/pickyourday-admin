@@ -13,8 +13,7 @@ adminController.PreferencesCtrl = function ($rootScope, $scope, SystemService, $
                 items: function () {
 
                     return {
-                        question:{},
-                        preferences:$scope.preferences
+                       
                     };
                 }
             }
@@ -39,10 +38,7 @@ adminController.PreferencesCtrl = function ($rootScope, $scope, SystemService, $
             resolve: {
                 items: function () {
 
-                    return {
-                        question:preference.questions[index],
-                        preferences:$scope.preferences
-                    };
+                    return preference.questions[index];
                     
                 }
             }
@@ -64,6 +60,38 @@ adminController.PreferencesCtrl = function ($rootScope, $scope, SystemService, $
         preference.questions.splice(index, 1);
         $rootScope.success("Question Deleted!");
     };
+    
+     $scope.manageRelationships = function (preference, index) {
+         var modalInstance = $uibModal.open({
+             animation: true,
+             templateUrl: 'app/modals/relationship/main.html',
+             controller: 'RelationShipCtrl',
+             size: 'lg',
+             resolve: {
+                 items: function () {
+                     
+                     
+                     return {
+                         current:preference.questions[index],
+                         preferences:$scope.preferences,
+                       
+                     }
+
+                 }
+             }
+
+         });
+
+         modalInstance.result.then(function (item) {
+             console.log(preference.questions);
+             preference.questions[index].relations = item;
+             $rootScope.success("Question Updated!");
+
+         }, function () {
+
+         });
+
+     };
 
     $scope.create=function(){
         $rootScope.input("Enter Preference Group Name: ", "text", "Sitios, Negocios Sugeridos...", function(value){
@@ -128,7 +156,7 @@ adminController.PreferencesCtrl = function ($rootScope, $scope, SystemService, $
             $scope.loading=false;
             $scope.preferences=result.data;
 
-            if($rootScope.preferences.length===0){
+            if($rootScope.preferences && $rootScope.preferences.length===0){
                 $rootScope.warning("Warning! No preferences");
             }
 

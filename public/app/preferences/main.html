@@ -64,7 +64,7 @@
                         <div class="panel-body">
 
                             <uib-accordion close-others="true" ng-if="preference.questions.length>0">
-                                <uib-accordion-group is-open="question.openService" ng-repeat="question in preference.questions">
+                                <uib-accordion-group is-open="question.openQuestion" ng-repeat="question in preference.questions">
                                     <uib-accordion-heading>
 
 
@@ -78,6 +78,8 @@
                                         <li class="list-group-item active">   <strong>Options</strong></li>
                                         <li ng-repeat="option in question.options" class="list-group-item">{{option}}</li>
                                     </ul>
+                                       <button class="btn btn-default edit-button" type="button" title="manage relationships" ng-click="manageRelationships(preference, $index)"  ng-if="preference.editable"><i class="fa fa-map-signs"></i></button>
+                                    
                                     <button type="button" class="btn btn-default edit-button" ng-if="preference.editable" ng-click="updateQuestion(preference, $index)"><i class="fa fa-pencil"></i></button>
 
                                     <button type="button" class="btn btn-default edit-button" ng-if="preference.editable" ng-click="deleteQuestion(preference, $index)"><i class="fa fa-trash"></i></button>
@@ -93,6 +95,7 @@
             </div>
 
             <div class="btn-group fr" role="group" aria-label="actions">
+            
                 <button type="button" class="btn btn-default edit-button" ng-click="preference.editable=true" ng-if="!preference.editable"><i class="fa fa-pencil"></i></button>
                 <button type="button" class="btn btn-success edit-button" ng-click="save(preference)" ng-if="preference.editable">Save</button>
                 <button type="button" class="btn btn-default edit-button" ng-click="delete(preference, $index)"><i class="fa fa-trash"></i></button>
