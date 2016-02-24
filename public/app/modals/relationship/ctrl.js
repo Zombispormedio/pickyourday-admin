@@ -35,6 +35,7 @@ adminController.RelationShipCtrl= function ($scope, $uibModalInstance, items) {
            if(a.related){
                var relation={};
                relation.question=a._id;
+			   if(a.type==="date")relation.not_equality=true;
              
                relation.answer=a["answer_"+a.type];
                 prev.push(relation);
