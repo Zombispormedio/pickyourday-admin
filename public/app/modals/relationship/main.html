@@ -27,14 +27,7 @@
                     <option ng-repeat="option in question.options" value="{{option}}">{{option}}</option>
 
                 </select>
-                <select class="form-control" ng-model="question.answer_date.condition" ng-switch-when="date">
-                    <option value="lte" selected>Less or equals than</option>
-                    <option value="gte">Greater or equals than</option>
-                    <option value="lt">Less than</option>
-                    <option value="gt">Greater than</option>
-
-                </select>
-                <input type="date" class="form-control" ng-switch-when="date" ng-model="question.answer_date.date">
+             
                
                 
             

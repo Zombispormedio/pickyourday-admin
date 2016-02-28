@@ -1,7 +1,7 @@
 adminController.QuestionCtrl= function ($scope, $uibModalInstance, items) {
 
 
-    $scope.types=[{name:"Yes/No", value:"yes_no"}, {name:"Keywords", value:"keywords"}, {name:"Options", value:"options"}, {name:"Date", value:"date"}];
+    $scope.types=[{name:"Yes/No", value:"yes_no"}, {name:"Keywords", value:"keywords"}, {name:"Options", value:"options"}];
     $scope.question=items;
 
 
