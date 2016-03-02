@@ -100,25 +100,46 @@
 
                     </div>
                 </div>
-            </div>
+                <div  class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Category</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="input-group">
 
-                <div class="btn-group fr" role="group" aria-label="actions">
-                    <button type="button" class="btn btn-default edit-button" ng-click="service.editable=true" ng-if="!service.editable"><i class="fa fa-pencil"></i></button>
-                    <button type="button" class="btn btn-success edit-button" ng-click="save(service)" ng-if="service.editable">Save</button>
-                    <button type="button" class="btn btn-default edit-button" ng-click="delete(service, $index)"><i class="fa fa-trash"></i></button>
+                                <select class="form-control" ng-model="service.category" ng-disabled="!service.editable">
+                                    <option value=""  ng-selected="!service.category">No category</option>
+                                    <option ng-repeat="category in categories" value="{{category._id}}" ng-selected="category._id===service.category">{{category.name}}</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
-                <script type="text/ng-template" id="KeywordPopover.html">
 
-                    <div class="form-group">
+            </div>
 
-                        <input type="text" class="form-control mb5" ng-model="service.tempTag">
+            <div class="btn-group fr" role="group" aria-label="actions">
+                <button type="button" class="btn btn-default edit-button" ng-click="service.editable=true" ng-if="!service.editable"><i class="fa fa-pencil"></i></button>
+                <button type="button" class="btn btn-success edit-button" ng-click="save(service)" ng-if="service.editable">Save</button>
+                <button type="button" class="btn btn-default edit-button" ng-click="delete(service, $index)"><i class="fa fa-trash"></i></button>
+            </div>
 
-                        <button class="btn btn-default ml20" type="button" ng-click="addTag(service)">Submit</i></button>
+            <script type="text/ng-template" id="KeywordPopover.html">
+
+                <div class="form-group">
+
+                    <input type="text" class="form-control mb5" ng-model="service.tempTag">
+
+                    <button class="btn btn-default ml20" type="button" ng-click="addTag(service)">Submit</i></button>
 
 
-                    </div>
-                </script>
+                </div>
+            </script>
 
 
         </uib-accordion-group>

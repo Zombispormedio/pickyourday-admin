@@ -51,7 +51,6 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
 
     $scope.save=function(company){
 
-		console.log(company);
         CompanyService.company().update({id:company._id}, company, function(result){
             if(result.error){ $rootScope.error(result.error.message); return console.log(result.error);}
             company.editable=false;
@@ -105,7 +104,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
 
         CompanyService.company().list({}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
-
+            console.log(result.data);
             $scope.loading=false;
             $rootScope.companies=result.data;
 
@@ -214,9 +213,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
         company.emailSecond.splice(index, 1);
     };
 
-    $scope.changeCategory=function(company){
-        company.category_metadata= _.find($scope.categories, function(obj) { return obj._id == company.category; });
-    };
+   
 
     $scope.createService=function(company){
         var modalInstance = $uibModal.open({
@@ -226,7 +223,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
             resolve: {
                 items: function () {
 
-                    return {};
+                    return {service: {},category:company.category};
                 }
             }
 
@@ -250,7 +247,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
             resolve: {
                 items: function () {
 
-                    return company.services[index];
+                    return {service:company.services[index], category:company.category};
                 }
             }
 

@@ -36,8 +36,8 @@
 
 
                         <li class="list-group-item">  <span><strong>Category:</strong></span>
-                            <select class="form-control" ng-model="company.category" ng-disabled="!company.editable" ng-change="changeCategory(company)">
-                                <option ng-repeat="category in categories" value="{{category._id}}">{{category.name}}</option>
+                            <select class="form-control" ng-model="company.category" ng-disabled="!company.editable">
+                                <option ng-repeat="category in categories" value="{{category._id}}" ng-selected="category._id===company.category">{{category.name}}</option>
 
                             </select>
                         </li>
@@ -171,7 +171,7 @@
                                 <uib-accordion-group is-open="service.openService" ng-repeat="service in company.services">
                                     <uib-accordion-heading>
 
-                                        <h4>{{service.default.name}}</h4>
+                                        <h4>{{service | service_name}}</h4>
 
                                     </uib-accordion-heading>
 

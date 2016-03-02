@@ -144,10 +144,13 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
     };
 
     $rootScope.error=function(message){
+        if(typeof message==="object")message=JSON.stringify(message);
         notie.alert(3, message, 2.5);
     };
 
     $rootScope.warning=function(message){
+        if(typeof message==="object")message=JSON.stringify(message);
+
         notie.alert(2, message, 2);
     };
 

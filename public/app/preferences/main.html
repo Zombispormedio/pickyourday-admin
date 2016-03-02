@@ -68,18 +68,23 @@
                                     <uib-accordion-heading>
 
 
-                                    <h4>&iquest;{{question.text}}?</h4>
+                                        <h4>&iquest;{{question.text}}?</h4>
                                     </uib-accordion-heading>
 
                                     <p><strong>Type: </strong> {{question.type}}</p>
-                                    
+
 
                                     <ul ng-if="question.options && question.options.length!==0" class="list-group">
                                         <li class="list-group-item active">   <strong>Options</strong></li>
                                         <li ng-repeat="option in question.options" class="list-group-item">{{option}}</li>
                                     </ul>
-                                       <button class="btn btn-default edit-button" type="button" title="manage relationships" ng-click="manageRelationships(preference, $index)"  ng-if="preference.editable"><i class="fa fa-map-signs"></i></button>
                                     
+                                    <ul ng-if="question.keywords && question.keywords.length!==0" class="list-group">
+                                        <li class="list-group-item active">   <strong>Keywords</strong></li>
+                                        <li ng-repeat="keyword in question.keywords" class="list-group-item">{{keyword}}</li>
+                                    </ul>
+                                    <button class="btn btn-default edit-button" type="button" title="manage relationships" ng-click="manageRelationships(preference, $index)"  ng-if="preference.editable"><i class="fa fa-map-signs"></i></button>
+
                                     <button type="button" class="btn btn-default edit-button" ng-if="preference.editable" ng-click="updateQuestion(preference, $index)"><i class="fa fa-pencil"></i></button>
 
                                     <button type="button" class="btn btn-default edit-button" ng-if="preference.editable" ng-click="deleteQuestion(preference, $index)"><i class="fa fa-trash"></i></button>
@@ -95,7 +100,7 @@
             </div>
 
             <div class="btn-group fr" role="group" aria-label="actions">
-            
+
                 <button type="button" class="btn btn-default edit-button" ng-click="preference.editable=true" ng-if="!preference.editable"><i class="fa fa-pencil"></i></button>
                 <button type="button" class="btn btn-success edit-button" ng-click="save(preference)" ng-if="preference.editable">Save</button>
                 <button type="button" class="btn btn-default edit-button" ng-click="delete(preference, $index)"><i class="fa fa-trash"></i></button>

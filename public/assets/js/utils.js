@@ -25,7 +25,16 @@ function deleteLocal(key) {
 }
 
 Array.prototype.find=function(value){
-  return this.filter(function(a){
-      return a.value===value;
-  })[0];
+    return this.filter(function(a){
+        return a.value===value;
+    })[0];
 };
+
+
+function ClosureMessage(message){
+    return function(fn){
+        return function(){
+            fn(message);
+        };
+    };
+}

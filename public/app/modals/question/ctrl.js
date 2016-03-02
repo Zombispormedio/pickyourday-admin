@@ -28,6 +28,25 @@ adminController.QuestionCtrl= function ($scope, $uibModalInstance, items) {
     $scope.deleteOption=function(index){
         $scope.question.options.splice(index, 1);
     };
+    
+    $scope.addKeyword=function(question){
+
+
+
+        if(!$scope.question.keywords) $scope.question.keywords=[];
+
+        if(question.tempKeyword!==""){
+
+            $scope.question.keywords.push(question.tempKeyword);
+
+            delete question.tempKeyword;
+        }
+
+    };
+
+    $scope.deleteKeyword=function(index){
+        $scope.question.keywords.splice(index, 1);
+    };
 
 
     $scope.ok = function () {

@@ -29,6 +29,7 @@
         </div>
         <div class="row mt5">
             <div class="col-lg-4" ng-if="question.type==='options'">
+               <h4>Options</h4>
                 <div class="input-group">
                     <input type="text" class="form-control" name="questionOpt" placeholder="add option" ng-model="question.tempOpt">
                     <span class="input-group-btn">
@@ -39,6 +40,24 @@
                 <ul class="list-group">
                     <li class="list-group-item" ng-repeat="option in question.options">
                         <span class="badge bt-icon" ng-click="deleteOption($index)"><i class="fa fa-times"></i></span> {{option}}
+                    </li>
+
+                </ul>
+
+            </div>
+            
+              <div class="col-lg-4">
+               <h4>Keywords</h4>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="questionKey" placeholder="add keyword" ng-model="question.tempKeyword">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="addKeyword(question)" type="button">Go!</button>
+                    </span>
+                </div>
+                <br>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="keyword in question.keywords">
+                        <span class="badge bt-icon" ng-click="deleteKeyword($index)"><i class="fa fa-times"></i></span> {{keyword}}
                     </li>
 
                 </ul>

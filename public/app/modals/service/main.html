@@ -2,6 +2,11 @@
     <h3 class="modal-title">Add Service</h3>
 </div>
 <div class="modal-body">
+    <div class="input-group">
+        <span class="input-group-addon">Name</span>
+        <input type="text" class="form-control"   ng-model="service.name">
+     
+    </div>
     <h4>Default Services</h4>
     <form>
         <div class="list-group grid-service" ng-init="selectedIndex=0">
