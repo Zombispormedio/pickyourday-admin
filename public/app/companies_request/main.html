@@ -9,12 +9,12 @@
 
 <div class="container mr2">
 
-    <uib-accordion close-others="true" ng-if="companies.length>0">
+    <uib-accordion close-others="true" ng-if="companiesRequest.length>0">
 
-        <uib-accordion-group is-open="status.open" ng-repeat="company in companies" ng-init="company.editable=false">
+        <uib-accordion-group is-open="status.open" ng-repeat="company in companiesRequest" ng-init="company.editable=false">
             <uib-accordion-heading>
 
-                {{company.cif}} - {{company.email}} - {{company.state}}
+                {{company.cif}} - {{company.email}}
 
                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                 <span class="label label-default category-company" ng-style="{'background-color':company.category_metadata.color}">{{company.category_metadata.name}}</span>
@@ -318,9 +318,10 @@
 
 
             <div class="btn-group fr" role="group" aria-label="actions">
+                <button type="button" class="btn btn-default edit-button" ng-click="acceptCompany(company)" ng-if="!company.editable"><i class="fa fa-check"></i></button>
+                <button type="button" class="btn btn-default edit-button" ng-click="refuseCompany(company)" ng-if="!company.editable"><i class="fa fa-times"></i></button>
                 <button type="button" class="btn btn-default edit-button" ng-click="company.editable=true" ng-if="!company.editable"><i class="fa fa-pencil"></i></button>
                 <button type="button" class="btn btn-success edit-button" ng-click="save(company)" ng-if="company.editable">Save</button>
-                <button type="button" class="btn btn-default edit-button" ng-click="delete(company, $index)"><i class="fa fa-trash"></i></button>
             </div>
 
             <script type="text/ng-template" id="KeywordPopover.html">

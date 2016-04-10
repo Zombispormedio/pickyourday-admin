@@ -109,7 +109,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
             $rootScope.companies=result.data;
 
             if($rootScope.companies.length===0){
-                $rootScope.warning("Warning! No customers");
+                $rootScope.warning("Warning! No companies");
             }
 
         }, function(){

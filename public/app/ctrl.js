@@ -13,6 +13,10 @@ adminController.TabCtrl = function ($rootScope, $scope, OauthService) {
         $rootScope.go("app.categories");
     };
 
+    $scope.goToCompaniesRequest=function(){
+        $rootScope.go("app.companiesRequest");
+    };
+
     $scope.goToServices=function(){
         $rootScope.go("app.services");
     };
