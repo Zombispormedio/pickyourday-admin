@@ -24,7 +24,6 @@
     "angular-bootstrap": "~0.14.3",
     "angular-contenteditable": "~0.3.8",
     "components-font-awesome": "~4.5.0",
-    "notie": "*",
     "angular-animate": "~1.4.8",
     "ngmap": "~1.15.6",
     "angular-bootstrap-colorpicker": "~3.0.22",
