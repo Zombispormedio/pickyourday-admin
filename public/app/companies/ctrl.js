@@ -63,6 +63,23 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
         });
     };
 
+    $scope.demoCompany=function(company, index){
+        
+        company.state ="demo";
+        CompanyService.company().update({id:company._id}, company, function(result){
+            if(result.error){ $rootScope.error(result.error.message); return console.log(result.error);}
+            company.editable=false;
+            $rootScope.success("State changed!");
+            $rootScope.companies.splice(index, 1);
+
+
+        }, function(){
+
+            $rootScope.warning("Server Not Found");
+
+        });
+    };
+
 
     $scope.delete=function(company, index){
         $rootScope.confirm("Are you sure?", function(){

@@ -94,7 +94,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
     })
 
         .state("app.companiesRequest", {
-        url: "companies-pending",
+        url: "companies-request",
         onEnter: function ($rootScope) {
             if (!getJSONLocal("user")) {
                 $rootScope.go("login");

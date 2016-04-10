@@ -1,17 +1,17 @@
 adminController.CompaniesRequestCtrl = function ($rootScope, $scope, CompanyService, $uibModal) {
     
  	$scope.loading=true;
-var self = this;
+    var self = this;
     this.ListCompanies=function(){
 
-        CompanyService.company().list({state:"demo"}, {}, function(result){
+        CompanyService.company().list({state:"pending"}, {}, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
             console.log(result.data);
             $scope.loading=false;
             $rootScope.companiesRequest=result.data;
 
             if($rootScope.companiesRequest.length===0){
-                $rootScope.warning("Warning! No companies");
+                $rootScope.warning("No companies request");
             }
 
         }, function(){
