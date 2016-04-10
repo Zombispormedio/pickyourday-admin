@@ -2,7 +2,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
 
     $scope.loading=true;
 
-
+    var self = this;
     $scope.createCompany=function(category){
 
 
@@ -70,7 +70,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
             if(result.error){ $rootScope.error(result.error.message); return console.log(result.error);}
             company.editable=false;
             $rootScope.success("State changed!");
-            $rootScope.companies.splice(index, 1);
+            self.ListCompanies();
 
 
         }, function(){
