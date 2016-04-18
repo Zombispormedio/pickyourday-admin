@@ -79,6 +79,23 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
 
         });
     };
+    
+    $scope.acceptCompany=function(company){
+        
+        company.state ="active";
+        CompanyService.company().update({id:company._id}, company, function(result){
+            if(result.error){ $rootScope.error(result.error.message); return console.log(result.error);}
+            company.editable=false;
+            $rootScope.success("Accepted!");
+            self.ListCompanies();
+
+
+        }, function(){
+
+            $rootScope.warning("Server Not Found");
+
+        });
+    };
 
 
     $scope.delete=function(company, index){

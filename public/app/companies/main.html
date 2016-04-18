@@ -322,6 +322,7 @@
                 <button type="button" class="btn btn-success edit-button" ng-click="save(company)" ng-if="company.editable">Save</button>
                 <button type="button" class="btn btn-default edit-button" ng-click="delete(company, $index)"><i class="fa fa-trash"></i></button>
                 <button type="button" class="btn btn-default edit-button" ng-click="demoCompany(company,$index)" ng-if="!company.editable"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-default edit-button" ng-click="acceptCompany(company)" ng-if="!company.editable"><i class="fa fa-check"></i></button>
             </div>
 
             <script type="text/ng-template" id="KeywordPopover.html">
