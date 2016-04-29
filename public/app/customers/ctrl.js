@@ -1,26 +1,24 @@
 adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService,  $uibModal) {
 
-    $scope.loading=true;
-
 
     $scope.create=function(){
         $rootScope.input("Enter Customer Email: ", "text", "@email.com", function(email){
 
 
             $rootScope.input("Enter Customer Password: ", "password","", function(password){
-               CustomerService.customer().create({}, {email:email, password:password}, function(result){
-                   if(result.error){ $rootScope.error(result.error); return;}
+                CustomerService.customer().create({}, {email:email, password:password}, function(result){
+                    if(result.error){ $rootScope.error(result.error); return;}
 
-                   $rootScope.customers.unshift(result.data);
+                    $rootScope.customers.unshift(result.data);
 
-                   $rootScope.success("Customer Created!");
+                    $rootScope.success("Customer Created!");
 
-               }, function(){
+                }, function(){
 
-                   $rootScope.warning("Server Not Found");
+                    $rootScope.warning("Server Not Found");
 
-               });
-           });
+                });
+            });
 
         });
     };
@@ -117,11 +115,20 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService,  
     };
     $scope.deleteEvent=function(customer, index){
 
-      customer.events.splice(index, 1);
+        customer.events.splice(index, 1);
         $rootScope.success("Event Deleted!");
     };
 
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     this.ListCustomers=function(){
 
@@ -142,13 +149,6 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService,  
         });
 
     };
-
-
-
-
-
-
-
 
     this.ListCustomers();
 

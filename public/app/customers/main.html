@@ -3,13 +3,47 @@
 
 </div>
 
+
+<form class="form-inline tab-options">
+
+    <button class="btn btn-default " type="button">
+        <i class="fa fa-bars"></i>
+    </button>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+        </span>
+    </div>
+
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">...</a></li>
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+
+</form>
+
 <div class="loading" ng-if="loading">
     <h1><i class="fa fa-refresh fa-spin fa-4x" ></i></h1>
 </div>
 
-<div class="container mr2">
+<div class="tab-accordion">
 
-    <uib-accordion close-others="true" ng-if="customers.length>0">
+    <uib-accordion close-others="true" >
 
         <uib-accordion-group is-open="status.open" ng-repeat="customer in customers" ng-init="customer.editable=false">
             <uib-accordion-heading>
@@ -169,7 +203,7 @@
             </div>
 
 
-            <div class="btn-group fr" role="group" aria-label="actions">
+            <div class="btn-group" role="group" aria-label="actions">
                 <button type="button" class="btn btn-default edit-button" ng-click="customer.editable=true" ng-if="!customer.editable"><i class="fa fa-pencil"></i></button>
                 <button type="button" class="btn btn-success edit-button" ng-click="save(customer)" ng-if="customer.editable">Save</button>
                 <button type="button" class="btn btn-default edit-button" ng-click="delete(customer, $index)"><i class="fa fa-trash"></i></button>
@@ -181,6 +215,7 @@
 
     </uib-accordion>
 
-
+</div>
 
 </div>
+

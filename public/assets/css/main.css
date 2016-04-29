@@ -4,12 +4,19 @@
 
 .page-header{
     text-align: center;
+    margin: 0;
+    padding-bottom: 0;
+    margin-top: -1%;
+}
+
+.page-header h1{
+        font-size: 20px;
 }
 
 .logout{
     float: right;
     margin-right: 2%;
-    margin-top: -0.5%;
+    margin-top: 0.2%;
 }
 .none{
     display: none !important;
@@ -46,11 +53,19 @@
 
 .add-button{
     position: fixed;
+        bottom: 5%;
+    left: 94%;
+        z-index: 1000;
 }
 
 .add-button button{
-    font-size: 7em;
-    border-radius: 0;
+    font-size: 2em;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.2s;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 
 .image-uploader:hover{
@@ -152,5 +167,30 @@ img:hover + .carousel-caption .delete-image, .carousel-caption:hover .delete-ima
     font-size: 2em;
 }
 
+.tab-accordion{
+    overflow-y: auto;
+ height: 514px;
+}
+
+.tab-options{
+        padding-bottom: 0.5%;
+    padding-top: 0.5%;
+}
+
+.tab-options button, .tab-options .input-group{
+          right: 18.5%;
+    position: relative;
+
+}
+
+.tab-options .input-group .form-control{
+        width: 30em;
+}
 
 
+
+.pagination {
+       display: inline;
+    position: relative;
+    left: 1080px;
+}
