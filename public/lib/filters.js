@@ -35,3 +35,5 @@ adminFilter.service_name=function($rootScope){
         return result;
     }
 }
+
+

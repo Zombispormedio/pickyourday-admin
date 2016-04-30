@@ -11,6 +11,13 @@ adminFactory.CustomerService= function(ApiService){
                 delete:{method:"DELETE", params:{id:"@id"}}
 
             });
+        },
+         count:function(){
+            return ApiService.rest(this.base+"/count",{
+                get:{method:"GET", params:{}},
+              
+
+            });
         }
 
 

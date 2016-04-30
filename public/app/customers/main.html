@@ -4,44 +4,38 @@
 </div>
 
 
-<form class="form-inline tab-options">
+<div class="tab-options">
+    <div class="filter">
+        <button class="btn btn-default " type="button" ng-click="openFilterModal()">
+            <i class="fa fa-bars"></i>
+        </button> 
+    </div>
 
-    <button class="btn btn-default " type="button">
-        <i class="fa fa-bars"></i>
-    </button>
     <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for...">
+        <input type="text" class="form-control" placeholder="Search for..." ng-model="searchObject.text" ng-change="searchByText()">
         <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
+            <button class="btn btn-default" type="button" ng-click="searchByText()"><i class="fa fa-search"></i></button>
         </span>
     </div>
 
-    <ul class="pagination">
-        <li>
-            <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">...</a></li>
-        <li>
-            <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
+    <uib-pagination total-items="page.totalItems" ng-model="page.current" max-size="page.size" force-ellipses="true" rotate="true"  ng-change="changePagination()" items-per-page="page.sizeItems"></uib-pagination>
+    <span class="size">
+    Size
+    <input type="number" class="form-control" placeholder="Size" ng-model="page.sizeItems" min="5" max="500" step="1" ng-change="changePagination()">
+  </span>
+</div>
 
-</form>
+<div class="container">
+    
+    <h3 ng-if="customers.length==0" style="text-align:center">No results</h3>
+</div>
+
 
 <div class="loading" ng-if="loading">
     <h1><i class="fa fa-refresh fa-spin fa-4x" ></i></h1>
 </div>
 
-<div class="tab-accordion">
+<div class="tab-accordion" ng-if="customers.length>0">
 
     <uib-accordion close-others="true" >
 
@@ -217,5 +211,5 @@
 
 </div>
 
-</div>
+
 

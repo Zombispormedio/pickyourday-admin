@@ -120,27 +120,84 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService,  
     };
 
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
-    this.ListCustomers=function(){
 
-        CustomerService.customer().list({}, {}, function(result){
+    $scope.page={
+        totalItems:0,
+        current:1,
+        sizeItems:5,
+        size:4
+
+    }
+    $scope.searchObject={
+
+    }
+
+    var query= {p:$scope.page.current-1, s:$scope.page.sizeItems};
+
+    $scope.changePagination=function(){
+        query.p=$scope.page.current-1;
+        query.s=$scope.page.sizeItems;
+        fetch();
+    }
+
+    $scope.searchByText=function(){
+        query.search_text=$scope.searchObject.text;
+        fetch();
+    }
+
+
+
+    $scope.openFilterModal=function(){
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/customer-filter/main.html',
+            controller: 'CustomerFilterModalCtrl',
+            size:'lg',
+            resolve: {
+                items: function () {
+
+                    return $scope.searchObject;
+                }
+            }
+
+        });
+
+        modalInstance.result.then(function (item) {
+            var filter_query=_.transform(item, function(result, value, key) {
+                if(value!=void 0&& value!=="")result[key]=value;
+            }, {});
+
+            var pick_query=_.omit(query, ["name", "email", "surname", 
+                                          'fromBirthDate','toBirthDate',
+                                          'fromRegister','toRegister',
+                                          'fromLastUpdate','toLastUpdate']);
+        
+            query=_.merge(pick_query, filter_query);
+           
+
+            fetch();
+
+        });
+
+    };
+
+
+
+    var ListCustomers=function(query){
+        query=query||{};
+
+        CustomerService.count().get(query, function(res){
+            $scope.page.totalItems=res.data;
+
+        })
+
+
+        CustomerService.customer().list(query, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
 
             $scope.loading=false;
             $rootScope.customers=result.data;
-
-            if($rootScope.customers.length===0){
-                $rootScope.warning("Warning! No customers");
-            }
 
         }, function(){
 
@@ -150,6 +207,11 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService,  
 
     };
 
-    this.ListCustomers();
+    var fetch =function(){
+        ListCustomers(query);
+    }
+
+    fetch();
+
 
 };
