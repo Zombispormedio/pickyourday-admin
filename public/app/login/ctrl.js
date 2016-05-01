@@ -35,7 +35,7 @@ adminController.LoginCtrl = function ($rootScope, $scope, OauthService , ConfigS
         ], function(err, user){
             if(err)return $rootScope.warning(err);
                 saveLocal("user", user);
-              $rootScope.go("app");
+              $rootScope.go("app.customers");
         });
 
 
