@@ -319,7 +319,52 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
             delete query.search_text;
         }
       
-    }
+    };
+    $scope.openFilterModal=function(){
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/company-filter/main.html',
+            controller: 'CompanyFilterModalCtrl',
+            size:'lg',
+            resolve: {
+                items: function () {
+
+                    return $scope.searchObject;
+                }
+            }
+
+        });
+
+        modalInstance.result.then(function (item) {
+          
+            var filter_query=_.transform(item, function(result, value, key) {
+                if(value!=void 0&& value!==""){
+                    
+                     result[key]=value;
+                    
+                }
+                   
+              
+            }, {});
+            
+     
+            var pick_query=_.omit(query, ["name", "email", "cif", 
+                                          "phone", "category", "service", 
+                                          "state", "keywords_seq",
+                                          "country", "province","city","zipcode","address",
+                                          'fromRegister','toRegister',
+                                          'fromLastUpdate','toLastUpdate']);
+        
+            query=_.merge(pick_query, filter_query);
+           
+
+            fetch();
+
+        });
+
+    };
+        
+        
 
     var ListCompanies=function(query){
         query=query||{};
@@ -331,7 +376,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
 
         CompanyService.company().list(query, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
-            console.log(result.data);
+          
             $scope.loading=false;
             $rootScope.companies=result.data;
 

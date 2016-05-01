@@ -19,14 +19,14 @@
 
     <uib-pagination total-items="page.totalItems" ng-model="page.current" max-size="page.size" force-ellipses="true" rotate="true"  ng-change="changePagination()" items-per-page="page.sizeItems"></uib-pagination>
     <span class="size">
-    Size
-    <input type="number" class="form-control" placeholder="Size" ng-model="page.sizeItems" min="5" max="500" step="1" ng-change="changePagination()">
-  </span>
+        Size
+        <input type="number" class="form-control" placeholder="Size" ng-model="page.sizeItems" min="5" max="500" step="1" ng-change="changePagination()">
+    </span>
 </div>
 
-<div class="container">
-    
-    <h3 ng-if="customers.length==0" style="text-align:center">No results</h3>
+<div class="container" ng-if="companies.length==0">
+
+    <h3 style="text-align:center">No results</h3>
 </div>
 
 
@@ -44,7 +44,7 @@
                 {{company.cif}} - {{company.email}} - {{company.state}}
 
                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                <span class="label label-default category-company" ng-style="{'background-color':company.category_metadata.color}">{{company.category_metadata.name}}</span>
+                
             </uib-accordion-heading>
 
             <div class="row">
@@ -63,7 +63,7 @@
 
 
                         <li class="list-group-item">  <span><strong>Category:</strong></span>
-                            <select class="form-control" ng-model="company.category" ng-disabled="!company.editable">
+                            <select class="form-control form-categories" ng-model="company.category" ng-disabled="!company.editable" >
                                 <option ng-repeat="category in categories" value="{{category._id}}" ng-selected="category._id===company.category">{{category.name}}</option>
 
                             </select>
@@ -71,7 +71,7 @@
 
                         <li class="list-group-item">
                             <div class="input-group">
-                                <span class="input-group-addon" >Phone</span>
+                                <span class="input-group-addon" >Phones</span>
                                 <input type="phone" ng-disabled="!company.editable" class="form-control"   ng-model="company.tempPhone">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" ng-disabled="!company.editable" ng-click="addPhone(company)">Add</button>
@@ -111,11 +111,11 @@
 
 
                     <ul class="list-group">
-                        <li class="list-group-item">  <span><strong>Register Date: </strong></span>{{company.registerDate | date: 'medium'}}
+                        <li class="list-group-item">  <span><strong>Register Date: </strong></span>{{company.registerDate||'N/A' | date: 'medium'}}
                         </li>
-                        <li class="list-group-item">  <span><strong>Last Access: </strong></span>{{company.lastAccess | date:'medium'}}
+                        <li class="list-group-item">  <span><strong>Last Access: </strong></span>{{company.lastAccess||'N/A' | date:'medium'}}
                         </li>
-                        <li class="list-group-item">  <span><strong>Last Update: </strong></span>{{company.lastUpdate | date:'medium'}}
+                        <li class="list-group-item">  <span><strong>Last Update: </strong></span>{{company.lastUpdate||'N/A' | date:'medium'}}
                         </li>
                     </ul>
 
@@ -143,8 +143,8 @@
                             </h3>
                         </div>
                         <div class="panel-body" >
-                            <uib-carousel interval="50000" no-wrap="false" >
-                                <uib-slide ng-repeat="image in company.images" active="image.active">
+                            <uib-carousel interval="50000" no-wrap="false" active="true">
+                                <uib-slide ng-repeat="image in company.images" index="$index">
                                     <img ng-src="{{image.src}}" alt="{{image.alt}}" style="margin:auto; height: 305px;" >
                                     <div class="carousel-caption">
                                         <i class="fa fa-trash-o delete-image bt-icon" ng-if="company.editable" ng-click="deleteImage(company, $index)"></i>
@@ -186,6 +186,13 @@
                 </div>
 
                 <div class="col-md-4">
+                    <div class="btn-group  mb5" role="group" aria-label="actions">
+                        <button type="button" class="btn btn-default edit-button" ng-click="company.editable=true" ng-if="!company.editable"><i class="fa fa-pencil"></i></button>
+                        <button type="button" class="btn btn-success edit-button" ng-click="save(company)" ng-if="company.editable">Save</button>
+                        <button type="button" class="btn btn-default edit-button" ng-click="delete(company, $index)"><i class="fa fa-trash"></i></button>
+                        <button type="button" class="btn btn-default edit-button" ng-click="demoCompany(company,$index)" ng-if="!company.editable"><i class="fa fa-times"></i></button>
+                        <button type="button" class="btn btn-default edit-button" ng-click="acceptCompany(company)" ng-if="!company.editable"><i class="fa fa-check"></i></button>
+                    </div>
                     <div class="panel panel-default" ng-init="company.showServices=false">
                         <div class="panel-heading">
                             <h3 class="panel-title">
@@ -236,7 +243,7 @@
                             <div class="alert alert-info" role="alert" ng-if="company.services.length==0">No Services</div>
                         </div>
                     </div>
-                    <div class="panel panel-default mb5"  ng-init="company.showLocations=false">
+                    <div class="panel panel-default"  ng-init="company.showLocations=false">
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 <a href="" ng-click="company.showLocations=!company.showLocations">  Location</a>
@@ -244,96 +251,75 @@
                             </h3>
                         </div>
                         <div class="panel-body"  ng-if="company.showLocations">
-						
-					
-
-                         <div ng-if="company.location">
-
-                                        <h4>{{company.location.name}}
-
-                                        </h4>
-
-                                 
-
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <strong>Country: </strong>
-                                            {{company.location.country}}
-                                        </li>
-                                        <li class="list-group-item">
-                                            <strong>Province: </strong>
-                                            {{company.location.province}}
-                                        </li>
-                                        <li class="list-group-item">
-                                            <strong>City: </strong>
-                                            {{company.location.city}}
-                                        </li>
-                                        <li class="list-group-item">
-                                            <strong>Zipcode: </strong>
-                                            {{company.location.zipcode}}
-                                        </li>
-                                        <li class="list-group-item">
-                                            <strong>Adress: </strong>
-                                            {{company.location.address}}
-                                        </li>
-
-                                        <li class="list-group-item">
-                                            <strong>Geolocation </strong>
-                                            <ul class="list-group">
-                                                <li class="list-group-item">
-                                                    <strong>Longitude: </strong>
-                                                    {{company.location.geolocation.longitude}}
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <strong>Latitude: </strong>
-                                                    {{company.location.geolocation.latitude}}
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="list-group-item">
-                                            <ng-map default-style="true" center="[ {{company.location.geolocation.longitude}}, {{company.location.geolocation.latitude}}]" zoom="15">
-                                            </ng-map>
-
-                                        </li>
 
 
 
-                                    </ul>
+                            <div ng-if="company.location">
 
-                                    <button type="button" class="btn btn-default edit-button" ng-if="company.editable" ng-click="updateLocation(company)"><i class="fa fa-pencil"></i></button>
+                                <h4>{{company.location.name}}
 
-                                    <button type="button" class="btn btn-default edit-button" ng-if="company.editable" ng-click="deleteLocation(company)"><i class="fa fa-trash"></i></button>
+                                </h4>
 
 
-                              </div>
+
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <strong>Country: </strong>
+                                        {{company.location.country}}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Province: </strong>
+                                        {{company.location.province}}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>City: </strong>
+                                        {{company.location.city}}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Zipcode: </strong>
+                                        {{company.location.zipcode}}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Address: </strong>
+                                        {{company.location.address}}
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <strong>Geolocation </strong>
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <strong>Longitude: </strong>
+                                                {{company.location.geolocation.longitude}}
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Latitude: </strong>
+                                                {{company.location.geolocation.latitude}}
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <ng-map default-style="true" center="[ {{company.location.geolocation.longitude}}, {{company.location.geolocation.latitude}}]" zoom="15">
+                                        </ng-map>
+
+                                    </li>
+
+
+
+                                </ul>
+
+                                <button type="button" class="btn btn-default edit-button" ng-if="company.editable" ng-click="updateLocation(company)"><i class="fa fa-pencil"></i></button>
+
+                                <button type="button" class="btn btn-default edit-button" ng-if="company.editable" ng-click="deleteLocation(company)"><i class="fa fa-trash"></i></button>
+
+
+                            </div>
                             <div class="alert alert-info" role="alert" ng-if="!company.location">No Location</div>
 
 
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">  <span><strong>Promotions</strong></span>
-                            </h3>
-                        </div>
-                        <div class="panel-body">
 
-
-
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">  <span><strong>Reviews</strong></span>
-                            </h3>
-                        </div>
-                        <div class="panel-body">
-
-
-
-                        </div>
-                    </div>
 
 
                 </div>
@@ -344,13 +330,7 @@
 
 
 
-            <div class="btn-group fr" role="group" aria-label="actions">
-                <button type="button" class="btn btn-default edit-button" ng-click="company.editable=true" ng-if="!company.editable"><i class="fa fa-pencil"></i></button>
-                <button type="button" class="btn btn-success edit-button" ng-click="save(company)" ng-if="company.editable">Save</button>
-                <button type="button" class="btn btn-default edit-button" ng-click="delete(company, $index)"><i class="fa fa-trash"></i></button>
-                <button type="button" class="btn btn-default edit-button" ng-click="demoCompany(company,$index)" ng-if="!company.editable"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-default edit-button" ng-click="acceptCompany(company)" ng-if="!company.editable"><i class="fa fa-check"></i></button>
-            </div>
+
 
             <script type="text/ng-template" id="KeywordPopover.html">
 

@@ -3,13 +3,42 @@
 
 </div>
 
+
+<div class="tab-options">
+    <div class="filter">
+        <button class="btn btn-default " type="button" ng-click="openFilterModal()">
+            <i class="fa fa-bars"></i>
+        </button> 
+    </div>
+
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for..." ng-model="searchObject.text" ng-change="searchByText()">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="searchByText()"><i class="fa fa-search"></i></button>
+        </span>
+    </div>
+
+    <uib-pagination total-items="page.totalItems" ng-model="page.current" max-size="page.size" force-ellipses="true" rotate="true"  ng-change="changePagination()" items-per-page="page.sizeItems"></uib-pagination>
+    <span class="size">
+        Size
+        <input type="number" class="form-control" placeholder="Size" ng-model="page.sizeItems" min="5" max="500" step="1" ng-change="changePagination()">
+    </span>
+</div>
+
+<div class="container" ng-if="companiesRequest.length==0">
+
+    <h3 style="text-align:center">No results</h3>
+</div>
+
+
+
 <div class="loading" ng-if="loading">
     <h1><i class="fa fa-refresh fa-spin fa-4x" ></i></h1>
 </div>
 
-<div class="container mr2">
+<div class="tab-accordion" ng-if="companiesRequest.length>0">
 
-    <uib-accordion close-others="true" ng-if="companiesRequest.length>0">
+    <uib-accordion close-others="true" >
 
         <uib-accordion-group is-open="status.open" ng-repeat="company in companiesRequest" ng-init="company.editable=false">
             <uib-accordion-heading>
@@ -17,7 +46,6 @@
                 {{company.cif}} - {{company.email}}
 
                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                <span class="label label-default category-company" ng-style="{'background-color':company.category_metadata.color}">{{company.category_metadata.name}}</span>
             </uib-accordion-heading>
 
             <div class="row">

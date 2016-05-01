@@ -169,7 +169,7 @@ img:hover + .carousel-caption .delete-image, .carousel-caption:hover .delete-ima
 
 .tab-accordion{
     overflow-y: auto;
-    height: 300px;
+    height: 500px;
 }
 
 .tab-options{
@@ -197,11 +197,12 @@ img:hover + .carousel-caption .delete-image, .carousel-caption:hover .delete-ima
 
 .tab-options .pagination{
     margin-top: 0;
-    margin-left: 400px;
+    margin-left: 320px;
+    width: 385px;
 }
 
 .tab-options .size{
-    margin-left: 8%;
+    margin-left: 1%;
 
 }
 
@@ -215,8 +216,30 @@ img:hover + .carousel-caption .delete-image, .carousel-caption:hover .delete-ima
     margin-bottom: 1.5%;
 }
 
+.modal-body .form-inline .form-group{
+        margin-bottom: 1%;
+}
+
+.form-categories{
+        width: 200px;
+    display: inline;
+    margin-left: 25%;
+}
+
+.filter-modal{
+        height: 450px;
+    overflow-y: auto;
+}
 
 
+    
 
+.modal-body .form-inline .form-group+.form-group{
+    margin-left: 3%;
+}
 
+.modal-body .form-inline .keywords-filter{
+    width: 575px;
+
+}
 
