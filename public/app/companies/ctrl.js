@@ -313,12 +313,10 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
 
     $scope.searchByText=function(){
         query.search_text=$scope.searchObject.text;
-        if(query.search_text!==""){
-              fetch();
-        }else{
+        if(query.search_text===""){
             delete query.search_text;
         }
-      
+        fetch();
     };
     $scope.openFilterModal=function(){
         var modalInstance = $uibModal.open({
