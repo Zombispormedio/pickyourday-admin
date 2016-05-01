@@ -43,6 +43,14 @@ adminFactory.SystemService= function(ApiService){
 
             });
         },
+        
+         countPicks:function(){
+            return ApiService.rest(this.base+"/pick/count",{
+                get:{method:"GET", params:{}},
+              
+
+            });
+        },
 
         images:function(){
             return ApiService.rest(this.base+"/image/:type",{

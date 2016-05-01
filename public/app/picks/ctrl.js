@@ -1,4 +1,4 @@
-adminController.PickCtrl = function ($rootScope, $scope, SystemService) {
+adminController.PickCtrl = function ($rootScope, $scope, SystemService, $uibModal) {
 
     $scope.loading=true;
 
@@ -8,7 +8,7 @@ adminController.PickCtrl = function ($rootScope, $scope, SystemService) {
             SystemService.picks().delete({id:pick._id}, pick, function(result){
                 if(result.error){ $rootScope.error(result.error); return;}
 
-                $rootScope.picks.splice(index, 1);
+                fetch();
 
                 $rootScope.success("Deleted!");
 
@@ -22,19 +22,89 @@ adminController.PickCtrl = function ($rootScope, $scope, SystemService) {
         });
     };
 
+    $scope.page={
+        totalItems:0,
+        current:1,
+        sizeItems:5,
+        size:4
+
+    }
+    $scope.searchObject={
+
+    }
+
+    var query= {p:$scope.page.current-1, s:$scope.page.sizeItems};
+
+    $scope.changePagination=function(){
+        query.p=$scope.page.current-1;
+        query.s=$scope.page.sizeItems;
+        fetch();
+    }
+
+    $scope.searchByText=function(){
+        query.search_text=$scope.searchObject.text;
+        if(query.search_text===""){
+            delete query.search_text;
+        }
+        fetch();
+    };
+    
+    $scope.openFilterModal=function(){
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/pick-filter/main.html',
+            controller: 'PickFilterModalCtrl',
+            size:'lg',
+            resolve: {
+                items: function () {
+
+                    return $scope.searchObject;
+                }
+            }
+
+        });
+
+        modalInstance.result.then(function (item) {
+
+            var filter_query=_.transform(item, function(result, value, key) {
+                if(value!=void 0&& value!==""){
+
+                    result[key]=value;
+
+                }
 
 
-    this.ListPicks=function(){
+            }, {});
 
-        SystemService.picks().list({}, {}, function(result){
+
+            var pick_query=_.omit(query, []);
+
+            query=_.merge(pick_query, filter_query);
+
+
+            fetch();
+
+        });
+
+    };
+
+
+    var ListPicks=function(query){
+        query=query||{};
+
+        SystemService.countPicks().get(query, function(res){
+            $scope.page.totalItems=res.data;
+
+        })
+
+
+        SystemService.picks().list(query, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
 
             $scope.loading=false;
             $rootScope.picks=result.data;
 
-            if($rootScope.picks.length===0){
-                $rootScope.warning("Warning! No Picks");
-            }
+
 
         }, function(){
 
@@ -46,10 +116,16 @@ adminController.PickCtrl = function ($rootScope, $scope, SystemService) {
 
 
 
+    var fetch =function(){
+        ListPicks(query);
+    }
+
+    fetch();
 
 
 
 
-    this.ListPicks();
+
+
 
 };

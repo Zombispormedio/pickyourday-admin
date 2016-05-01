@@ -14,7 +14,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
                         CompanyService.company().create({}, {email:email, name:name,password:password, cif:cif, category:category}, function(result){
                             if(result.error){ $rootScope.error(result.error.message); return;}
 
-                            $rootScope.companies.unshift(result.data);
+                           fetch();s
 
                             $rootScope.success("Company Created!");
 
@@ -104,7 +104,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
             CompanyService.company().delete({id:company._id}, {}, function(result){
                 if(result.error){ $rootScope.error(result.error); return;}
 
-                $rootScope.companies.splice(index, 1);
+                fetch();
 
                 $rootScope.success("Deleted!");
 

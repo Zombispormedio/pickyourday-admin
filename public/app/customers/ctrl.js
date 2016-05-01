@@ -9,7 +9,7 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService,  
                 CustomerService.customer().create({}, {email:email, password:password}, function(result){
                     if(result.error){ $rootScope.error(result.error); return;}
 
-                    $rootScope.customers.unshift(result.data);
+                   fetch();
 
                     $rootScope.success("Customer Created!");
 
@@ -46,7 +46,7 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService,  
             CustomerService.customer().delete({id:customer._id}, {}, function(result){
                 if(result.error){ $rootScope.error(result.error); return;}
 
-                $rootScope.customers.splice(index, 1);
+                fetch();
 
                 $rootScope.success("Deleted!");
 

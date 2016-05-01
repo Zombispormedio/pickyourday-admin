@@ -45,7 +45,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
             }
         },
         views: {
-            'categories': {
+            'content': {
                 templateUrl: 'app/categories/main.html',
                 controller:"CategoriesCtrl"
             }
@@ -59,7 +59,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
             }
         },
         views: {
-            'services': {
+            'content': {
                 templateUrl: 'app/services/main.html',
                 controller:"ServicesCtrl"
             }
@@ -73,7 +73,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
             }
         },
         views: {
-            'customers': {
+            'content': {
                 templateUrl: 'app/customers/main.html',
                 controller:"CustomersCtrl"
             }
@@ -87,7 +87,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
             }
         },
         views: {
-            'companies': {
+            'content': {
                 templateUrl: 'app/companies/main.html',
                 controller:"CompaniesCtrl"
             }
@@ -102,7 +102,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
             }
         },
         views: {
-            'companiesRequest': {
+            'content': {
                 templateUrl: 'app/companies_request/main.html',
                 controller:"CompaniesRequestCtrl"
             }
@@ -118,7 +118,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
             }
         },
         views: {
-            'picks': {
+            'content': {
                 templateUrl: 'app/picks/main.html',
                 controller:"PickCtrl"
             }
@@ -133,7 +133,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
             }
         },
         views: {
-            'preferences': {
+            'content': {
                 templateUrl: 'app/preferences/main.html',
                 controller:"PreferencesCtrl"
             }
