@@ -1,0 +1,76 @@
+<div class="modal-header">
+    <h3 class="modal-title">Advanced Preferences Search</h3>
+</div>
+<div class="modal-body filter-modal">
+
+    <div class="form-inline">
+        <div class="form-group">
+            <label>Name Group</label>
+            <input type="text" class="form-control" ng-model="filter.name">
+        </div>
+        <div class="form-group">
+            <label>Question ID</label>
+            <input type="text" class="form-control object-id" ng-model="filter.question_id">
+        </div>
+
+
+
+
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group">
+            <label>Question Text</label>
+            <input type="text" class="form-control" ng-model="filter.question_text">
+        </div>
+
+        <div class="form-group">
+            <label>Question Type</label>
+
+            <select class="form-control" ng-model="filter.question_type" >
+                <option selected value="">Select Question Type</option>
+                <option selected value="keywords">Keywords</option>
+                <option selected value="yes_no">Yes/No</option>
+                <option selected value="options">Options</option>
+            </select>
+        </div>
+
+
+
+    </div>
+    <div  class="form-inline">
+        <div class="form-group">
+            <label>Question Options</label>
+            <input type="text" class="form-control keywords-filter" ng-model="filter.question_options" placeholder="options separated by commas">
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group">
+            <label>Question Keywords</label>
+            <input type="text" class="form-control keywords-filter" ng-model="filter.question_keywords" placeholder="Keywords separated by commas">
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <h4>Relation</h4>
+        <div class="form-group">
+            <label>Relation ID</label>
+            <input type="text" class="form-control object-id" ng-model="filter.relation_id">
+        </div>
+        <div class="form-group">
+            <label>Relation Answer</label>
+            <input type="text" class="form-control" ng-model="filter.relation_answer">
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

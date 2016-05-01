@@ -4,14 +4,40 @@
 
 </div>
 
+<div class="tab-options">
+    <div class="filter">
+        <button class="btn btn-default " type="button" ng-click="openFilterModal()">
+            <i class="fa fa-bars"></i>
+        </button> 
+    </div>
+
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for id, name, description, question text, question options, question relation answer, question keywords, question id, question relation id..." ng-model="searchObject.text" ng-change="searchByText()">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="searchByText()"><i class="fa fa-search"></i></button>
+        </span>
+    </div>
+
+    <uib-pagination total-items="page.totalItems" ng-model="page.current" max-size="page.size" force-ellipses="true" rotate="true"  ng-change="changePagination()" items-per-page="page.sizeItems"></uib-pagination>
+    <span class="size">
+        Size
+        <input type="number" class="form-control" placeholder="Size" ng-model="page.sizeItems" min="1" max="500" step="1" ng-change="changePagination()">
+    </span>
+</div>
+
+<div class="container" ng-if="preferences.length==0">
+
+    <h3 style="text-align:center">No results</h3>
+</div>
+
 <div class="loading" ng-if="loading">
     <h1><i class="fa fa-circle-o-notch fa-spin fa-4x" ></i></h1>
 </div>
 
 
-<div class="container">
+<div class="tab-accordion"  ng-if="preferences.length>0">
 
-    <uib-accordion close-others="true" ng-if="preferences.length>0">
+    <uib-accordion close-others="true">
 
         <uib-accordion-group is-open="status.open"  ng-repeat="preference in preferences" ng-init="preference.editable=false">
             <uib-accordion-heading>

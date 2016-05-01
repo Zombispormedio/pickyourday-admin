@@ -48,6 +48,12 @@ adminFactory.SystemService= function(ApiService){
 
             });
         },
+         countPreferences:function(){
+            return ApiService.rest(this.base+"/preferences/count",{
+                get:{method:"GET", params:{}},
+
+            });
+        },
         picks:function(){
             return ApiService.rest(this.base+"/pick/:id",{
                 list:{method:"GET", params:{}},
