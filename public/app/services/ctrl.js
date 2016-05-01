@@ -1,4 +1,4 @@
-adminController.ServicesCtrl = function ($rootScope, $scope, SystemService) {
+adminController.ServicesCtrl = function ($rootScope, $scope, SystemService, $uibModal) {
 
     $scope.loading=true;
     $scope.create=function(){
@@ -9,7 +9,7 @@ adminController.ServicesCtrl = function ($rootScope, $scope, SystemService) {
 
                 if(result.error){ $rootScope.error(result.error); return;}
 
-                $scope.services.unshift(result.data);
+                fetch();
 
                 $rootScope.success("Default Service Created!");
 
@@ -43,7 +43,7 @@ adminController.ServicesCtrl = function ($rootScope, $scope, SystemService) {
             SystemService.default_services().delete({id:service._id}, service, function(result){
                 if(result.error){ $rootScope.error(result.error); return;}
 
-                $scope.services.splice(index, 1);
+                fetch();
 
                 $rootScope.success("Deleted!");
 
@@ -58,24 +58,7 @@ adminController.ServicesCtrl = function ($rootScope, $scope, SystemService) {
     };
 
 
-    this.ListServices=function(){
 
-        SystemService.default_services().list({}, {}, function(result){
-            if(result.error){  $rootScope.error(result.error); return;}
-            $scope.loading=false;
-            $rootScope.services=result.data;
-
-            if($rootScope.services.length===0){
-                $rootScope.warning("Warning! No Services");
-            }
-
-        }, function(){
-
-            $rootScope.warning("Server Not Found");
-
-        });
-
-    };
 
 
     $scope.dynamicPopover = {
@@ -92,11 +75,110 @@ adminController.ServicesCtrl = function ($rootScope, $scope, SystemService) {
         service.keywords.splice(index, 1);
 
     };
+    
+    
+    
+    $scope.page={
+        totalItems:0,
+        current:1,
+        sizeItems:5,
+        size:4
+
+    }
+    $scope.searchObject={
+
+    }
+
+    var query= {p:$scope.page.current-1, s:$scope.page.sizeItems};
+
+    $scope.changePagination=function(){
+        query.p=$scope.page.current-1;
+        query.s=$scope.page.sizeItems;
+        fetch();
+    }
+
+    $scope.searchByText=function(){
+        query.search_text=$scope.searchObject.text;
+        if(query.search_text===""){
+            delete query.search_text;
+        }
+        fetch();
+    };
+    $scope.openFilterModal=function(){
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/service-filter/main.html',
+            controller: 'ServiceFilterModalCtrl',
+            size:'lg',
+            resolve: {
+                items: function () {
+
+                    return $scope.searchObject;
+                }
+            }
+
+        });
+
+        modalInstance.result.then(function (item) {
+          
+            var filter_query=_.transform(item, function(result, value, key) {
+                if(value!=void 0&& value!==""){
+                    
+                     result[key]=value;
+                    
+                }
+                   
+              
+            }, {});
+            
+     
+            var pick_query=_.omit(query, ['greaterDuration', 'lessDuration',
+                                          'greaterPrice','lessPrice',
+                                          'toDateCreated','fromDateCreated',
+                                          'category',"by_name","keywords_seq"]);
+        
+            query=_.merge(pick_query, filter_query);
+           
+
+            fetch();
+
+        });
+
+    };
+    
+    
+
+    var ListServices=function(query){
+
+        query=query||{};
+
+        SystemService.countDefaultServices().get(query, function(res){
+            $scope.page.totalItems=res.data;
+
+        })
+        SystemService.default_services().list(query, function(result){
+            if(result.error){  $rootScope.error(result.error); return;}
+            $scope.loading=false;
+            $rootScope.services=result.data;
+
+
+
+        }, function(){
+
+            $rootScope.warning("Server Not Found");
+
+        });
+
+    };
 
 
 
 
+    $rootScope.ListCategories();
+    var fetch =function(){
+        ListServices(query);
+    }
 
-    this.ListServices();
+    fetch();
 
 };

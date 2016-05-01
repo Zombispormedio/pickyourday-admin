@@ -12,6 +12,13 @@ adminFactory.SystemService= function(ApiService){
 
             });
         },
+          countCategories:function(){
+            return ApiService.rest(this.base+"/category/count",{
+                get:{method:"GET", params:{}},
+              
+
+            });
+        },
         default_services:function(){
             return ApiService.rest(this.base+"/default_service/:id",{
                 list:{method:"GET", params:{}},
@@ -19,6 +26,14 @@ adminFactory.SystemService= function(ApiService){
                 getByID:{method:"GET", params:{id:"@id"}},
                 update:{method:"PUT", params:{id:"@id"}},
                 delete:{method:"DELETE", params:{id:"@id"}}
+
+            });
+        },
+        
+          countDefaultServices:function(){
+            return ApiService.rest(this.base+"/default_service/count",{
+                get:{method:"GET", params:{}},
+              
 
             });
         },

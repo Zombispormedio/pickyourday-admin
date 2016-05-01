@@ -62,29 +62,6 @@ adminController.CategoriesCtrl = function ($rootScope, $scope, SystemService, $u
 
 
 
-
-    this.ListCategories=function(){
-
-        SystemService.categories().list({}, {}, function(result){
-            if(result.error){  $rootScope.error(result.error); return;}
-            $scope.loading=false;
-            $rootScope.categories=result.data;
-
-            if($rootScope.categories.length===0){
-                $rootScope.warning("Warning! No categories");
-            }
-
-        }, function(){
-
-            $rootScope.warning("Server Not Found");
-
-        });
-
-    };
-
-
-
-
     $scope.open = function (category) {
 
 
@@ -119,11 +96,101 @@ adminController.CategoriesCtrl = function ($rootScope, $scope, SystemService, $u
 
         });
     };
+    $scope.page={
+        totalItems:0,
+        current:1,
+        sizeItems:5,
+        size:4
+
+    }
+    $scope.searchObject={
+
+    }
+
+    var query= {p:$scope.page.current-1, s:$scope.page.sizeItems};
+
+    $scope.changePagination=function(){
+        query.p=$scope.page.current-1;
+        query.s=$scope.page.sizeItems;
+        fetch();
+    }
+
+    $scope.searchByText=function(){
+        query.search_text=$scope.searchObject.text;
+        if(query.search_text===""){
+            delete query.search_text;
+        }
+        fetch();
+    };
+    $scope.openFilterModal=function(){
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'app/modals/category-filter/main.html',
+            controller: 'CategoryFilterModalCtrl',
+            size:'lg',
+            resolve: {
+                items: function () {
+
+                    return $scope.searchObject;
+                }
+            }
+
+        });
+
+        modalInstance.result.then(function (item) {
+          
+            var filter_query=_.transform(item, function(result, value, key) {
+                if(value!=void 0&& value!==""){ 
+                     result[key]=value;
+                    
+                }
+                   
+            }, {});
+            
+     
+            var pick_query=_.omit(query, []);
+        
+            query=_.merge(pick_query, filter_query);
+           
+
+            fetch();
+
+        });
+
+    };
+    
+  var ListCategories=function(query){
+       query=query||{};
+
+         SystemService.countCategories().get(query, function(res){
+            $scope.page.totalItems=res.data;
+
+        })
+
+        SystemService.categories().list(query, function(result){
+            if(result.error){  $rootScope.error(result.error); return;}
+            $scope.loading=false;
+            $rootScope.categories=result.data;
+
+
+        }, function(){
+
+            $rootScope.warning("Server Not Found");
+
+        });
+
+    };
 
 
 
 
+     var fetch =function(){
+       ListCategories(query);
+    }
 
-    this.ListCategories();
+    fetch();
+
+
+
 
 };

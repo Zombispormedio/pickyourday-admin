@@ -227,7 +227,7 @@ img:hover + .carousel-caption .delete-image, .carousel-caption:hover .delete-ima
 }
 
 .filter-modal{
-        height: 450px;
+        max-height: 450px;
     overflow-y: auto;
 }
 
@@ -243,3 +243,16 @@ img:hover + .carousel-caption .delete-image, .carousel-caption:hover .delete-ima
 
 }
 
+.modal-body .form-inline .duration{
+   width: 150px;
+
+}
+
+.modal-body .form-inline .object-id{
+   width: 250px;
+
+}
+
+
+  
+    

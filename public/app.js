@@ -191,9 +191,6 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
 
             $rootScope.categories=result.data;
 
-            if($rootScope.categories.length===0){
-                $rootScope.warning("Warning! No categories");
-            }
 
         }, function(){
 
@@ -212,9 +209,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
 
             $rootScope.services=result.data;
 
-            if($rootScope.services.length===0){
-                $rootScope.warning("Warning! No Services");
-            }
+           
 
         }, function(){
 
@@ -224,10 +219,6 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
 
     };
 
-    if(getJSONLocal("user")){
-        $rootScope.ListCategories();
-        $rootScope.ListServices();
-    }
 
 
     $rootScope.noimage="https://8549c43475562a0521ba166a16fdb7de6ce65077.googledrive.com/host/0B-TPTaV5ouD7TUtDXzVxQmhYa1E/noimage.png";

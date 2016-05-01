@@ -48,7 +48,7 @@ adminController.PickCtrl = function ($rootScope, $scope, SystemService, $uibModa
         }
         fetch();
     };
-    
+
     $scope.openFilterModal=function(){
         var modalInstance = $uibModal.open({
             animation: true,
@@ -77,7 +77,15 @@ adminController.PickCtrl = function ($rootScope, $scope, SystemService, $uibModa
             }, {});
 
 
-            var pick_query=_.omit(query, []);
+            var pick_query=_.omit(query, [
+                "customer", "company", "service",
+                "promotion", "duration", "by_state", "by_origin",
+                "nameCli", "phoneCli", 
+                "fromInitDate", "toInitDate", 
+                "fromDateCreated", "toDateCreated"
+
+
+            ]);
 
             query=_.merge(pick_query, filter_query);
 

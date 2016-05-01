@@ -7,7 +7,7 @@
     </div>
 
     <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for id..." ng-model="searchObject.text" ng-change="searchByText()">
+        <input type="text" class="form-control" placeholder="Search for id, customer id, company id, service id, promotion id, observation..." ng-model="searchObject.text" ng-change="searchByText()">
         <span class="input-group-btn">
             <button class="btn btn-default" type="button" ng-click="searchByText()"><i class="fa fa-search"></i></button>
         </span>
@@ -47,6 +47,14 @@
                     <ul class="list-group">
                         <li class="list-group-item">Created: {{pick.dateCreated | date}}</li>
                         <li class="list-group-item">State: {{pick.state | capitalize}}</li>
+                        <li class="list-group-item">Origin: {{pick.origin | capitalize}}</li>
+                        <li class="list-group-item" ng-if="pick.origin==='manual'">
+                            <h4>Manual Client Data</h4>
+                            <ul class="list-group">
+                                <li class="list-group-item">Name: {{pick.nameCli}}</li>
+                                <li class="list-group-item">Phone: {{pick.phoneCli}}</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
 
