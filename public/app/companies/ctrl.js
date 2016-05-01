@@ -64,7 +64,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
     };
 
     $scope.demoCompany=function(company, index){
-        
+
         company.state ="demo";
         CompanyService.company().update({id:company._id}, company, function(result){
             if(result.error){ $rootScope.error(result.error.message); return console.log(result.error);}
@@ -79,9 +79,9 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
 
         });
     };
-    
+
     $scope.acceptCompany=function(company){
-        
+
         company.state ="active";
         CompanyService.company().update({id:company._id}, company, function(result){
             if(result.error){ $rootScope.error(result.error.message); return console.log(result.error);}
@@ -134,25 +134,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
         }
     };
 
-    this.ListCompanies=function(){
 
-        CompanyService.company().list({}, {}, function(result){
-            if(result.error){  $rootScope.error(result.error); return;}
-            console.log(result.data);
-            $scope.loading=false;
-            $rootScope.companies=result.data;
-
-            if($rootScope.companies.length===0){
-                $rootScope.warning("Warning! No companies");
-            }
-
-        }, function(){
-
-            $rootScope.warning("Server Not Found");
-
-        });
-
-    };
 
     $scope.addImage=function(company){
         var modalInstance = $uibModal.open({
@@ -247,7 +229,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
         company.emailSecond.splice(index, 1);
     };
 
-   
+
 
     $scope.createService=function(company){
         var modalInstance = $uibModal.open({
@@ -310,9 +292,66 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
     };
 
 
+    $scope.page={
+        totalItems:0,
+        current:1,
+        sizeItems:5,
+        size:4
+
+    }
+    $scope.searchObject={
+
+    }
+
+    var query= {p:$scope.page.current-1, s:$scope.page.sizeItems};
+
+    $scope.changePagination=function(){
+        query.p=$scope.page.current-1;
+        query.s=$scope.page.sizeItems;
+        fetch();
+    }
+
+    $scope.searchByText=function(){
+        query.search_text=$scope.searchObject.text;
+        if(query.search_text!==""){
+              fetch();
+        }else{
+            delete query.search_text;
+        }
+      
+    }
+
+    var ListCompanies=function(query){
+        query=query||{};
+
+        CompanyService.count().get(query, function(res){
+            $scope.page.totalItems=res.data;
+
+        })
+
+        CompanyService.company().list(query, function(result){
+            if(result.error){  $rootScope.error(result.error); return;}
+            console.log(result.data);
+            $scope.loading=false;
+            $rootScope.companies=result.data;
+
+
+        }, function(){
+
+            $rootScope.warning("Server Not Found");
+
+        });
+
+    };
+
+
     $rootScope.ListCategories();
     $rootScope.ListServices();
 
-    this.ListCompanies();
+     var fetch =function(){
+        ListCompanies(query);
+    }
+
+    fetch();
 
 };

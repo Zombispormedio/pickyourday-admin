@@ -169,7 +169,7 @@ img:hover + .carousel-caption .delete-image, .carousel-caption:hover .delete-ima
 
 .tab-accordion{
     overflow-y: auto;
-    height: 500px;
+    height: 300px;
 }
 
 .tab-options{

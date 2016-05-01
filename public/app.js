@@ -18,7 +18,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
         onEnter: function ($rootScope) {
             if (getJSONLocal("user")) {
 
-                $rootScope.go("app");
+                $rootScope.go("app.customers");
             }
         },
         templateUrl: 'app/login/main.html',
@@ -34,7 +34,8 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
             }
         },
         templateUrl: 'app/main.html',
-        controller: 'TabCtrl'
+        controller: 'TabCtrl',
+        abstract:true
     })
         .state("app.categories", {
         url: "categories",
@@ -145,7 +146,7 @@ var app = angular.module('myAdmin', ['ui.router', "ngResource", 'ui.bootstrap', 
 
 
 
-    $urlRouterProvider.otherwise("/login");
+    $urlRouterProvider.otherwise("/customers");
     $httpProvider.interceptors.push('AuthInterceptor');
 
 })
