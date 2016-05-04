@@ -5,28 +5,40 @@
 
     <div class="form-inline">
         <div class="form-group">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="filter.id">
+        </div>
+        <div class="form-group">
             <label>Email</label>
             <input type="text" class="form-control" ng-model="filter.email">
         </div>
+
         <div class="form-group">
             <label>CIF</label>
             <input type="text" class="form-control" ng-model="filter.cif">
         </div>
+
+    </div>
+    <div class="form-inline">
+
         <div class="form-group">
             <label>Name</label>
             <input type="text" class="form-control" ng-model="filter.name">
         </div>
-
-
-
-
-    </div>
-
-    <div class="form-inline">
         <div class="form-group">
             <label>Phone</label>
             <input type="tel" class="form-control" ng-model="filter.phone">
         </div>
+
+        <div class="form-group">
+            <label>Other Emails</label>
+            <input type="text" class="form-control" ng-model="filter.other_emails">
+        </div>
+
+    </div>
+    <hr>
+    <div class="form-inline">
+
 
         <div class="form-group">
             <label>Category</label>
@@ -37,8 +49,8 @@
 
             </select>
         </div>
-        
-         <div class="form-group">
+
+        <div class="form-group">
             <label>Services</label>
 
             <select class="form-control" ng-model="filter.service">
@@ -47,14 +59,15 @@
 
             </select>
         </div>
-
-       
+        <div class="checkbox form-group">
+            <input type="checkbox" ng-model="filter.premium"> Premium
+        </div>
 
     </div>
-    
+
     <div class="form-inline">
-       
-         <div class="form-group">
+
+        <div class="form-group">
             <label>State</label>
             <select class="form-control" ng-model="filter.state" ng-disabled="filter.request">
                 <option selected value="">Select State</option>
@@ -64,12 +77,12 @@
                 <option selected value="refused">Refused</option>
             </select>
         </div>
-          <div class="form-group">
+        <div class="form-group">
             <label>Keywords</label>
             <input type="text" class="form-control keywords-filter" ng-model="filter.keywords_seq" placeholder="Keywords separated by commas">
         </div>
     </div>
-
+    <hr>
     <div class="form-inline">
         <h4>Location</h4>
         <div class="form-group">
@@ -98,33 +111,297 @@
             <input type="text" class="form-control" ng-model="filter.address">
         </div>
     </div>
+    <hr>
+    <div class="row">
+        <div class="form-inline col-md-3">
+            <h4>Expiring Date</h4>
+            <div class="form-group date-form">
+                <label >From </label>
+                <input type="date" class="form-control" ng-model="filter.fromDateExpire">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="date" class="form-control"   ng-model="filter.toDateExpire">
+            </div>
 
+        </div>
 
+        <div class="form-inline col-md-3">
+            <h4>Payment Date</h4>
+            <div class="form-group date-form">
+                <label >From </label>
+                <input type="date" class="form-control" ng-model="filter.fromDatePayment">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="date" class="form-control"   ng-model="filter.toDatePayment">
+            </div>
+
+        </div>
+
+        <div class="form-inline col-md-3">
+            <h4>Register Date</h4>
+            <div class="form-group date-form">
+                <label >From</label>
+                <input type="date" class="form-control" ng-model="filter.fromRegister">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="date" class="form-control"   ng-model="filter.toRegister">
+            </div>
+
+        </div>
+
+        <div class="form-inline col-md-3">
+            <h4>Last Update Date</h4>
+            <div class="form-group date-form">
+                <label >From </label>
+                <input type="date" class="form-control" ng-model="filter.fromLastUpdate">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="date" class="form-control"   ng-model="filter.toLastUpdate">
+            </div>
+
+        </div>
+    </div>
+    <hr>
     <div class="form-inline">
-        <h4>Register Date</h4>
+        <h4>Review</h4>
+
+    </div>
+
+    <div class="row">
+
+        <div class="form-inline col-md-5">
+            <h5>Rating</h5>
+            <div class="form-group date-form">
+                <label >From </label>
+                <input type="number" class="form-control" ng-model="filter.review_from_rating">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="number" class="form-control"   ng-model="filter.review_to_rating">
+            </div>
+
+        </div>
+
+        <div class="form-inline col-md-5">
+            <h5>Date</h5>
+            <div class="form-group date-form">
+                <label >From </label>
+                <input type="date" class="form-control" ng-model="filter.review_from_date">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="date" class="form-control"   ng-model="filter.review_to_date">
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <hr>
+    <div class="form-inline">
+        <h4>Promotion</h4>
         <div class="form-group">
-            <label >From Register</label>
-            <input type="date" class="form-control" ng-model="filter.fromRegister">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="filter.promotion_id">
         </div>
         <div class="form-group">
-            <label>To Register</label>
-            <input type="date" class="form-control"   ng-model="filter.toRegister">
+            <label>Name</label>
+            <input type="text" class="form-control" ng-model="filter.promotion_name">
         </div>
 
     </div>
 
     <div class="form-inline">
-        <h4>Last Update Date</h4>
         <div class="form-group">
-            <label >From Last Update</label>
-            <input type="date" class="form-control" ng-model="filter.fromLastUpdate">
+            <label>State</label>
+            <select class="form-control" ng-model="filter.promotion_state" ng-disabled="filter.request">
+                <option selected value="">Select State</option>
+                <option selected value="wainting">Waiting</option>
+                <option selected value="started">Started</option>
+                <option selected value="spent">Spent</option>
+                <option selected value="finished">Finished</option>
+            </select>
         </div>
         <div class="form-group">
-            <label>To Last Update</label>
-            <input type="date" class="form-control"   ng-model="filter.toLastUpdate">
+            <label>Services</label>
+            <input type="text" class="form-control keywords-filter" ng-model="filter.promotion_services" placeholder="Service IDs separated by commas">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-inline col-md-4">
+            <h5>Init Date</h5>
+            <div class="form-group date-form">
+                <label >From </label>
+                <input type="date" class="form-control" ng-model="filter.promotion_from_initDate">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="date" class="form-control"   ng-model="filter.promotion_to_initDate">
+            </div>
+
+        </div>
+
+        <div class="form-inline col-md-4">
+            <h5>End Date</h5>
+            <div class="form-group date-form">
+                <label >From </label>
+                <input type="date" class="form-control" ng-model="promotion_from_endDate">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="date" class="form-control"   ng-model="filter.promotion_to_endDate">
+            </div>
+
+        </div>
+
+        <div class="form-inline col-md-4">
+            <h5>Created Date</h5>
+            <div class="form-group date-form">
+                <label >From</label>
+                <input type="date" class="form-control" ng-model="filter.promotion_from_dateCreated">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="date" class="form-control"   ng-model="filter.promotion_to_dateCreated">
+            </div>
+
         </div>
 
     </div>
+
+    <hr>
+    <div class="form-inline">
+        <h4>Service</h4>
+        <div class="form-group">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="filter.service_id">
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" ng-model="filter.service_name">
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="form-inline col-md-4">
+            <h5>Price</h5>
+            <div class="form-group date-form">
+                <label >From </label>
+                <input type="number" class="form-control" ng-model="filter.service_from_price">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="number" class="form-control"   ng-model="filter.service_to_price">
+            </div>
+
+        </div>
+
+        <div class="form-inline col-md-4">
+            <h5>Duration</h5>
+            <div class="form-group date-form">
+                <label >From </label>
+                <input type="number" class="form-control" ng-model="filter.service_from_price">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="number" class="form-control"   ng-model="filter.service_to_duration">
+            </div>
+
+        </div>
+
+
+        <div class="form-inline col-md-4">
+            <h5>Created Date</h5>
+            <div class="form-group date-form">
+                <label >From</label>
+                <input type="date" class="form-control" ng-model="filter.service_from_dateCreated">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="date" class="form-control"   ng-model="filter.service_to_dateCreated">
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="form-inline col-md-4">
+            <h5>Rating Service</h5>
+            <div class="form-group date-form">
+                <label >From </label>
+                <input type="number" class="form-control" ng-model="filter.service_review_from_rating">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="number" class="form-control"   ng-model="filter.service_review_to_rating">
+            </div>
+
+        </div>
+
+        <div class="form-inline col-md-4">
+            <h5>Date Rating Service</h5>
+            <div class="form-group date-form">
+                <label >From</label>
+                <input type="date" class="form-control" ng-model="filter.service_review_from_date">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="date" class="form-control"   ng-model="filter.service_review_to_date">
+            </div>
+
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="form-inline">
+        <h4>Resource</h4>
+        <div class="form-group">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="filter.resource_id">
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" ng-model="filter.resource_name">
+        </div>
+        <div class="form-group">
+            <label>Surname</label>
+            <input type="text" class="form-control" ng-model="filter.resource_surname">
+        </div>
+
+    </div>
+    
+      <div class="form-inline">
+           <div class="form-group">
+            <label>Services</label>
+            <input type="text" class="form-control keywords-filter" ng-model="filter.promotion_services" placeholder="Service IDs separated by commas">
+        </div>
+        
+
+    </div>
+    
+      <div class="form-inline">
+            <h5>Init Date</h5>
+            <div class="form-group date-form">
+                <label >From</label>
+                <input type="date" class="form-control" ng-model="filter.service_review_from_date">
+            </div>
+            <div class="form-group date-form">
+                <label>To</label>
+                <input type="date" class="form-control"   ng-model="filter.resource_from_initDate">
+            </div>
+
+        </div>
+
 
 </div>
 <div class="modal-footer">

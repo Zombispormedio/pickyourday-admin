@@ -44,7 +44,7 @@
                 {{company.cif}} - {{company.email}} - {{company.state}}
 
                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                
+
             </uib-accordion-heading>
 
             <div class="row">
@@ -251,17 +251,8 @@
                             </h3>
                         </div>
                         <div class="panel-body"  ng-if="company.showLocations">
-
-
-
                             <div ng-if="company.location">
-
-                                <h4>{{company.location.name}}
-
-                                </h4>
-
-
-
+                                <h4>{{company.location.name}}</h4>
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <strong>Country: </strong>
@@ -319,6 +310,230 @@
 
                         </div>
                     </div>
+
+
+
+                    <div class="panel panel-default" ng-init="company.showPromotions=false">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a href="" ng-click="company.showPromotions=!company.showPromotions"><strong>Promotions </strong></a>
+
+                            </h3>
+                        </div>
+                        <div class="panel-body" ng-if="company.showPromotions">
+                            <uib-accordion close-others="true" ng-if="company.promotions.length>0">
+                                <uib-accordion-group is-open="promotion.open" ng-repeat="promotion in company.promotions">
+                                    <uib-accordion-heading>
+
+                                        <h4>{{promotion.name}}</h4>
+
+                                    </uib-accordion-heading>
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <strong>Use Limit: </strong>
+                                            {{promotion.useLimit || 0}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Used Times: </strong>
+                                            {{promotion.timeUsed || 0}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Discount: </strong>
+                                            {{promotion.discount||0}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>State: </strong>
+                                            {{promotion.state}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h4 class="list-group-item-heading">Description</h4>
+                                            <p class="list-group-item-text">{{promotion.description}}</p>
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <strong>Init: </strong>
+                                            {{promotion.initDate |date}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>End: </strong>
+                                            {{promotion.endDate |date}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Created: </strong>
+                                            {{promotion.dateCreated |date}}
+                                        </li>
+
+                                    </ul>
+
+
+
+
+                                </uib-accordion-group>
+                            </uib-accordion>
+                            <div class="alert alert-info" role="alert" ng-if="company.promotions.length==0">No Promotions</div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="panel panel-default" ng-init="company.showReviews=false">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a href="" ng-click="company.showReviews=!company.showReviews"><strong>Reviews </strong></a>
+
+                            </h3>
+                        </div>
+                        <div class="panel-body" ng-if="company.showReviews">
+                            <uib-accordion close-others="true" ng-if="company.review.length>0">
+                                <uib-accordion-group is-open="rev.open" ng-repeat="rev in company.review">
+                                    <uib-accordion-heading>
+
+                                        <h4>Customer: {{rev.id_customer}}</h4>
+
+                                    </uib-accordion-heading>
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <strong>Rating: </strong>
+                                            {{rev.rating || 0}}
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <h4 class="list-group-item-heading">Description</h4>
+                                            <p class="list-group-item-text">{{rev.description}}</p>
+                                        </li>
+
+
+                                        <li class="list-group-item">
+                                            <strong>Created: </strong>
+                                            {{rev.date |date}}
+                                        </li>
+
+                                    </ul>
+
+
+
+
+                                </uib-accordion-group>
+                            </uib-accordion>
+                            <div class="alert alert-info" role="alert" ng-if="company.review.length==0">No Reviews</div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="panel panel-default" ng-init="company.showResources=false">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a href="" ng-click="company.showResources=!company.showResources"><strong>Resources </strong></a>
+
+                            </h3>
+                        </div>
+                        <div class="panel-body" ng-if="company.showResources">
+                            <uib-accordion close-others="true" ng-if="company.resources.length>0">
+                                <uib-accordion-group is-open="res.open" ng-repeat="res in company.resources">
+                                    <uib-accordion-heading>
+
+                                        <h4>{{res.name}}  {{res.surname}}</h4>
+
+                                    </uib-accordion-heading>
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <strong>Phone: </strong>
+                                            {{res.phone || 0}}
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <h4 class="list-group-item-heading">Description</h4>
+                                            <p class="list-group-item-text">{{res.description}}</p>
+                                        </li>
+
+                                        <li class="list-group-item" ng-if="res.picks.length>0">
+                                            <strong>Picks </strong>
+                                            <ul class="list-group">
+                                                <li class="list-group-item" ng-repeat="p in res.picks">
+                                                    {{p}}
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="list-group-item" ng-if="res.services.length>0">
+                                            <strong>Services </strong>
+                                            <ul class="list-group">
+                                                <li class="list-group-item" ng-repeat="s in res.services">
+                                                    {{s}}
+                                                </li>
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="list-group-item">
+                                            <strong>Init Date: </strong>
+                                            {{res.initDate |date}}
+                                        </li>
+
+                                    </ul>
+
+
+
+
+                                </uib-accordion-group>
+                            </uib-accordion>
+                            <div class="alert alert-info" role="alert" ng-if="company.resources.length==0">No Resources</div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="panel panel-default" ng-init="company.showTimeTable=false">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a href="" ng-click="company.showTimeTable=!company.showTimeTable"><strong>TimeTable </strong></a>
+
+                            </h3>
+                        </div>
+                        <div class="panel-body" ng-if="company.showTimeTable">
+                            <uib-accordion close-others="true" ng-if="company.scheduleActivity.length>0">
+                                <uib-accordion-group is-open="table.open" ng-repeat="table in company.scheduleActivity">
+                                    <uib-accordion-heading>
+
+                                        <h4>From {{table.initial | date}} to {{table.end |date}}</h4>
+
+                                    </uib-accordion-heading>
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item" ng-repeat="week in table.week">
+                                            <strong>{{week.day}} </strong>
+
+                                            <ul class="list-group">
+                                                <li class="list-group-item" ng-repeat="time in week.times">
+                                                    {{time}}
+                                                </li>
+                                            </ul>
+
+
+                                        </li>
+
+
+                                    </ul>
+
+
+
+
+                                </uib-accordion-group>
+                            </uib-accordion>
+                            <div class="alert alert-info" role="alert" ng-if="company.scheduleActivity.length==0">No TimeTable</div>
+                        </div>
+                    </div>
+
+
+
+
 
 
 
