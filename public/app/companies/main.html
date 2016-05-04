@@ -107,16 +107,50 @@
 
                     </ul>
 
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">AR Settings</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="inputmarkerid3" class="col-sm-2 control-label" style="text-align:center">Marker ID</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputmarkerid3" placeholder="Marker ID" ng-model="company.ar_settings.marker_id">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputanimationsource3" class="col-sm-2 control-label" style="text-align: center; margin-left: -1%;  margin-right: 1%;">Animation Source</label>
+                                    <div class="col-sm-10" style="margin-top: 3%;">
+                                        <input type="text" class="form-control" id="inputanimationsource3" placeholder="https://example.com"  ng-model="company.ar_settings.animation_url">
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
 
 
 
                     <ul class="list-group">
-                        <li class="list-group-item">  <span><strong>Register Date: </strong></span>{{company.registerDate||'N/A' | date: 'medium'}}
+
+                        <li class="list-group-item">  <span><strong>Premium: </strong></span>
+                            <span ng-if="company.premium">YES</span>
+
+                            <span ng-if="!company.premium">NO</span>
+                        </li>       
+
+                        <li class="list-group-item">  <span><strong>Expiring Date: </strong></span>{{company.dateExpire||'N/A' | date:'medium'}}
                         </li>
-                        <li class="list-group-item">  <span><strong>Last Access: </strong></span>{{company.lastAccess||'N/A' | date:'medium'}}
+                        <li class="list-group-item">  <span><strong>Payment Date: </strong></span>{{company.datePayment||'N/A' | date:'medium'}}
+                        </li>
+                        <li class="list-group-item">  <span><strong>Register Date: </strong></span>{{company.registerDate||'N/A' | date: 'medium'}}
                         </li>
                         <li class="list-group-item">  <span><strong>Last Update: </strong></span>{{company.lastUpdate||'N/A' | date:'medium'}}
                         </li>
+
                     </ul>
 
                 </div>
