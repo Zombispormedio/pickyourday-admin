@@ -136,7 +136,7 @@ adminController.ServicesCtrl = function ($rootScope, $scope, SystemService, $uib
      
             var pick_query=_.omit(query, ['greaterDuration', 'lessDuration',
                                           'greaterPrice','lessPrice',
-                                          'toDateCreated','fromDateCreated',
+                                          'beforeDateCreated','afterDateCreated',
                                           'category',"by_name","keywords_seq"]);
         
             query=_.merge(pick_query, filter_query);

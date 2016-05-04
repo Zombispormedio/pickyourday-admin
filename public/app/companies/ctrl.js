@@ -350,7 +350,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
                                           "phone", "category", "service", 
                                           "state", "keywords_seq",
                                           "country", "province","city","zipcode","address",
-                                          'fromRegister','toRegister','fromLastUpdate','toLastUpdate',
+                                          'afterRegister','beforeRegister','afterLastUpdate','beforeLastUpdate',
                                           "id", "premium", "other_emails",
                                           'toDateExpire','fromDateExpire', 'toDatePayment', 'fromDatePayment', 
                                           "promotion_id", "promotion_name", "promotion_services", 'promotion_state',

@@ -172,9 +172,9 @@ adminController.CustomersCtrl = function ($rootScope, $scope, CustomerService,  
             }, {});
 
             var pick_query=_.omit(query, ["name", "email", "surname", 
-                                          'fromBirthDate','toBirthDate',
-                                          'fromRegister','toRegister',
-                                          'fromLastUpdate','toLastUpdate']);
+                                          'afterBirthDate','beforeBirthDate',
+                                          'afterRegister','beforeRegister',
+                                          'afterLastUpdate','beforeLastUpdate']);
         
             query=_.merge(pick_query, filter_query);
            

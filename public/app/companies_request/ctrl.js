@@ -97,8 +97,8 @@ adminController.CompaniesRequestCtrl = function ($rootScope, $scope, CompanyServ
                                           "phone", "category", "service", 
                                           "keywords_seq",
                                           "country", "province","city","zipcode","address",
-                                          'fromRegister','toRegister',
-                                          'fromLastUpdate','toLastUpdate']);
+                                          'afterRegister','beforeRegister',
+                                          'afterLastUpdate','beforeLastUpdate']);
         
             query=_.merge(pick_query, filter_query);
            

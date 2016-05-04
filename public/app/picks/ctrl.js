@@ -81,8 +81,8 @@ adminController.PickCtrl = function ($rootScope, $scope, SystemService, $uibModa
                 "customer", "company", "service",
                 "promotion", "duration", "by_state", "by_origin",
                 "nameCli", "phoneCli", 
-                "fromInitDate", "toInitDate", 
-                "fromDateCreated", "toDateCreated"
+                "afterInitDate", "beforeInitDate", 
+                "afterDateCreated", "beforeDateCreated"
 
 
             ]);
