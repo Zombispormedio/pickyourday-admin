@@ -1,6 +1,10 @@
 adminController.CustomerFilterModalCtrl= function ($scope, $uibModalInstance, items) {
 
     $scope.filter=items;
+    $scope.clean=function(){
+        $scope.filter={};
+    }
+
     $scope.ok = function () {
   
 

@@ -14,7 +14,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
                         CompanyService.company().create({}, {email:email, name:name,password:password, cif:cif, category:category}, function(result){
                             if(result.error){ $rootScope.error(result.error.message); return;}
 
-                           fetch();s
+                            fetch();s
 
                             $rootScope.success("Company Created!");
 
@@ -334,35 +334,46 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
         });
 
         modalInstance.result.then(function (item) {
-          
+
             var filter_query=_.transform(item, function(result, value, key) {
                 if(value!=void 0&& value!==""){
-                    
-                     result[key]=value;
-                    
+
+                    result[key]=value;
+
                 }
-                   
-              
+
+
             }, {});
-            
-     
+
+
             var pick_query=_.omit(query, ["name", "email", "cif", 
                                           "phone", "category", "service", 
                                           "state", "keywords_seq",
                                           "country", "province","city","zipcode","address",
-                                          'fromRegister','toRegister',
-                                          'fromLastUpdate','toLastUpdate']);
-        
+                                          'fromRegister','toRegister','fromLastUpdate','toLastUpdate',
+                                          "id", "premium", "other_emails",
+                                          'toDateExpire','fromDateExpire', 'toDatePayment', 'fromDatePayment', 
+                                          "promotion_id", "promotion_name", "promotion_services", 'promotion_state',
+                                          'promotion_to_initDate', 'promotion_from_initDate', 'promotion_to_endDate','promotion_from_endDate','promotion_to_dateCreated','promotion_from_dateCreated', 'service_name',"service_id",
+                                          'service_to_price','service_from_price',
+                                          'service_to_duration','service_from_duration',
+                                          'service_to_dateCreated','service_from_dateCreated',
+                                          'service_review_to_rating','service_review_from_rating',
+                                          'service_review_to_date','service_review_from_date',
+                                          'review_to_rating','review_from_rating','review_to_date','review_from_date',
+                                          "resource_services","resource_id","resource_name","resource_surname",
+                                          'resource_to_initDate','resource_from_initDate']);
+
             query=_.merge(pick_query, filter_query);
-           
+
 
             fetch();
 
         });
 
     };
-        
-        
+
+
 
     var ListCompanies=function(query){
         query=query||{};
@@ -374,7 +385,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
 
         CompanyService.company().list(query, function(result){
             if(result.error){  $rootScope.error(result.error); return;}
-          
+
             $scope.loading=false;
             $rootScope.companies=result.data;
 
@@ -391,7 +402,7 @@ adminController.CompaniesCtrl = function ($rootScope, $scope, CompanyService, $u
     $rootScope.ListCategories();
     $rootScope.ListServices();
 
-     var fetch =function(){
+    var fetch =function(){
         ListCompanies(query);
     }
 

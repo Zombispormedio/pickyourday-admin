@@ -1,6 +1,8 @@
 adminController.ServicesCtrl = function ($rootScope, $scope, SystemService, $uibModal) {
 
     $scope.loading=true;
+    
+    
     $scope.create=function(){
         $rootScope.input("Enter Service Name: ", "text", "Cortar Pelo, extracción de molares...", function(value){
 
