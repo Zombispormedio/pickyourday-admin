@@ -107,31 +107,6 @@
 
                     </ul>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">AR Settings</h3>
-                        </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal">
-                                <div class="form-group">
-                                    <label for="inputmarkerid3" class="col-sm-2 control-label" style="text-align:center">Marker ID</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputmarkerid3" placeholder="Marker ID" ng-model="company.ar_settings.marker_id" ng-disabled="!company.editable">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="inputanimationsource3" class="col-sm-2 control-label" style="text-align: center; margin-left: -1%;  margin-right: 1%;">Animation Source</label>
-                                    <div class="col-sm-10" style="margin-top: 3%;">
-                                        <input type="text" class="form-control" id="inputanimationsource3" placeholder="https://example.com"  ng-model="company.ar_settings.animation_url" ng-disabled="!company.editable">
-                                    </div>
-                                </div>
-
-
-                            </form>
-                        </div>
-                    </div>
-
 
 
                     <ul class="list-group">
@@ -155,11 +130,14 @@
 
                 </div>
                 <div class="col-md-4">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" ng-init="company.showDescription=false">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Description</h3>
+                            <h3 class="panel-title">
+                            <a href="" ng-click="company.showDescription=!company.showDescription"> Description</a>
+                           
+                            </h3>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" ng-if="company.showDescription">
                             <span contenteditable="{{company.editable}}"
                                   ng-model="company.description"
                                   strip-br="true"
@@ -170,13 +148,14 @@
                     </div>
 
 
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" ng-init="company.showImages=false">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Images
+                            <h3 class="panel-title">
+                               <a href="" ng-click="company.showImages=!company.showImages">Images</a>
                                 <i class="fa fa-plus fr bt-icon"  ng-if="company.editable" ng-click="company.editable && addImage(company)"></i>
                             </h3>
                         </div>
-                        <div class="panel-body" >
+                        <div class="panel-body" ng-if="company.showImages">
                             <uib-carousel interval="50000" no-wrap="false" active="true">
                                 <uib-slide ng-repeat="image in company.images" index="$index">
                                     <img ng-src="{{image.src}}" alt="{{image.alt}}" style="margin:auto; height: 305px;" >
@@ -192,15 +171,17 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" ng-init="company.showKeywords=false">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Keywords
+                            <h3 class="panel-title">
+                              <a href="" ng-click="company.showKeywords=!company.showKeywords">Keywords</a>
+                            
                                 <i class="fa fa-plus fr bt-icon"  ng-if="company.editable" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}"></i>
 
                             </h3>
 
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" ng-if="company.showKeywords">
                             <div class="keywords label label-default" ng-repeat="keyword in company.keywords" >
                                 <span contenteditable="{{company.editable}}"
                                       ng-model="company.keywords[$index]"
@@ -215,6 +196,41 @@
 
                         </div>
 
+                    </div>
+                    
+                         <div class="panel panel-default" ng-init="company.showARSettings=false">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                            <a href="" ng-click="company.showARSettings=!company.showARSettings">AR Settings</a>
+                         
+                            </h3>
+                        </div>
+                        <div class="panel-body" ng-if="company.showARSettings">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="inputmarkerid3" class="col-sm-2 control-label" style="text-align:center">Marker ID</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputmarkerid3" placeholder="Marker ID" ng-model="company.ar_settings.marker_id" ng-disabled="!company.editable">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputanimationsource3" class="col-sm-2 control-label" style="text-align: center; margin-left: -1%;  margin-right: 1%;">Animation Source</label>
+                                    <div class="col-sm-10" style="margin-top: 3%;">
+                                        <input type="text" class="form-control" id="inputanimationsource3" placeholder="https://example.com"  ng-model="company.ar_settings.animation_url" ng-disabled="!company.editable">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" style="text-align: center; margin-left: -1%;  margin-right: 1%;">Message</label>
+                                    <div class="col-sm-10" style="margin-top: 3%;">
+                                        <textarea class="form-control"  placeholder="Something"  ng-model="company.ar_settings.message" ng-disabled="!company.editable"></textarea>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
                     </div>
 
                 </div>
