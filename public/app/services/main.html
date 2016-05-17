@@ -82,7 +82,7 @@
                         <div class="panel-body">
                             <div class="input-group">
 
-                                <input type="number" ng-disabled="!service.editable" class="form-control" min="0" aria-describedby="basic-addon1" ng-model="service.duration">
+                                <input type="number" ng-disabled="!service.editable" class="form-control" min="5" aria-describedby="basic-addon1" ng-model="service.duration">
                                 <span class="input-group-addon" id="basic-addon2">minutes</span>
                             </div>
                         </div>
@@ -139,10 +139,23 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
+                <div  class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Price</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="input-group">
+
+                                <input type="number" ng-disabled="!service.editable" class="form-control" min="0" aria-describedby="basic-addon1" ng-model="service.price">
+                                <span class="input-group-addon" id="basic-addon2">€</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
 
             </div>
 
